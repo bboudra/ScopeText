@@ -6,10 +6,10 @@
 * ScopeText is an Android OS application that performs actions based on keywords, and phrases from text messages.
 
 ## Target Devices
-    Currently, this application is only supported on mobile devices that support the Android OS with at least version 4.1 Jelly Bean (API 15) installed.
+Currently, this application is only supported on mobile devices that support the Android OS with at least version 4.1 Jelly Bean (API 15) installed.
 
 ## Definitions
-    The following definitions are used throughout this document and the overall application to help encapsulate desired features.
+The following definitions are used throughout this document and the overall application to help encapsulate desired features.
   * **Message**
     - An entire text message.
   * **keyword**
