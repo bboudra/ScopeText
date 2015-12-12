@@ -24,3 +24,6 @@ The following definitions are used throughout this document and the overall appl
    3. Current contact limit is pending until stress tests are implemented.
 2. **Specify expected Message/Keyword/Phrase within a text message.**
    1. Allow user to specify exact matches of a desired Message/Keyword/Phrase from an expected contact.
+3. **Alarm App Interaction**
+   1. Allow user to specify when they would like to change their alarm.
+   2. Implement communication with one alarm application.
