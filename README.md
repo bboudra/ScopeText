@@ -24,11 +24,13 @@
 2. **External Application Interface**
    2. ScopeText must interact with one external Alarm application.
 3. **User Input**
-   1. Allow user to specify exact matches of a desired Message/Keyword/Phrase from an expected contact.
+   1. Allow user to specify exact matches of a desired Message/Keyword/Phrase from a text message.
    2. Allow user to modify a specific alarm.
 4. **Actions**
    3. ScopeText must be able to change the time on an alarm.
    4. If user wants to edit more details of the alarm, then open the external alarm application.
-5. **Application Behavior**
+5. **Persistence**
    1. ScopeText must save the user's selections.
    2. Scopetext must load the user's selections on application start up.
+6. **SMS**
+   1. Listen for desired text message based on user selected contact.
