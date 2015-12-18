@@ -29,8 +29,9 @@
 4. **Persistence**
    1. ScopeText must save the user's selections.
    2. Scopetext must load the user's selections on application start up.
-6. **SMS**
+6. **Messages**
    1. Listen for desired text message based on user selected contact.
+   2. Allow up to 10(Dependant upon stress tests) stored messages per contact.
 
 ## Design
 <h3 align="center">Entity Relationship Diagram</h3>
@@ -39,3 +40,6 @@
 <h3 align="center">Screen Hierarchy</h3>
 &nbsp;
 <div style="text-align:center"><img src ="ScopeTextScreenHierarchy.png"/></div>
+
+## Future Version Ideas
+* Message search feature.
