@@ -35,3 +35,7 @@
 ## Design
 <h3 align="center">Entity Relationship Diagram</h3>
 ![Entity Relationship Diagram](ScopeTextERD.png)
+&nbsp;
+<h3 align="center">Screen Hierarchy</h3>
+&nbsp;
+<div style="text-align:center"><img src ="ScopeTextScreenHierarchy.png"/></div>
