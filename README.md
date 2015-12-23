@@ -34,7 +34,7 @@
    2. Allow up to 10(Dependant upon stress tests) stored messages per contact.
 
 ## Design
-<h3 align="center">Screen Hierarchy</h3>
+<h3>Screen Hierarchy</h3>
 <img src="docs/ScopeTextScreenHierarchy.png" alt="Screen Hierarchy" align="middle">
 
 ## Design Components
