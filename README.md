@@ -35,7 +35,7 @@
 
 ## Design
 <h3 align="center">Screen Hierarchy</h3>
-![Screen Hierarchy](docs/ScopeTextScreenHierarchy.png)
+<img src="docs/ScopeTextScreenHierarchy.png" alt="Screen Hierarchy" align="middle">
 
 ## Design Components
 1. **Main Activity**
