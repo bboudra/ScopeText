@@ -34,12 +34,12 @@
    2. Allow up to 10(Dependant upon stress tests) stored messages per contact.
 
 ## Design
-<h3 align="center">Entity Relationship Diagram</h3>
-![Entity Relationship Diagram](ScopeTextERD.png)
-&nbsp;
 <h3 align="center">Screen Hierarchy</h3>
-&nbsp;
-<div style="text-align:center"><img src ="ScopeTextScreenHierarchy.png"/></div>
+![Screen Hierarchy](docs/ScopeTextScreenHierarchy.png)
 
+## Design Components
+1. **Main Activity**
+	1. Container for all the fragments.
+	
 ## Future Version Ideas
 * Message search feature.
