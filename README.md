@@ -33,13 +33,23 @@
    1. Listen for desired text message based on user selected contact.
    2. Allow up to 10(Dependant upon stress tests) stored messages per contact.
 
-## Design
+## Design Components
+
+### ScopeText Architecture
+<img src="docs/ScopeTextDFD.png" alt="Screen Hierarchy" align="middle">
+
+### UI Component
+1. **MainActivity.java**
+	1. Container for all ScopeText Fragments.
+	2. Handles all life cycle events for the application.
+	3. Container for the ActionBar UI View.
+3. **MainMenuFragment.java**
+	1. + button on actionbar switches fragment to the NewContactFragment.
+	2. Inherits from a ListFragment to support Views that navigate to the ContactFragment.
+	3. Send newly created contacts to the Persistence Component.
+	4. Load contacts (If any existing) on app start up.
 <h3>Screen Hierarchy</h3>
 <img src="docs/ScopeTextScreenHierarchy.png" alt="Screen Hierarchy" align="middle">
-
-## Design Components
-1. **Main Activity**
-	1. Container for all the fragments.
 	
 ## Future Version Ideas
 * Message search feature.
