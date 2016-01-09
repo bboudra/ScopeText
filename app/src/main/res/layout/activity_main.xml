@@ -15,4 +15,14 @@
         android:elevation="4dp"
         android:theme="@style/AppTheme"
         />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/actionBar"
+        />
+
+    <!--TODO Add admob advertising view-->
 </RelativeLayout>

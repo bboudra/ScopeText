@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.scopetext.scopetext.NewContactFragment">
+
+    <TextView
+        android:id="@+id/new_contact_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/header_padding_top"
+        android:text="@string/new_contact_header"
+        android:textSize="@dimen/header_text_size"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <!--<TextView-->
+        <!--android:id="@+id/search_contact_text"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/search_contact_text"-->
+        <!--android:textSize="@dimen/body_text_size"-->
+        <!--android:layout_below="@id/new_contact_header"/>-->
+
+    <EditText
+        android:id="@+id/contact_name_form"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_height"
+        android:imeOptions="actionSearch"
+        android:layout_below="@id/new_contact_header"
+        android:hint="@string/search_contact_text" />
+</RelativeLayout>
