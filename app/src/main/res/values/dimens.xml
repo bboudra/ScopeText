@@ -6,6 +6,6 @@
     <dimen name="form_width">100dp</dimen>
     <dimen name="form_height">20dp</dimen>
     <dimen name="header_padding_top">100dp</dimen>
-    <dimen name="header_text_size">50dp</dimen>
+    <dimen name="header_text_size">22dp</dimen>
     <dimen name="body_text_size">20dp</dimen>
 </resources>

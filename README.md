@@ -58,6 +58,13 @@
 	 
 <h3>Screen Hierarchy</h3>
 <img src="docs/ScopeTextScreenHierarchy.png" alt="Screen Hierarchy" align="middle">
+
+## Testing Plan
+
+### Integration tests
+
+### System Tests
+
 	
 ## Future Version Ideas
 * Message search feature.

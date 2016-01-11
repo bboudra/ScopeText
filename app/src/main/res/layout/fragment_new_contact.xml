@@ -6,12 +6,12 @@
 
     <TextView
         android:id="@+id/new_contact_header"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/header_padding_top"
         android:text="@string/new_contact_header"
         android:textSize="@dimen/header_text_size"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:background="@color/colorPrimary"
+        android:gravity="center"/>
 
     <!--<TextView-->
         <!--android:id="@+id/search_contact_text"-->

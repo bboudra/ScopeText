@@ -6,4 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="AppTheme.TitleText">
+        <item name="android:textSize">@dimen/header_text_size</item>
+        <item name="android:textColor">@color/colorTitle</item>
+    </style>
 </resources>
