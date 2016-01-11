@@ -4,6 +4,7 @@
     <string name="action_new_contact">Add Contact</string>
     <string name="new_contact_header">New Contact</string>
     <string name="search_contact_text">Search Contact Name: </string>
+    <string name="new_contact">NEW_CONTACT</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
