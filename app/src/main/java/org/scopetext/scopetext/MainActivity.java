@@ -14,7 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
-    final int PAGE_NUM = 2;
+    final int PAGE_NUM = 1;
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
     private Resources mResources;
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_screen_slide);
+        setContentView(R.layout.activity_main);
         mResources = getResources();
 
         mPager = (ViewPager) findViewById(R.id.fragment_pager);
@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         mPager.setAdapter(mPagerAdapter);
 
         //TODO Put toolbar setup in private method
-       // Toolbar toolbar = (Toolbar) findViewById(R.id.actionBar);
-      //  setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.actionBar);
+        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -62,14 +62,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void newContactFragment() {
-        final String NEW_CONTACT = mResources.getString(R.string.new_contact);
-        NewContactFragment fragment = NewContactFragment.newInstance();
-
-        getSupportFragmentManager().beginTransaction().
-                add(R.id.fragment_container, fragment, NEW_CONTACT).
-                addToBackStack(NEW_CONTACT).commit();
-    }
+//    private void newContactFragment() {
+//        final String NEW_CONTACT = mResources.getString(R.string.new_contact);
+//        NewContactFragment fragment = NewContactFragment.newInstance();
+//
+//        getSupportFragmentManager().beginTransaction().
+//                add(R.id.fragment_container, fragment, NEW_CONTACT).
+//                addToBackStack(NEW_CONTACT).commit();
+//    }
 
     /**
      * A simple pager adapter that represents 2 ScreenSlidePageFragment objects, in
