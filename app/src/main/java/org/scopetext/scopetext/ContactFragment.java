@@ -10,41 +10,35 @@ import android.view.ViewGroup;
 
 
 /**
- * Handles the UI when the user adds a new contact.
+ * Handles the UI for displaying list of contacts.
  */
-public class NewContactFragment extends Fragment {
+public class ContactFragment extends Fragment {
     private FragmentCommunicationListener mListener;
 
-    public NewContactFragment() {
+    public ContactFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Replaces constructor.
-     * @return A new instance of fragment NewContactFragment.
-     */
-    // TODO: Pass in parameters for fragment communication.
-    public static NewContactFragment newInstance() {
-        NewContactFragment fragment = new NewContactFragment();
+    public static ContactFragment newInstance() {
+        ContactFragment fragment = new ContactFragment();
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_new_contact, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_contact, container, false);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // Ensure Parent Context is a
 //        if (context instanceof FragmentCommunicationListener) {
 //            mListener = (FragmentCommunicationListener) context;
 //        } else {
@@ -58,5 +52,4 @@ public class NewContactFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
 }

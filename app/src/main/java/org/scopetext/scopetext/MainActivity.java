@@ -13,24 +13,28 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
-    final int PAGE_NUM = 1;
+public class MainActivity extends AppCompatActivity implements FragmentCommunicationListener {
+    private static final int PAGE_NUM = 2;
     private ViewPager mPager;
-    private PagerAdapter mPagerAdapter;
-    private Resources mResources;
 
+    /**
+     * Initializes all necessary components.
+     *
+     * @param savedInstanceState The application's saved content
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mResources = getResources();
+        Toolbar toolbar = null;
+        PagerAdapter pagerAdapter = null;
 
+        // Pager setup for swiping to switch fragments
         mPager = (ViewPager) findViewById(R.id.fragment_pager);
-        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-        mPager.setAdapter(mPagerAdapter);
+        pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPager.setAdapter(pagerAdapter);
 
-        //TODO Put toolbar setup in private method
-        Toolbar toolbar = (Toolbar) findViewById(R.id.actionBar);
+        // Toolbar setup
+        toolbar = (Toolbar) findViewById(R.id.actionBar);
         setSupportActionBar(toolbar);
     }
 
@@ -62,15 +66,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    private void newContactFragment() {
-//        final String NEW_CONTACT = mResources.getString(R.string.new_contact);
-//        NewContactFragment fragment = NewContactFragment.newInstance();
-//
-//        getSupportFragmentManager().beginTransaction().
-//                add(R.id.fragment_container, fragment, NEW_CONTACT).
-//                addToBackStack(NEW_CONTACT).commit();
-//    }
-
     /**
      * A simple pager adapter that represents 2 ScreenSlidePageFragment objects, in
      * sequence.
@@ -82,7 +77,10 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new ScreenSlidePageFragment();
+            if (position == 0)
+                return ContactFragment.newInstance();
+             else
+                return NewContactFragment.newInstance();
         }
 
         @Override

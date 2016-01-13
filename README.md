@@ -37,15 +37,23 @@
 ### ScopeText Architecture
 <img src="docs/ScopeTextDFD.png" alt="Screen Hierarchy" align="middle">
 
+<h3>Screen Hierarchy</h3>
+<img src="docs/ScopeTextScreenHierarchy.png" alt="Screen Hierarchy" align="middle">
+
+
 ### UI Component
 1. **MainActivity.java**
 	1. Container for all ScopeText Fragments.
-	2. Load contacts (If any existing) from Contact.java.
 	2. Handles all life cycle events for the application.
 	3. Container for the ActionBar UI View.
-		1. + button on actionbar notifies Contact.java to create a new user.
 	4. Contains admob advertising view.  
-6. **NewContactFragment.java**
+	5. Allow swiping to switch fragments
+		1. Action bar subtitle shift.
+		2. Fade bar animation under subtitle
+2. **ContactFragment.java**
+	1. Load contacts (If any existing) from Contact.java.
+	2. Store contacts as a scrollable list view.
+3. **NewContactFragment.java**
 	1. Form requesting name of existing phone contact.
 		1. Name is sent over to Contact.java where contact is retrieved.
 	2. Check boxes next to all contact phone numbers.
@@ -55,9 +63,6 @@
 2. **Contact.java**
 	1. Send newly created contacts to the Persistence Component to store.
 	3. Load contacts (If any existing) on app start up.
-	 
-<h3>Screen Hierarchy</h3>
-<img src="docs/ScopeTextScreenHierarchy.png" alt="Screen Hierarchy" align="middle">
 
 ## Testing Plan
 
