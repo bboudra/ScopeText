@@ -1,6 +1,6 @@
 package org.scopetext.scopetext;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,11 +9,13 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements FragmentCommunicationListener {
+public class MainActivity extends AppCompatActivity {
     private static final int PAGE_NUM = 2;
     private ViewPager mPager;
 
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
         Toolbar toolbar = null;
         PagerAdapter pagerAdapter = null;
 

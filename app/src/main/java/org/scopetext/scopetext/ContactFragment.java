@@ -13,7 +13,6 @@ import android.view.ViewGroup;
  * Handles the UI for displaying list of contacts.
  */
 public class ContactFragment extends Fragment {
-    private FragmentCommunicationListener mListener;
 
     public ContactFragment() {
         // Required empty public constructor
@@ -39,17 +38,12 @@ public class ContactFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        if (context instanceof FragmentCommunicationListener) {
-//            mListener = (FragmentCommunicationListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement FragmentCommunicationListener");
-//        }
+
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+
     }
 }

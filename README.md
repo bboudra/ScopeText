@@ -49,7 +49,6 @@
 	4. Contains admob advertising view.  
 	5. Allow swiping to switch fragments
 		1. Action bar subtitle shift.
-		2. Fade bar animation under subtitle
 2. **ContactFragment.java**
 	1. Load contacts (If any existing) from Contact.java.
 	2. Store contacts as a scrollable list view.
@@ -74,3 +73,4 @@
 ## Future Version Ideas
 * Message search feature.
 * Allow user to switch to contact app to create new contact if desired one doesn't exist.
+* Fade bar animation under subtitle

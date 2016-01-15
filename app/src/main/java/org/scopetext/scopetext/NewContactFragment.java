@@ -13,7 +13,6 @@ import android.view.ViewGroup;
  * Handles the UI when the user adds a new contact.
  */
 public class NewContactFragment extends Fragment {
-    private FragmentCommunicationListener mListener;
 
     public NewContactFragment() {
         // Required empty public constructor
@@ -44,19 +43,12 @@ public class NewContactFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // Ensure Parent Context is a
-//        if (context instanceof FragmentCommunicationListener) {
-//            mListener = (FragmentCommunicationListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement FragmentCommunicationListener");
-//        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+
     }
 
 }
