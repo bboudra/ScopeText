@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * A simple pager adapter that represents 2 ScreenSlidePageFragment objects, in
+     * A simple pager adapter that represents 2 Fragment objects, in
      * sequence.
      */
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             if (position == 0)
                 return ContactFragment.newInstance();
-             else
+            else
                 return NewContactFragment.newInstance();
         }
 

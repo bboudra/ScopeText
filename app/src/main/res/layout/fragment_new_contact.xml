@@ -19,21 +19,24 @@
             android:background="@color/colorPrimary"
             android:gravity="center"/>
 
-        <!--<TextView-->
-            <!--android:id="@+id/search_contact_text"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/search_contact_text"-->
-            <!--android:textSize="@dimen/body_text_size"-->
-            <!--android:layout_below="@id/new_contact_header"/>-->
+        <TextView
+            android:id="@+id/search_contact_text"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/form_height"
+            android:text="@string/search_contact_text"
+            android:textSize="@dimen/body_text_size"
+            android:layout_below="@id/new_contact_header"
+            android:gravity="center"/>
 
         <EditText
             android:id="@+id/contact_name_form"
             android:layout_width="match_parent"
             android:layout_height="@dimen/form_height"
             android:imeOptions="actionSearch"
+            android:gravity="center"
             android:layout_below="@id/new_contact_header"
-            android:hint="@string/search_contact_text" />
+            android:layout_toRightOf="@id/search_contact_text"
+            android:hint="@string/search_contact_text_hint" />
     </RelativeLayout>
 
 </ScrollView>
