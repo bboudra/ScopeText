@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Matchers;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -17,7 +18,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(MainActivity.class)
 public class MainActivityTest {
-    @Spy
     private MainActivity mainActivity;
     Bundle savedInstanceState;
 
@@ -25,14 +25,19 @@ public class MainActivityTest {
     public void setup() {
         savedInstanceState = Mockito.mock(Bundle.class);
         mainActivity = Mockito.spy(new MainActivity());
-
-        //
     }
 
     @Test
     public void layoutTest() {
-        mainActivity = new MainActivity();
+        onCreateSetup();
+
         mainActivity.onCreate(savedInstanceState);
+    }
+
+    /*
+     * Stub
+     */
+    private void onCreateSetup() {
 
     }
 }
