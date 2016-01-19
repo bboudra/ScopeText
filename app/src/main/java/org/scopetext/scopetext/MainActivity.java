@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
      * A simple pager adapter that represents 2 Fragment objects, in
      * sequence.
      */
-    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+    protected class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
         }
