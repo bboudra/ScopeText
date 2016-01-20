@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 
 import junit.framework.Assert;
 
@@ -24,14 +25,14 @@ import org.powermock.modules.junit4.PowerMockRunner;
  * Unit tests for MainActivity.java
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(MainActivity.class)
+@PrepareForTest({ MainActivity.class, Bundle.class})
 public class MainActivityTest {
     private MainActivity mainActivity;
     Bundle savedInstanceState;
 
     @Before
     public void setup() {
-        savedInstanceState = Mockito.mock(Bundle.class);
+        savedInstanceState = PowerMockito.mock(Bundle.class);
         mainActivity = Mockito.spy(new MainActivity());
     }
 
@@ -39,13 +40,17 @@ public class MainActivityTest {
     public void layoutTest() {
         FragmentManager fragmentManager = Mockito.mock(FragmentManager.class);
         ScreenSlidePagerAdapter pagerAdapter = Mockito.mock(ScreenSlidePagerAdapter.class);
+        Toolbar toolbar = Mockito.mock(Toolbar.class);
 
         // Stubs
         try {
-            Mockito.doNothing().when(mainActivity).setContentView(R.layout.activity_main);
+            Mockito.doNothing().when(mainActivity).setContentView(Matchers.anyInt());
             Mockito.doReturn(Mockito.mock(ViewPager.class)).
                     when(mainActivity).findViewById(R.id.fragment_pager);
             Mockito.doReturn(fragmentManager).when(mainActivity).getSupportFragmentManager();
+            Mockito.doReturn(toolbar).when(mainActivity).
+                    findViewById(R.id.actionBar);
+            Mockito.doReturn
             PowerMockito.whenNew(ScreenSlidePagerAdapter.class).
                     withArguments(fragmentManager).thenReturn(pagerAdapter);
         } catch (Exception e) {
@@ -56,5 +61,6 @@ public class MainActivityTest {
         mainActivity.onCreate(savedInstanceState);
 
         // Test
+        Mockito.verify(mainActivity).setContentView(R.layout.activity_main);
     }
 }
