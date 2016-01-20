@@ -50,7 +50,7 @@ public class MainActivityTest {
             Mockito.doReturn(fragmentManager).when(mainActivity).getSupportFragmentManager();
             Mockito.doReturn(toolbar).when(mainActivity).
                     findViewById(R.id.actionBar);
-            Mockito.doReturn
+            
             PowerMockito.whenNew(ScreenSlidePagerAdapter.class).
                     withArguments(fragmentManager).thenReturn(pagerAdapter);
         } catch (Exception e) {
