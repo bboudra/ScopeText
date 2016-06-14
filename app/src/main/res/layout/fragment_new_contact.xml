@@ -1,16 +1,10 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/new_contact_fragment_scroll"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="org.scopetext.scopetext.NewContactFragment">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
         <TextView
-            android:id="@+id/new_contact_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/new_contact_header"
@@ -21,22 +15,17 @@
 
         <TextView
             android:id="@+id/search_contact_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/form_height"
             android:text="@string/search_contact_text"
             android:textSize="@dimen/body_text_size"
-            android:layout_below="@id/new_contact_header"
             android:gravity="center"/>
 
         <EditText
-            android:id="@+id/contact_name_form"
             android:layout_width="match_parent"
             android:layout_height="@dimen/form_height"
             android:imeOptions="actionSearch"
             android:gravity="center"
-            android:layout_below="@id/new_contact_header"
-            android:layout_toRightOf="@id/search_contact_text"
             android:hint="@string/search_contact_text_hint" />
-    </RelativeLayout>
 
-</ScrollView>
+</LinearLayout>

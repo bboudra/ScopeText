@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 
 /**
- * Handles the UI for displaying list of contacts.
+ * Handles the UI for displaying list of contacts.<br/>
  */
 public class ContactFragment extends Fragment {
 

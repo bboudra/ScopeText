@@ -15,6 +15,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+/**
+ * Controller component of the app. Communicates with all of the other
+ * components, and handles responses from all of them.
+ * @author John Qualls
+ * @version 1.0
+ */
 public class MainActivity extends AppCompatActivity {
     private static final int PAGE_NUM = 2;
     private ViewPager mPager;
