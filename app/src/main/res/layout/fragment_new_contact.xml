@@ -13,19 +13,16 @@
             android:background="@color/colorPrimary"
             android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/search_contact_text"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/form_height"
-            android:text="@string/search_contact_text"
-            android:textSize="@dimen/body_text_size"
-            android:gravity="center"/>
+            android:layout_height="wrap_content"
+            android:src="@drawable/contacts"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="@dimen/form_height"
             android:imeOptions="actionSearch"
             android:gravity="center"
-            android:hint="@string/search_contact_text_hint" />
+            android:hint="@string/search_contact_text_hint"/>
 
 </LinearLayout>
