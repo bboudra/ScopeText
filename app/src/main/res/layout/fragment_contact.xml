@@ -5,19 +5,14 @@
     android:layout_height="match_parent" >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context="org.scopetext.scopetext.ContactFragment"
         >
 
         <TextView
+            style="@style/AppTheme.TitleText"
             android:id="@+id/contact_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/contact_header"
-            android:textSize="@dimen/header_text_size"
-            android:textColor="@color/colorTitle"
-            android:background="@color/colorPrimary"
-            android:gravity="center"/>
+            android:text="@string/contact_header"/>
 
     </RelativeLayout>
 </ScrollView>

@@ -8,7 +8,26 @@
     </style>
 
     <style name="AppTheme.TitleText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/header_text_size</item>
         <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="AppTheme.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/form_height</item>
+        <item name="android:textColor">@color/colorForm</item>
+        <item name="android:textColorHint">@color/colorForm</item>
+        <item name="android:textSize">@dimen/body_text_size</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="AppTheme.SearchText" parent="AppTheme.EditText">
+        <item name="android:drawableLeft">@drawable/search</item>
+        <item name="android:inputType">text</item>
+        <item name="android:imeOptions">actionSearch</item>
     </style>
 </resources>

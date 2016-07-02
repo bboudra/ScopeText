@@ -5,24 +5,16 @@
     android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/new_contact_header"
-            android:textSize="@dimen/header_text_size"
-            android:textColor="@color/colorTitle"
-            android:background="@color/colorPrimary"
-            android:gravity="center"/>
+            style="@style/AppTheme.TitleText"
+            android:text="@string/new_contact_header"/>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/contacts"/>
-
+            android:src="@drawable/contacts"
+            android:contentDescription="@string/contact_image"/>
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/form_height"
-            android:imeOptions="actionSearch"
-            android:gravity="center"
+            style="@style/AppTheme.SearchText"
+            android:id="@+id/search_edit_text"
             android:hint="@string/search_contact_text_hint"/>
-
 </LinearLayout>
