@@ -11,6 +11,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/image_view_padding_top"
             android:src="@drawable/contacts"
             android:contentDescription="@string/contact_image"/>
         <EditText

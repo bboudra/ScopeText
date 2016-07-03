@@ -29,5 +29,6 @@
         <item name="android:drawableLeft">@drawable/search</item>
         <item name="android:inputType">text</item>
         <item name="android:imeOptions">actionSearch</item>
+        <item name="android:paddingEnd">25dp</item>
     </style>
 </resources>

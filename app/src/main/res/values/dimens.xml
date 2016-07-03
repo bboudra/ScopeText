@@ -5,8 +5,10 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="form_width">100dp</dimen>
     <dimen name="form_height">48dp</dimen>
+    <dimen name="form_padding_right">25dp</dimen>
     <dimen name="header_padding_top">100dp</dimen>
     <dimen name="header_text_size">22dp</dimen>
     <dimen name="body_text_size">20dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="image_view_padding_top">20dp</dimen>
 </resources>
