@@ -17,9 +17,10 @@
         <EditText
             style="@style/AppTheme.SearchText"
             android:id="@+id/search_edit_text"
+
             android:hint="@string/search_contact_text_hint"/>
         <ListView
-            android:id="@+id/contact_list"
+            android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 </LinearLayout>
