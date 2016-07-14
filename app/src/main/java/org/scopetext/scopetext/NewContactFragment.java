@@ -16,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Data;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
@@ -32,27 +34,13 @@ import android.widget.TextView.OnEditorActionListener;
 public class NewContactFragment extends Fragment
     implements LoaderCallbacks<Cursor>, OnItemClickListener, OnEditorActionListener{
 
-    /**
-     * Replaces constructor.
-     * @return A new instance of fragment NewContactFragment.
-     */
-    // TODO: Pass in parameters for fragment communication.
-    public static NewContactFragment newInstance() {
-        NewContactFragment fragment = new NewContactFragment();
-        return fragment;
-    }
-
-    // Contains columns returned from query
     @SuppressLint("InlinedApi")
     private static final String[] PROJECTION =
             {
-                    Contacts._ID,
-                    Contacts.LOOKUP_KEY,
-                    Build.VERSION.SDK_INT
-                            >= Build.VERSION_CODES.HONEYCOMB ?
-                            Contacts.DISPLAY_NAME_PRIMARY :
-                            Contacts.DISPLAY_NAME
-
+                    Phone._ID,
+                    Phone.LOOKUP_KEY,
+                    Phone.DISPLAY_NAME_PRIMARY,
+                    Phone.NUMBER
             };
 
     /*
@@ -61,10 +49,8 @@ public class NewContactFragment extends Fragment
  */
     @SuppressLint("InlinedApi")
     private final static String[] FROM_COLUMNS = {
-            Build.VERSION.SDK_INT
-                    >= Build.VERSION_CODES.HONEYCOMB ?
-                    Contacts.DISPLAY_NAME_PRIMARY :
-                    Contacts.DISPLAY_NAME
+            Phone.DISPLAY_NAME_PRIMARY,
+            Phone.NUMBER
     };
     /*
      * Defines an array that contains resource ids for the layout views
@@ -72,20 +58,23 @@ public class NewContactFragment extends Fragment
      * the Android framework, so it is prefaced with "android.R.id"
      */
     private final static int[] TO_IDS = {
-            android.R.id.text1
+            android.R.id.text1,
+            android.R.id.text2
     };
 
     // Defines the text expression
     @SuppressLint("InlinedApi")
     private static final String SELECTION =
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ?
-                    Contacts.DISPLAY_NAME_PRIMARY + " LIKE ?" :
-                    Contacts.DISPLAY_NAME + " LIKE ?";
+                    Phone.DISPLAY_NAME_PRIMARY + " LIKE ?" +
+                            " AND " + Phone.TYPE + " = "+ "'" + Phone.TYPE_MOBILE + "'" +
+                            " AND " + Data.MIMETYPE + " = " +
+                            "'" + Phone.CONTENT_ITEM_TYPE + "'";
 
+    private static final String SORT_ORDER = Phone.TYPE + " ASC ";
     // Defines a variable for the search string
     private String mSearchString;
     // Defines the array to hold values that replace the ?
-    private String[] mSelectionArgs = { mSearchString };
+    private String[] mSelectionArgs = { "" };
     // Define global mutable variables
     // Define a ListView object
     ListView mContactsList;
@@ -105,10 +94,19 @@ public class NewContactFragment extends Fragment
     private static final int LOOKUP_KEY_INDEX = 1;
     private static final String LOG_TAG = "NewContactFragment.java";
 
+    /**
+     * Replaces constructor.
+     * @return A new instance of fragment NewContactFragment.
+     */
+    // TODO: Pass in parameters for fragment communication.
+    public static NewContactFragment newInstance() {
+        NewContactFragment fragment = new NewContactFragment();
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.i("Test", "New Contact Fragment onCreateView()");
         return inflater.inflate(R.layout.fragment_new_contact, container, false);
     }
 
@@ -164,11 +162,11 @@ public class NewContactFragment extends Fragment
         // Starts the query
         return new CursorLoader(
                 getActivity(),
-                Contacts.CONTENT_URI,
+                Data.CONTENT_URI,
                 PROJECTION,
                 SELECTION,
                 mSelectionArgs,
-                null
+                SORT_ORDER
         );
     }
 

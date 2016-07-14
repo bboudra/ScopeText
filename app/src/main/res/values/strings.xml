@@ -5,7 +5,7 @@
     <string name="new_contact_header">New Contact</string>
     <string name="contact_header">Contacts</string>
     <string name="search_contact_text">Contact Name: </string>
-    <string name="search_contact_text_hint">Search Contacts</string>
+    <string name="search_contact_text_hint">Search Contact Name</string>
     <string name="new_contact">NEW_CONTACT</string>
     <string name="contact_image">Contacts Icon</string>
 </resources>
