@@ -3,7 +3,8 @@
     android:id="@+id/contact_fragment_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context="org.scopetext.scopetext.ContactFragment"
@@ -11,8 +12,17 @@
 
         <TextView
             style="@style/AppTheme.TitleText"
-            android:id="@+id/contact_header"
-            android:text="@string/contact_header"/>
-
-    </RelativeLayout>
+            android:text="@string/contact_header"
+            android:layout_weight=".25"/>
+        <TextView
+            style="@style/AppTheme.TitleText"
+            android:text="Message"
+            android:layout_weight=".25"
+            />
+        <TextView
+            style="@style/AppTheme.TitleText"
+            android:text="Response"
+            android:layout_weight=".25"
+            />
+    </LinearLayout>
 </ScrollView>
