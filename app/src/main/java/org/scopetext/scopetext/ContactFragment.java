@@ -1,7 +1,6 @@
 package org.scopetext.scopetext;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -20,8 +19,7 @@ public class ContactFragment extends Fragment {
     }
 
     public static ContactFragment newInstance() {
-        ContactFragment fragment = new ContactFragment();
-        return fragment;
+        return new ContactFragment();
     }
 
     @Override
@@ -51,7 +49,7 @@ public class ContactFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Log.i("Test", "Contact Fragment onCreateView()");
-        return inflater.inflate(R.layout.fragment_contact, container, false);
+        return inflater.inflate(R.layout.fragment_scope_text_detail, container, false);
     }
 
     @Override

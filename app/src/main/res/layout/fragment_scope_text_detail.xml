@@ -18,10 +18,8 @@
             style="@style/AppTheme.ScopeTextHeader"
             android:text="@string/contact_header"/>
         <TextView
-            style="@style/AppTheme.ScopeTextHeader"
-            android:text="@string/message_header"/>
-        <TextView
-            style="@style/AppTheme.ScopeTextHeader"
-            android:text="@string/response_header"/>
+            style="@style/AppTheme.TitleText"
+            android:text="@string/use_header"
+            android:layout_weight=".20"/>
     </LinearLayout>
 </ScrollView>
