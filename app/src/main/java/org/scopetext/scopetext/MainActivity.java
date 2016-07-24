@@ -21,6 +21,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
     private static final int PAGE_NUM = 2;
     private ViewPager mPager;
+    private SampleDBHelper dbHelper;
 
     /**
      * Initializes all necessary components.
@@ -34,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = null;
         PagerAdapter pagerAdapter = null;
+
+        // Initialize db
+        dbHelper = new SampleDBHelper(this);
 
         // Pager setup for swiping to switch fragments
         mPager = (ViewPager) findViewById(R.id.fragment_pager);
@@ -85,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             if (position == 0)
-                return ContactFragment.newInstance();
+                return ContactFragment.newInstance(dbHelper);
             else
                 return NewContactFragment.newInstance();
         }
