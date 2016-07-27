@@ -10,15 +10,14 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/actionBar"
+        style="@style/AppTheme"
+        android:theme="@style/AppTheme"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        android:theme="@style/AppTheme"
-        app:titleTextAppearance="@style/AppTheme.TitleText"
-        />
+        app:titleTextAppearance="@style/AppTheme.TitleText"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/fragment_pager"
+    <FrameLayout
+        android:id="@+id/scopetext_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"/>
 </LinearLayout>

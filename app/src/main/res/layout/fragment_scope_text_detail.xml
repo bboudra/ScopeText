@@ -1,13 +1,11 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/contact_fragment_scroll"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context="org.scopetext.scopetext.ContactFragment">
+        android:layout_height="wrap_content">
 
         <TextView
             style="@style/AppTheme.ScopeTextHeader"
@@ -21,22 +19,33 @@
             android:text="@string/use_header"
             android:layout_weight=".20"/>
     </LinearLayout>
-    -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <Button
+        <EditText
             android:id="@+id/insert_button"
-            android:text="Insert Record"
-            android:layout_width="wrap_content"
+            android:hint="Insert Record"
+            android:layout_width="0dp"
             android:layout_height="@dimen/form_height"
-            android:layout_weight=".5"/>
+            android:layout_weight=".3"
+            android:inputType="text"
+            android:imeOptions="actionDone"/>
         <Button
-            android:id="@+id/select_button"
-            android:text="Read records"
-            android:layout_width="wrap_content"
+        android:id="@+id/select_button"
+        android:text="Read records"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/form_height"
+        android:layout_weight=".3"/>
+        <Button
+            android:id="@+id/delete_button"
+            android:text="Delete Records"
+            android:layout_width="0dp"
             android:layout_height="@dimen/form_height"
-            android:layout_weight=".5"/>
+            android:layout_weight=".3"/>
     </LinearLayout>
-</ScrollView>
+    <ListView
+        android:id="@+id/scopetext_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+</LinearLayout>

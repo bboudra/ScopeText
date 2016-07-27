@@ -1,11 +1,8 @@
 package org.scopetext.scopetext;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -19,8 +16,6 @@ import android.view.MenuItem;
  * @version 1.0
  */
 public class MainActivity extends AppCompatActivity {
-    private static final int PAGE_NUM = 2;
-    private ViewPager mPager;
     private SampleDBHelper dbHelper;
 
     /**
@@ -34,31 +29,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = null;
-        PagerAdapter pagerAdapter = null;
 
         // Initialize db
         dbHelper = new SampleDBHelper(this);
 
-        // Pager setup for swiping to switch fragments
-        mPager = (ViewPager) findViewById(R.id.fragment_pager);
-        pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-        mPager.setAdapter(pagerAdapter);
-
         // Toolbar setup
         toolbar = (Toolbar) findViewById(R.id.actionBar);
         setSupportActionBar(toolbar);
-    }
 
-    @Override
-    public void onBackPressed() {
-        if (mPager.getCurrentItem() == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
-            super.onBackPressed();
-        } else {
-            // Otherwise, select the previous step.
-            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-        }
+        // Initialize ScopeText fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        ContactFragment fragment = ContactFragment.newInstance(dbHelper);
+        transaction.add(R.id.scopetext_fragment, fragment);
+        transaction.commit();
     }
 
     @Override
@@ -74,29 +58,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_custom_settings:
             default:
                 return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /**
-     * A simple pager adapter that represents 2 Fragment objects, in
-     * sequence.
-     */
-    protected class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-        public ScreenSlidePagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            if (position == 0)
-                return ContactFragment.newInstance(dbHelper);
-            else
-                return NewContactFragment.newInstance();
-        }
-
-        @Override
-        public int getCount() {
-            return PAGE_NUM;
         }
     }
 }
