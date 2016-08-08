@@ -1,25 +1,21 @@
-package org.scopetext.scopetext;
+package org.scopetext.view;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
 import junit.framework.Assert;
 
-import org.scopetext.scopetext.MainActivity.ScreenSlidePagerAdapter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.Matchers;
-import org.mockito.Spy;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.scopetext.view.MainActivity.ScreenSlidePagerAdapter;
 
 /**
  * Unit tests for MainActivity.java

@@ -1,4 +1,4 @@
-package org.scopetext.scopetext;
+package org.scopetext.view;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

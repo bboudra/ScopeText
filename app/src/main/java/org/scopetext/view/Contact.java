@@ -1,4 +1,4 @@
-package org.scopetext.scopetext;
+package org.scopetext.view;
 
 /**
  * Communicates with the Android OS to

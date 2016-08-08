@@ -1,4 +1,4 @@
-package org.scopetext.scopetext;
+package org.scopetext.view;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import org.scopetext.database.schema.SampleDBHelper;
 
 /**
  * Controller component of the app. Communicates with all of the other

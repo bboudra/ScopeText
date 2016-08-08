@@ -1,4 +1,4 @@
-package org.scopetext.scopetext;
+package org.scopetext.view;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -21,7 +21,9 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
-import org.scopetext.scopetext.SampleContract.Test;
+import org.scopetext.database.schema.SampleDBHelper;
+
+import schema.SampleContract.Test;
 
 
 /**
@@ -29,7 +31,7 @@ import org.scopetext.scopetext.SampleContract.Test;
  */
 public class ContactFragment extends Fragment implements Button.OnClickListener,
         OnEditorActionListener {
-    private final String[] projection = {
+    private final String[] PROJECTION = {
             Test._ID,
             Test.SCOPETEXT_NAME,
             Test.CONTACT_NAME
@@ -95,19 +97,19 @@ public class ContactFragment extends Fragment implements Button.OnClickListener,
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.select_button) {
-            cursor = dbRead.query(Test.TABLE_NAME,
-                         projection,
-                         null,
-                         null,
-                         null,
-                         null,
-                         null);
-            String result = "0";
-            adapter.changeCursor(cursor);
-        } else {
+        if(v.getId() == R.id.delete_button) {
             int rows = dbWrite.delete(Test.TABLE_NAME, null, null);
             Toast.makeText(getActivity(), rows + "", Toast.LENGTH_SHORT).show();
+        } else if (v.getId() == R.id.select_button) {
+            cursor = dbRead.query(Test.TABLE_NAME,
+                    PROJECTION,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            cursor.moveToFirst();
+            adapter.swapCursor(cursor);
         }
     }
 

@@ -3,15 +3,16 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:id="@+id/scopetext_contact"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/form_height"
-        android:layout_weight=".5"/>
-    <TextView
         android:id="@+id/scopetext_name"
         android:layout_width="0dp"
         android:layout_height="@dimen/form_height"
         android:layout_weight=".5"/>
+    <TextView
+        android:id="@+id/scopetext_contact"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/form_height"
+        android:layout_weight=".5"/>
+
 <!--    <CheckBox
         android:id="@+id/checkbox_enabled"
         android:layout_width="wrap_content"

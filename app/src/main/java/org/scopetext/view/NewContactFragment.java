@@ -1,4 +1,4 @@
-package org.scopetext.scopetext;
+package org.scopetext.view;
 
 import android.annotation.SuppressLint;
 import android.database.Cursor;
