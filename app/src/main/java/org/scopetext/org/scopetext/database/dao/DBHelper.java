@@ -3,9 +3,7 @@ package org.scopetext.org.scopetext.database.dao;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
-import org.scopetext.database.schema.ScopeTextContract;
 import org.scopetext.database.schema.ScopeTextContract.ScopeTextSchema;
 
 /**
@@ -26,8 +24,8 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public void onCreate(SQLiteDatabase db) {
         // Initialize tables
-        Log.d(LOG_TAG, ScopeTextContract.SQL_CREATE_TABLE);
-        db.execSQL(ScopeTextContract.SQL_CREATE_TABLE);
+/*        Log.d(LOG_TAG, ScopeTextSchema.SQL_CREATE_TABLE);
+        db.execSQL(ScopeTextSchema.SQL_CREATE_TABLE);*/
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
