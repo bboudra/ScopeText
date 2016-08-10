@@ -3,7 +3,7 @@ package org.scopetext.database.schema;
 import android.provider.BaseColumns;
 
 /**
- * Sc
+ * Schema for the ST_CT_ASSOC table.
  * Created by john.qualls on 8/9/2016.
  */
 public class PhoneNumberContract {
