@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
-import org.scopetext.database.schema.SampleDBHelper;
+import org.scopetext.database.dao.DBHelper;
 
 import schema.SampleContract.Test;
 
@@ -41,7 +41,7 @@ public class ContactFragment extends Fragment implements Button.OnClickListener,
     private SimpleCursorAdapter adapter;
     private Cursor cursor;
 
-    public static ContactFragment newInstance(SampleDBHelper dbHelper) {
+    public static ContactFragment newInstance(DBHelper dbHelper) {
         ContactFragment cf = new ContactFragment();
         cf.dbWrite = dbHelper.getReadableDatabase();
         cf.dbRead = dbHelper.getReadableDatabase();
@@ -58,7 +58,7 @@ public class ContactFragment extends Fragment implements Button.OnClickListener,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Log.i("Test", "Contact Fragment onCreateView()");
-        return inflater.inflate(R.layout.fragment_scope_text_detail, container, false);
+        return inflater.inflate(R.layout.fragment_scopetext, container, false);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class ContactFragment extends Fragment implements Button.OnClickListener,
         // TODO - Temporary test button setup
         final int[] toViews = {R.id.scopetext_name, R.id.scopetext_contact};
         final String[] fromColumns = {Test.SCOPETEXT_NAME, Test.CONTACT_NAME};
-        adapter = new SimpleCursorAdapter(getActivity(), R.layout.scopetext_row, cursor, fromColumns, toViews, 0);
+        adapter = new SimpleCursorAdapter(getActivity(), R.layout.fragment_scopetext_row, cursor, fromColumns, toViews, 0);
         ListView listView = (ListView) getActivity().findViewById(R.id.scopetext_list);
         listView.setAdapter(adapter);
         EditText et = (EditText)getActivity().findViewById(R.id.insert_button);

@@ -1,4 +1,4 @@
-package org.scopetext.org.scopetext.database.dao;
+package org.scopetext.database.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

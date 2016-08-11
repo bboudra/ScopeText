@@ -13,8 +13,8 @@
         android:layout_height="@dimen/form_height"
         android:layout_weight=".5"/>
 
-<!--    <CheckBox
+    <CheckBox
         android:id="@+id/checkbox_enabled"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/form_height"/>-->
+        android:layout_height="@dimen/form_height"/>
 </LinearLayout>

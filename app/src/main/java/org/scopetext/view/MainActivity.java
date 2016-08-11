@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import org.scopetext.database.schema.SampleDBHelper;
+import org.scopetext.database.dao.DBHelper;
 
 /**
  * Controller component of the app. Communicates with all of the other
@@ -18,7 +18,7 @@ import org.scopetext.database.schema.SampleDBHelper;
  * @version 1.0
  */
 public class MainActivity extends AppCompatActivity {
-    private SampleDBHelper dbHelper;
+    private DBHelper dbHelper;
 
     /**
      * Initializes all necessary components.
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = null;
 
         // Initialize db
-        dbHelper = new SampleDBHelper(this);
+        dbHelper = new DBHelper(this);
 
         // Toolbar setup
         toolbar = (Toolbar) findViewById(R.id.actionBar);

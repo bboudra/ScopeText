@@ -2,8 +2,13 @@
       xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
+        android:id="@+id/action_add_scopetext"
+        android:title="@string/action_add_scopetext_str"
+        android:icon="@drawable/ic_add_white_36dp"
+        />
+    <item
         android:id="@+id/action_custom_settings"
-        android:title="Settings"
+        android:title="@string/action_settings"
         android:icon="@drawable/ic_more_vert_white_36dp"
         app:showAsAction="always"/>
  </menu>

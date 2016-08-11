@@ -1,4 +1,4 @@
-package org.scopetext.org.scopetext.database.dao;
+package org.scopetext.database.dao;
 
 /**
  * Created by john.qualls on 8/9/2016.

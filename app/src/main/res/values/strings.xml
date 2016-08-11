@@ -12,4 +12,6 @@
     <string name="search_contact_text_hint">Search Contact Name</string>
     <string name="new_contact">NEW_CONTACT</string>
     <string name="contact_image">Contacts Icon</string>
+    <string name="action_add_scopetext_str">Add ScopeText</string>
+    <string name="action_settings">Settings</string>
 </resources>
