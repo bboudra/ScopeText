@@ -14,4 +14,5 @@
     <string name="contact_image">Contacts Icon</string>
     <string name="action_add_scopetext_str">Add ScopeText</string>
     <string name="action_settings">Settings</string>
+    <string name="action_delete_scopetext_str">Delete ScopeText</string>
 </resources>

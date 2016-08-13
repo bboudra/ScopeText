@@ -1,6 +1,5 @@
-package org.scopetext.view;
+package org.scopetext.controller;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,17 +12,11 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
-import android.widget.Toast;
 
 import org.scopetext.database.dao.DBHelper;
-
-import schema.SampleContract.Test;
 
 
 /**
@@ -31,11 +24,11 @@ import schema.SampleContract.Test;
  */
 public class ContactFragment extends Fragment implements Button.OnClickListener,
         OnEditorActionListener {
-    private final String[] PROJECTION = {
+/*    private final String[] PROJECTION = {
             Test._ID,
             Test.SCOPETEXT_NAME,
             Test.CONTACT_NAME
-    };
+    };*/
     private SQLiteDatabase dbWrite,
                            dbRead;
     private SimpleCursorAdapter adapter;
@@ -66,7 +59,7 @@ public class ContactFragment extends Fragment implements Button.OnClickListener,
         super.onActivityCreated(savedInstanceState);
 
         // TODO - Temporary test button setup
-        final int[] toViews = {R.id.scopetext_name, R.id.scopetext_contact};
+/*        final int[] toViews = {R.id.scopetext_name, R.id.scopetext_contact};
         final String[] fromColumns = {Test.SCOPETEXT_NAME, Test.CONTACT_NAME};
         adapter = new SimpleCursorAdapter(getActivity(), R.layout.fragment_scopetext_row, cursor, fromColumns, toViews, 0);
         ListView listView = (ListView) getActivity().findViewById(R.id.scopetext_list);
@@ -74,7 +67,7 @@ public class ContactFragment extends Fragment implements Button.OnClickListener,
         EditText et = (EditText)getActivity().findViewById(R.id.insert_button);
         et.setOnEditorActionListener(this);
         getActivity().findViewById(R.id.select_button).setOnClickListener(this);
-        getActivity().findViewById(R.id.delete_button).setOnClickListener(this);
+        getActivity().findViewById(R.id.delete_button).setOnClickListener(this);*/
     }
 
     @Override
@@ -97,7 +90,7 @@ public class ContactFragment extends Fragment implements Button.OnClickListener,
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.delete_button) {
+/*        if(v.getId() == R.id.delete_button) {
             int rows = dbWrite.delete(Test.TABLE_NAME, null, null);
             Toast.makeText(getActivity(), rows + "", Toast.LENGTH_SHORT).show();
         } else if (v.getId() == R.id.select_button) {
@@ -110,12 +103,12 @@ public class ContactFragment extends Fragment implements Button.OnClickListener,
                     null);
             cursor.moveToFirst();
             adapter.swapCursor(cursor);
-        }
+        }*/
     }
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
+/*        if (actionId == EditorInfo.IME_ACTION_DONE) {
             EditText editText = (EditText) v;
             String value = editText.getText().toString();
             ContentValues values = new ContentValues();
@@ -123,7 +116,7 @@ public class ContactFragment extends Fragment implements Button.OnClickListener,
             values.put(Test.CONTACT_NAME, "Bob");
             dbWrite.insert(Test.TABLE_NAME, null, values);
             return true;
-        }
+        }*/
         return false;
     }
 }

@@ -1,4 +1,4 @@
-package org.scopetext.view;
+package org.scopetext.controller;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package org.scopetext.view;
+package org.scopetext.controller;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -30,13 +30,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = null;
-
         // Initialize db
         dbHelper = new DBHelper(this);
 
         // Toolbar setup
-        toolbar = (Toolbar) findViewById(R.id.actionBar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.actionBar);
         setSupportActionBar(toolbar);
 
         // Initialize ScopeText fragment

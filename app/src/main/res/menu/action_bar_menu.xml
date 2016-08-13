@@ -5,7 +5,12 @@
         android:id="@+id/action_add_scopetext"
         android:title="@string/action_add_scopetext_str"
         android:icon="@drawable/ic_add_white_36dp"
-        />
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_delete_scopetext"
+        android:title="@string/action_delete_scopetext_str"
+        android:icon="@drawable/trash"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/action_custom_settings"
         android:title="@string/action_settings"

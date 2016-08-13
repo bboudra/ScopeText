@@ -1,4 +1,4 @@
-package org.scopetext.view;
+package org.scopetext.controller;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -15,7 +15,7 @@ import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.scopetext.view.MainActivity.ScreenSlidePagerAdapter;
+import org.scopetext.controller.MainActivity.ScreenSlidePagerAdapter;
 
 /**
  * Unit tests for MainActivity.java
