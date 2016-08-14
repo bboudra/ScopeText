@@ -5,4 +5,17 @@ package org.scopetext.controller;
  * Created by john.qualls on 8/13/2016.
  */
 public class ScopeTextFragmentManager {
+    private static ScopeTextFragmentManager scopeTextFragmentManager;
+
+    private ScopeTextFragmentManager() {
+
+    }
+
+    public static ScopeTextFragmentManager getInstance() {
+        if(scopeTextFragmentManager == null) {
+            scopeTextFragmentManager = new ScopeTextFragmentManager();
+        }
+
+        return scopeTextFragmentManager;
+    }
 }

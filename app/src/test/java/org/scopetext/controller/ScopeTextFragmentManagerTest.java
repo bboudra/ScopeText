@@ -1,6 +1,5 @@
 package org.scopetext.controller;
 
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -13,24 +12,24 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 /**
- * Unit tests for ToolbarManager.java
+ * Unit tests for ScopeTextFragmentManager.java
  * Created by john.qualls on 8/14/2016.
  */
-@PrepareForTest(ToolbarManager.class)
+@PrepareForTest(ScopeTextFragmentManager.class)
 @RunWith(PowerMockRunner.class)
-public class ToolbarManagerTest {
-    private ToolbarManager objUnderTest;
+public class ScopeTextFragmentManagerTest {
+    private ScopeTextFragmentManager objUnderTest;
 
     @Test
     public void returnNewInstanceTest() {
         try {
             // Mock setup
-            ToolbarManager mock = Mockito.mock(ToolbarManager.class);
-            PowerMockito.spy(ToolbarManager.class);
-            PowerMockito.whenNew(ToolbarManager.class).withNoArguments().thenReturn(mock);
+            ScopeTextFragmentManager mock = Mockito.mock(ScopeTextFragmentManager.class);
+            PowerMockito.spy(ScopeTextFragmentManager.class);
+            PowerMockito.whenNew(ScopeTextFragmentManager.class).withNoArguments().thenReturn(mock);
 
             // Test
-            objUnderTest = ToolbarManager.getInstance();
+            objUnderTest = ScopeTextFragmentManager.getInstance();
             assertEquals(mock, objUnderTest);
         } catch (Exception e) {
             fail(e.getMessage());
@@ -39,20 +38,14 @@ public class ToolbarManagerTest {
 
     @Test
     public void returnReferenceTest() {
-        objUnderTest = ToolbarManager.getInstance();
-        ToolbarManager singletonReference = ToolbarManager.getInstance();
+        objUnderTest = ScopeTextFragmentManager.getInstance();
+        ScopeTextFragmentManager singletonReference = ScopeTextFragmentManager.getInstance();
         assertEquals(objUnderTest, singletonReference);
     }
 
-    @Test
-    public void dontSetupToolbarWithNullActivityTest() {
-    }
-
-    @After
-    public void resetSingleton() {
+    private void initializeSingleton() {
         try {
-            objUnderTest = null;
-            Whitebox.setInternalState(ToolbarManager.class, "toolbarManager", objUnderTest);
+            objUnderTest = Whitebox.invokeConstructor(ScopeTextFragmentManager.class);
         } catch(Exception e) {
             fail(e.getMessage());
         }

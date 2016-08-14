@@ -19,6 +19,7 @@ import org.scopetext.database.dao.DBHelper;
  */
 public class MainActivity extends AppCompatActivity {
     private DBHelper dbHelper;
+    private ToolbarManager toolbarManager;
 
     /**
      * Initializes all necessary components.
@@ -30,10 +31,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize db
+/*        // Initialize db
         dbHelper = new DBHelper(this);
-
+*/
         // Toolbar setup
+        //toolbarManager = ToolbarManager.getInstance(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.actionBar);
         setSupportActionBar(toolbar);
 
