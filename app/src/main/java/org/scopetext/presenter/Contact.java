@@ -1,4 +1,4 @@
-package org.scopetext.controller;
+package org.scopetext.presenter;
 
 /**
  * Communicates with the Android OS to

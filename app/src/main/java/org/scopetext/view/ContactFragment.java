@@ -1,4 +1,4 @@
-package org.scopetext.controller;
+package org.scopetext.view;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import org.scopetext.database.dao.DBHelper;
+import org.scopetext.presenter.R;
 
 
 /**

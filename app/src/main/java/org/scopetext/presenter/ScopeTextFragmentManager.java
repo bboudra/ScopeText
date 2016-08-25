@@ -1,4 +1,4 @@
-package org.scopetext.controller;
+package org.scopetext.presenter;
 
 /**
  * Handles all fragment transactions, such as initializing and swaping fragments into a layout.

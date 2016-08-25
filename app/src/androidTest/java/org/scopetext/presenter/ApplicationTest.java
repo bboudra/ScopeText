@@ -1,4 +1,4 @@
-package org.scopetext.controller;
+package org.scopetext.presenter;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

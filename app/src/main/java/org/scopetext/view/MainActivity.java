@@ -1,15 +1,16 @@
-package org.scopetext.controller;
+package org.scopetext.view;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import org.scopetext.database.dao.DBHelper;
+import org.scopetext.presenter.R;
+import org.scopetext.presenter.ToolbarManager;
 
 /**
  * Controller component of the app. Communicates with all of the other
@@ -35,10 +36,7 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
 */
         // Toolbar setup
-        //toolbarManager = ToolbarManager.getInstance(this);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.actionBar);
-        setSupportActionBar(toolbar);
+        toolbarManager = ToolbarManager.getInstance(this, R.id.actionBar);
 
         // Initialize ScopeText fragment
         FragmentManager fragmentManager = getSupportFragmentManager();

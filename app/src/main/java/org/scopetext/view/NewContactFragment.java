@@ -1,4 +1,4 @@
-package org.scopetext.controller;
+package org.scopetext.view;
 
 import android.annotation.SuppressLint;
 import android.database.Cursor;
@@ -25,6 +25,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+
+import org.scopetext.presenter.R;
 
 
 /**
