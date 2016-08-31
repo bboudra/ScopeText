@@ -15,24 +15,22 @@ public class ToolbarManager {
 
     /**
      * Initializes the ActionBar
-     * @param activity Used to setup the apps ActionBar.
-     * @param toolbarID The id reference to the toolbar view.
+     * @param activity Used to setup the app's ActionBar.
      */
-    private ToolbarManager(MainActivity activity, int toolbarID) {
-        toolbar = (Toolbar) activity.findViewById(toolbarID);
+    private ToolbarManager(MainActivity activity) {
+        toolbar = (Toolbar) activity.findViewById(R.id.actionBar);
         activity.setSupportActionBar(toolbar);
     }
 
     /**
      * Static factory method that provides instance control for this singleton class.
      * @param activity Used to setup the apps ActionBar.
-     * @param toolbarID The id reference to the toolbar view.
      * @return ToolBarManager a reference to a singleton or null if there was an error with the
      * constructor initialization.
      */
-    public static ToolbarManager getInstance(MainActivity activity, int toolbarID) {
+    public static ToolbarManager getInstance(MainActivity activity) {
         if(toolbarManager == null && activity != null) {
-            toolbarManager = new ToolbarManager(activity, toolbarID);
+            toolbarManager = new ToolbarManager(activity);
         }
 
         return toolbarManager;

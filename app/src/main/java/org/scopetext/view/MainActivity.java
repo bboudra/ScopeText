@@ -9,7 +9,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import org.scopetext.database.dao.DBHelper;
+import org.scopetext.presenter.Presenter;
 import org.scopetext.presenter.R;
+import org.scopetext.presenter.ScopeTextFragmentManager;
 import org.scopetext.presenter.ToolbarManager;
 
 /**
@@ -19,8 +21,7 @@ import org.scopetext.presenter.ToolbarManager;
  * @version 1.0
  */
 public class MainActivity extends AppCompatActivity {
-    private DBHelper dbHelper;
-    private ToolbarManager toolbarManager;
+    private Presenter presenter;
 
     /**
      * Initializes all necessary components.
@@ -32,11 +33,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-/*        // Initialize db
-        dbHelper = new DBHelper(this);
-*/
-        // Toolbar setup
-        toolbarManager = ToolbarManager.getInstance(this, R.id.actionBar);
+        // Setup Presenter
+        DBHelper dbHelper = new DBHelper(this);
+        ToolbarManager toolbarManager = ToolbarManager.getInstance(this);
+        ScopeTextFragmentManager stFragManager = ScopeTextFragmentManager.getInstance();
+        presenter = new Presenter(dbHelper, toolbarManager, stFragManager);
 
         // Initialize ScopeText fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         ContactFragment fragment = ContactFragment.newInstance(dbHelper);
         transaction.add(R.id.scopetext_fragment, fragment);
         transaction.commit();
+        */
     }
 
     @Override

@@ -1,5 +1,7 @@
 package org.scopetext.presenter;
 
+import org.scopetext.database.dao.DBHelper;
+
 /**
  * The presenter component in the
  * <a href=http://antonioleiva.com/mvp-android/ "MVP">MVP</a> architecture.
@@ -10,18 +12,32 @@ package org.scopetext.presenter;
  */
 public class Presenter {
     private static Presenter presenter;
-    /**
-     * Needed for instance control
-     */
-    private Presenter() {}
+    private DBHelper dbHelper;
+    private ToolbarManager toolbarManager;
+    private ScopeTextFragmentManager stFragManager;
 
     /**
-     * Static factory method that provides instance control for this singleton class.
+     * Initialization that is required upon app startup.
+     *
      */
-    public static Presenter getInstance() {
-        if(presenter != null) {
-            presenter = new Presenter();
+    public Presenter(DBHelper dbHelper, ToolbarManager toolbarManager,
+                     ScopeTextFragmentManager stFragManager) throws IllegalArgumentException {
+
+
+        if(dbHelper != null && toolbarManager != null && stFragManager != null) {
+            this.dbHelper = dbHelper;
+            this.toolbarManager = toolbarManager;
+            this.stFragManager = stFragManager;
         }
-        return presenter;
+        else
+            throw new IllegalArgumentException(ExceptionMessage.nullParams);
     }
+
+    /**
+     * Getter method for the ToolbarManager singleton instance field.
+     */
+    protected ToolbarManager getToolbarManager() {
+        return this.toolbarManager;
+    }
+
 }
