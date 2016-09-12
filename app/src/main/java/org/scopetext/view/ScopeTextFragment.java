@@ -16,15 +16,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-import org.scopetext.database.dao.DBHelper;
 import org.scopetext.presenter.R;
 
 
 /**
  * Handles the UI for displaying list of contacts.<br/>
  */
-public class ContactFragment extends Fragment implements Button.OnClickListener,
-        OnEditorActionListener {
+public class ScopeTextFragment extends Fragment implements Button.OnClickListener,
+        OnEditorActionListener, ViewInterface {
+    private final int LAYOUT = R.id.scopetext_fragment;
 /*    private final String[] PROJECTION = {
             Test._ID,
             Test.SCOPETEXT_NAME,
@@ -35,11 +35,11 @@ public class ContactFragment extends Fragment implements Button.OnClickListener,
     private SimpleCursorAdapter adapter;
     private Cursor cursor;
 
-    public static ContactFragment newInstance(DBHelper dbHelper) {
-        ContactFragment cf = new ContactFragment();
+    public static ScopeTextFragment newInstance() {
+        /*ScopeTextFragment stf = new ScopeTextFragment();
         cf.dbWrite = dbHelper.getReadableDatabase();
-        cf.dbRead = dbHelper.getReadableDatabase();
-        return cf;
+        cf.dbRead = dbHelper.getReadableDatabase();*/
+        return new ScopeTextFragment();
     }
 
     @Override
@@ -119,5 +119,10 @@ public class ContactFragment extends Fragment implements Button.OnClickListener,
             return true;
         }*/
         return false;
+    }
+
+    @Override
+    public int getLayoutID() {
+        return LAYOUT;
     }
 }

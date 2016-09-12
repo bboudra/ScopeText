@@ -1,6 +1,7 @@
 package org.scopetext.presenter;
 
 import org.scopetext.database.dao.DBHelper;
+import org.scopetext.view.ScopeTextFragment;
 
 /**
  * The presenter component in the
@@ -18,7 +19,9 @@ public class Presenter {
 
     /**
      * Initialization that is required upon app startup.
-     *
+     * @param dbHelper
+     * @param stFragManager
+     * @param toolbarManager
      */
     public Presenter(DBHelper dbHelper, ToolbarManager toolbarManager,
                      ScopeTextFragmentManager stFragManager) throws IllegalArgumentException {
@@ -30,7 +33,12 @@ public class Presenter {
             this.stFragManager = stFragManager;
         }
         else
-            throw new IllegalArgumentException(ExceptionMessage.nullParams);
+            throw new IllegalArgumentException("Cannot have null parameters during Presenter " +
+                    "initialization.");
+
+        // Initialize ScopeTextFragment
+        ScopeTextFragment stFragment = new ScopeTextFragment();
+        stFragManager.addFragment(stFragment);
     }
 
     /**

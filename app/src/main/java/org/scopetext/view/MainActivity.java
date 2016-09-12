@@ -1,8 +1,6 @@
 package org.scopetext.view;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,17 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Setup Presenter
         DBHelper dbHelper = new DBHelper(this);
-        ToolbarManager toolbarManager = ToolbarManager.getInstance(this);
-        ScopeTextFragmentManager stFragManager = ScopeTextFragmentManager.getInstance();
+        ToolbarManager toolbarManager = new ToolbarManager(this);
+        ScopeTextFragmentManager stFragManager = new ScopeTextFragmentManager(this);
         presenter = new Presenter(dbHelper, toolbarManager, stFragManager);
-
-        // Initialize ScopeText fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        ContactFragment fragment = ContactFragment.newInstance(dbHelper);
-        transaction.add(R.id.scopetext_fragment, fragment);
-        transaction.commit();
-        */
     }
 
     @Override
