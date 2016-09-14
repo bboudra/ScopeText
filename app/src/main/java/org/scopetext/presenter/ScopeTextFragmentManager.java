@@ -1,9 +1,10 @@
 package org.scopetext.presenter;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 import org.scopetext.view.MainActivity;
-import org.scopetext.view.ViewInterface;
 
 /**
  * Handles all fragment transactions, such as initializing and swapping fragments into a layout.
@@ -26,13 +27,15 @@ public class ScopeTextFragmentManager {
      * @param fragment The new fragment to add.
      * @return Whether or not the fragment was added.
      */
-    public boolean addFragment(ViewInterface fragment) {
-        boolean added = true;
+    public boolean addFragment(Fragment fragment) {
+        boolean added = false;
 
-        /*FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(layoutID, fragment);
-        if(transaction.commit() != -1)
-            added = true;*/
+        if(fragment != null) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.add(R.id.scopetext_fragment , fragment);
+            if(transaction.commit() != -1)
+                added = true;
+        }
 
         return added;
     }

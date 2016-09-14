@@ -1,7 +1,7 @@
 package org.scopetext.presenter;
 
 import org.scopetext.database.dao.DBHelper;
-import org.scopetext.view.ScopeTextFragment;
+import org.scopetext.view.ScopeTextListFragment;
 
 /**
  * The presenter component in the
@@ -36,8 +36,8 @@ public class Presenter {
             throw new IllegalArgumentException("Cannot have null parameters during Presenter " +
                     "initialization.");
 
-        // Initialize ScopeTextFragment
-        ScopeTextFragment stFragment = new ScopeTextFragment();
+        // Initialize ScopeTextListFragment
+        ScopeTextListFragment stFragment = new ScopeTextListFragment();
         stFragManager.addFragment(stFragment);
     }
 

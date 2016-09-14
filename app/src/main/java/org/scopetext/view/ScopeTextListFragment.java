@@ -22,9 +22,9 @@ import org.scopetext.presenter.R;
 /**
  * Handles the UI for displaying list of contacts.<br/>
  */
-public class ScopeTextFragment extends Fragment implements Button.OnClickListener,
-        OnEditorActionListener, ViewInterface {
-    private final int LAYOUT = R.id.scopetext_fragment;
+public class ScopeTextListFragment extends Fragment implements Button.OnClickListener,
+        OnEditorActionListener {
+
 /*    private final String[] PROJECTION = {
             Test._ID,
             Test.SCOPETEXT_NAME,
@@ -35,11 +35,11 @@ public class ScopeTextFragment extends Fragment implements Button.OnClickListene
     private SimpleCursorAdapter adapter;
     private Cursor cursor;
 
-    public static ScopeTextFragment newInstance() {
-        /*ScopeTextFragment stf = new ScopeTextFragment();
+    public static ScopeTextListFragment newInstance() {
+        /*ScopeTextListFragment stf = new ScopeTextListFragment();
         cf.dbWrite = dbHelper.getReadableDatabase();
         cf.dbRead = dbHelper.getReadableDatabase();*/
-        return new ScopeTextFragment();
+        return new ScopeTextListFragment();
     }
 
     @Override
@@ -50,9 +50,7 @@ public class ScopeTextFragment extends Fragment implements Button.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        Log.i("Test", "Contact Fragment onCreateView()");
-        return inflater.inflate(R.layout.fragment_scopetext, container, false);
+        return inflater.inflate(R.layout.fragment_scopetext_list, container, false);
     }
 
     @Override
@@ -119,10 +117,5 @@ public class ScopeTextFragment extends Fragment implements Button.OnClickListene
             return true;
         }*/
         return false;
-    }
-
-    @Override
-    public int getLayoutID() {
-        return LAYOUT;
     }
 }
