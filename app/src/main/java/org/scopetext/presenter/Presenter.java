@@ -1,6 +1,7 @@
 package org.scopetext.presenter;
 
 import org.scopetext.database.dao.DBHelper;
+import org.scopetext.database.schema.DBOperation;
 import org.scopetext.view.ScopeTextListFragment;
 
 /**
@@ -48,4 +49,15 @@ public class Presenter {
         return this.toolbarManager;
     }
 
+    /**
+     * Invokes DBHelper to perform a specific DB read operation.
+     * @param dbOperation The database operation to perform.
+     */
+    public void dbReadOperation(DBOperation dbOperation) {
+        switch(dbOperation) {
+            case GET_ALL_SCOPETEXTS:
+                dbHelper.getAllScopeTexts();
+                break;
+        }
+    }
 }

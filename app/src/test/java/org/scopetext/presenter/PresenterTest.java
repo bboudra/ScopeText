@@ -5,7 +5,8 @@ import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
 import org.scopetext.database.dao.DBHelper;
-import org.scopetext.view.ScopeTextFragment;
+import org.scopetext.database.schema.DBOperation;
+import org.scopetext.view.ScopeTextListFragment;
 
 /**
  * Unit tests for Presenter.java
@@ -45,6 +46,16 @@ public class PresenterTest {
     @Test
     public void addFragmentOnStartupTest() {
         objUnderTest = new Presenter(dbHelper, toolbarManager, stFragManager);
-        Mockito.verify(stFragManager).addFragment(Matchers.any(ScopeTextFragment.class));
+        Mockito.verify(stFragManager).addFragment(Matchers.any(ScopeTextListFragment.class));
+    }
+
+    @Test
+    public void dbOperationGetAllScopeTextsTest() {
+        // Execute SUT
+        objUnderTest = new Presenter(dbHelper, toolbarManager, stFragManager);
+        objUnderTest.dbReadOperation(DBOperation.GET_ALL_SCOPETEXTS);
+
+        // Execute test
+        Mockito.verify(dbHelper).getAllScopeTexts();
     }
 }

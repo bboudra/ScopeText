@@ -1,6 +1,7 @@
 package org.scopetext.database.dao;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -24,8 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public void onCreate(SQLiteDatabase db) {
         // Initialize tables
-/*        Log.d(LOG_TAG, ScopeTextSchema.SQL_CREATE_TABLE);
-        db.execSQL(ScopeTextSchema.SQL_CREATE_TABLE);*/
+        db.execSQL(ScopeTextDAO.SQL_CREATE_TABLE);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
@@ -35,6 +35,14 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
+    }
+
+    /**
+     * Reads all existing ScopeText objects from the database.
+     * @return The Result Set containing all of the ScopeTexts.
+     */
+    public Cursor getAllScopeTexts() {
+        return null;
     }
 }
 

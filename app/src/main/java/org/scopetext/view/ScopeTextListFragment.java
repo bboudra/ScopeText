@@ -1,12 +1,9 @@
 package org.scopetext.view;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -16,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
+import org.scopetext.database.schema.DBOperation;
 import org.scopetext.presenter.R;
 
 
@@ -24,22 +22,19 @@ import org.scopetext.presenter.R;
  */
 public class ScopeTextListFragment extends Fragment implements Button.OnClickListener,
         OnEditorActionListener {
-
-/*    private final String[] PROJECTION = {
-            Test._ID,
-            Test.SCOPETEXT_NAME,
-            Test.CONTACT_NAME
-    };*/
-    private SQLiteDatabase dbWrite,
+    /*private SQLiteDatabase dbWrite,
                            dbRead;
     private SimpleCursorAdapter adapter;
-    private Cursor cursor;
+    private Cursor cursor;*/
+    private MainActivity activity;
 
     public static ScopeTextListFragment newInstance() {
         /*ScopeTextListFragment stf = new ScopeTextListFragment();
         cf.dbWrite = dbHelper.getReadableDatabase();
         cf.dbRead = dbHelper.getReadableDatabase();*/
-        return new ScopeTextListFragment();
+        ScopeTextListFragment fragment = new ScopeTextListFragment();
+        fragment.activity = (MainActivity) fragment.getActivity();
+        return fragment;
     }
 
     @Override
@@ -56,8 +51,12 @@ public class ScopeTextListFragment extends Fragment implements Button.OnClickLis
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        // TODO - Temporary test button setup
+        activity.dbReadOperation(DBOperation.GET_ALL_SCOPETEXTS);
+        /*final String[] DB_COLUMNS = {
+                ScopeTextSchema._ID,
+                ScopeTextSchema.NAME,
+        };
+        final int[] toViews = {R.id.scopetext_name, R.id.scopetext_contact};*/
 /*        final int[] toViews = {R.id.scopetext_name, R.id.scopetext_contact};
         final String[] fromColumns = {Test.SCOPETEXT_NAME, Test.CONTACT_NAME};
         adapter = new SimpleCursorAdapter(getActivity(), R.layout.fragment_scopetext_row, cursor, fromColumns, toViews, 0);

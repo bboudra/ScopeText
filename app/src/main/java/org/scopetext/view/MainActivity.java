@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import org.scopetext.database.dao.DBHelper;
+import org.scopetext.database.schema.DBOperation;
 import org.scopetext.presenter.Presenter;
 import org.scopetext.presenter.R;
 import org.scopetext.presenter.ScopeTextFragmentManager;
@@ -52,5 +53,9 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    protected void dbReadOperation(DBOperation dbOperation) {
+        presenter.dbReadOperation(dbOperation);
     }
 }
