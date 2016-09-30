@@ -11,6 +11,7 @@ public class ScopeTextContactAssocContract {
     private ScopeTextContactAssocContract(){}
 
     public static abstract class ScopeTextContactAssocSchema implements BaseColumns {
-        public static final String TABLE_NAME = "ST_CT_ASSOC";
+        public static final String TABLE_NAME = "SCOPETEXT_CONTACT_ASSOC",
+                SCOPETEXT_CONTACT_ID = "SCOPETEXT_CONTACT_ID";
     }
 }

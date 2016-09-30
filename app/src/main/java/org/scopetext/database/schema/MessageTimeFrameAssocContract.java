@@ -11,6 +11,7 @@ public class MessageTimeFrameAssocContract {
     private MessageTimeFrameAssocContract(){}
 
     public static abstract class MessageTimeFrameAssocSchema implements BaseColumns {
-        public static final String TABLE_NAME = "MSG_TM_ASSOC ";
+        public static final String TABLE_NAME = "MESSAGE_TIMEFRAME_ASSOC ",
+                MESSAGE_TIMEFRAME_ID = "CONTACT_PHONE_NUMBER_ASSOC_ID";
     }
 }

@@ -11,6 +11,8 @@ public class ContactPhoneNumberAssocContract {
     private ContactPhoneNumberAssocContract(){}
 
     public static abstract class ContactPhoneNumberSchema implements BaseColumns {
-        public static final String TABLE_NAME = "CT_PHN_NBR_ASSOC";
+        public static final String
+                TABLE_NAME = "CONTACT_PHONE_NUMBER_ASSOC",
+                CONTACT_PHONE_NUMBER_ID = "CONTACT_PHONE_NUMBER_ASSOC_ID";
     }
 }

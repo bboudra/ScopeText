@@ -12,6 +12,7 @@ public class ContactContract {
 
     public static abstract class ContractSchema implements BaseColumns {
         public static final String TABLE_NAME = "CONTRACT",
+                ID = "CONTACT_ID",
                 DISPLAY_NAME = "DISPLAY_NAME";
     }
 }

@@ -11,7 +11,8 @@ public class PhoneNumberContract {
     private PhoneNumberContract(){}
 
     public static abstract class PhoneNumberSchema implements BaseColumns {
-        public static final String TABLE_NAME = "ST_CT_ASSOC",
+        public static final String TABLE_NAME = "SCOPETEXT_CONTACT_ASSOC",
+                SCOPETEXT_CONTACT_ID = "SCOPETEXT_CONTACT_ID",
                 NUMBER = "NUMBER";
     }
 }

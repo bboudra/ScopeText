@@ -12,14 +12,14 @@ public class ScopeTextDAO {
     public static final String SQL_CREATE_TABLE =
             "CREATE TABLE " + ScopeTextSchema.TABLE_NAME + " (" +
                     ScopeTextSchema._ID + " INTEGER PRIMARY KEY NOT NULL," +
-                    ScopeTextSchema.NAME + " VARCHAR(25) NOT NULL," +
                     MessageSchema._ID + " INTEGER FOREIGN KEY(" +
                     MessageSchema._ID + ") REFERENCES MESSAGE(" +
                     MessageSchema._ID + ") " +
                     ResponseSchema._ID + " INTEGER FOREIGN KEY(" +
                     ResponseSchema._ID + ") REFERENCES MESSAGE(" +
                     ResponseSchema._ID + ") " +
-                    ScopeTextSchema.IN_USE + "VARCHAR(1) NOT NULL CHECK(" +
+                    ScopeTextSchema.NAME + " VARCHAR(25) NOT NULL," +
+                    ScopeTextSchema.IN_USE + "CHARACTER(1) NOT NULL CHECK(" +
                     ScopeTextSchema.IN_USE + " IN ('Y','N'))\n" +
                     ")";
 }

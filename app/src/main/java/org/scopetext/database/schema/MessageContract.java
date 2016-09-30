@@ -13,6 +13,7 @@ public class MessageContract {
 
     public static abstract class MessageSchema implements BaseColumns {
         public static final String TABLE_NAME = "MESSAGE",
+                MESSAGE_ID = "MESSAGE_ID",
                 TYPE = "TYPE",
                 REG_EXP = "REG_EXP";
     }
