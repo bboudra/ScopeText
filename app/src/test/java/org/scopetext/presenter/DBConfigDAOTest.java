@@ -1,25 +1,23 @@
-package org.scopetext.database.dao;
+package org.scopetext.presenter;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import org.junit.Test;
+import org.mockito.Mockito;
+import org.scopetext.database.dao.DBConfigDAO;
 import org.scopetext.database.schema.ResponseContract.ResponseSchema;
 
 /**
- * Executes database configuration SQL.
+ * Unit tests for DBConfigDAOTest.java.
  * Created by john.qualls on 9/30/2016.
  */
-public class DBConfigDAO {
-    public final String FOREIGN_KEY_ON = "PRAGMA FOREIGN_KEY = ON";
-    private String CREATE_RESPONSE_TABLE;
-    private String CREATE_MESSAGE_TABLE;
-    private String CREATE_SCOPETEXT_TABLE;
+public class DBConfigDAOTest {
+    private DBConfigDAO objUnderTest;
 
-    /**
-     * Creates the Response Table.
-     * @param db executes SQL.
-     */
-    public void createResponseTable(SQLiteDatabase db) {
-        CREATE_RESPONSE_TABLE = "CREATE TABLE" + ResponseSchema.TABLE_NAME + "( "
+    @Test
+    public void createResponseTableTest() {
+        // Setup
+        String CREATE_RESPONSE_TABLE = "CREATE TABLE" + ResponseSchema.TABLE_NAME + "( "
                 + ResponseSchema.RESPONSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
                 + ResponseSchema.ACTION_APP + "VARCHAR(6) NOT NULL CHECK("
                 + ResponseSchema.ACTION_APP + "IS 'CREATE' OR" + ResponseSchema.ACTION_APP
@@ -27,6 +25,11 @@ public class DBConfigDAO {
                 + ResponseSchema.ACTION_APP + "IS 'DELETE'),"
                 + ResponseSchema.EXTERNAL_APP
                 + " VARCHAR(25) NOT NULL CHECK(EXTERNAL_APP IS 'ALARM'));";
-        db.execSQL(CREATE_RESPONSE_TABLE);
+        objUnderTest = new DBConfigDAO();
+        SQLiteDatabase db = Mockito.mock(SQLiteDatabase.class);
+        objUnderTest.createResponseTable(db);
+
+        // Tests
+        Mockito.verify(db).execSQL(CREATE_RESPONSE_TABLE);
     }
 }
