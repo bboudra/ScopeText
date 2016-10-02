@@ -1,7 +1,7 @@
 package org.scopetext.presenter;
 
-import org.scopetext.database.dao.DBHelper;
-import org.scopetext.database.schema.DBOperation;
+import org.scopetext.model.dao.DBHelper;
+import org.scopetext.model.schema.DBOperation;
 import org.scopetext.view.ScopeTextListFragment;
 
 /**
@@ -56,7 +56,7 @@ public class Presenter {
     public void dbReadOperation(DBOperation dbOperation) {
         switch(dbOperation) {
             case GET_ALL_SCOPETEXTS:
-                dbHelper.getAllScopeTexts();
+
                 break;
         }
     }

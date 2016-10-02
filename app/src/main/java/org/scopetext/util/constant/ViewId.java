@@ -1,4 +1,4 @@
-package org.scopetext.presenter.constant;
+package org.scopetext.util.constant;
 
 import org.scopetext.presenter.R;
 

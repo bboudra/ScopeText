@@ -1,8 +1,10 @@
-package org.scopetext.database.dao;
+package org.scopetext.model.dao;
 
-import org.scopetext.database.schema.MessageContract.MessageSchema;
-import org.scopetext.database.schema.ResponseContract.ResponseSchema;
-import org.scopetext.database.schema.ScopeTextContract.ScopeTextSchema;
+import android.database.Cursor;
+
+import org.scopetext.model.schema.MessageContract.MessageSchema;
+import org.scopetext.model.schema.ResponseContract.ResponseSchema;
+import org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
 
 /**
  * Created by john.qualls on 8/9/2016.
@@ -22,4 +24,12 @@ public class ScopeTextDAO {
                     ScopeTextSchema.IN_USE + "CHARACTER(1) NOT NULL CHECK(" +
                     ScopeTextSchema.IN_USE + " IN ('Y','N'))\n" +
                     ")";
+
+    /**
+     * Reads all existing ScopeText objects from the database.
+     * @return The Result Set containing all of the ScopeTexts.
+     */
+    public Cursor getAllScopeTexts() {
+        return null;
+    }
 }

@@ -4,8 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
-import org.scopetext.database.dao.DBHelper;
-import org.scopetext.database.schema.DBOperation;
+import org.scopetext.model.dao.DBHelper;
+import org.scopetext.model.schema.DBOperation;
 import org.scopetext.view.ScopeTextListFragment;
 
 /**

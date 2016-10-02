@@ -1,4 +1,4 @@
-package org.scopetext.presenter.constant;
+package org.scopetext.util.constant;
 
 /**
  * Contains log tag constants used to distinguish logs from different classes.

@@ -1,4 +1,4 @@
-package org.scopetext.presenter;
+package org.scopetext.model.javabean;
 
 /**
  * Java bean that contains all properties of a Message.

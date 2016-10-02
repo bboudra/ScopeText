@@ -1,4 +1,4 @@
-package org.scopetext.presenter;
+package org.scopetext.model.javabean;
 
 import android.database.Cursor;
 

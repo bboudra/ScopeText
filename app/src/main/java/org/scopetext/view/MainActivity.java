@@ -6,8 +6,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import org.scopetext.database.dao.DBHelper;
-import org.scopetext.database.schema.DBOperation;
+import org.scopetext.model.dao.DBHelper;
+import org.scopetext.model.schema.DBOperation;
 import org.scopetext.presenter.Presenter;
 import org.scopetext.presenter.R;
 import org.scopetext.presenter.ScopeTextFragmentManager;

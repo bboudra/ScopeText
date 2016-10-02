@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-import org.scopetext.database.schema.DBOperation;
+import org.scopetext.model.schema.DBOperation;
 import org.scopetext.presenter.R;
 
 

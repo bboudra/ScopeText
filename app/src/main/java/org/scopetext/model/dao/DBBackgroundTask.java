@@ -1,4 +1,4 @@
-package org.scopetext.database.dao;
+package org.scopetext.model.dao;
 
 import android.os.AsyncTask;
 

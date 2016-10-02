@@ -1,4 +1,4 @@
-package org.scopetext.database.schema;
+package org.scopetext.model.schema;
 
 import android.provider.BaseColumns;
 

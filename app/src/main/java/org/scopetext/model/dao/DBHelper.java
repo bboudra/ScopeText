@@ -1,7 +1,6 @@
-package org.scopetext.database.dao;
+package org.scopetext.model.dao;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -22,6 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
         // Initialize tables
         DBConfigDAO dbConfigDAO = new DBConfigDAO();
         dbConfigDAO.createResponseTable(db);
+        dbConfigDAO.createMessageTable(db);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
@@ -31,14 +31,6 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param db The SQLite database.
      */
     public void onConfigure(SQLiteDatabase db) {
-    }
-
-    /**
-     * Reads all existing ScopeText objects from the database.
-     * @return The Result Set containing all of the ScopeTexts.
-     */
-    public Cursor getAllScopeTexts() {
-        return null;
     }
 }
 

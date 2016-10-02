@@ -2,7 +2,7 @@ package org.scopetext.presenter;
 
 import android.support.v7.widget.Toolbar;
 
-import org.scopetext.presenter.constant.ViewId;
+import org.scopetext.util.constant.ViewId;
 import org.scopetext.view.MainActivity;
 
 /**
