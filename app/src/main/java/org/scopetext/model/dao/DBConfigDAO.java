@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import org.scopetext.model.schema.MessageContract.MessageSchema;
 import org.scopetext.model.schema.ResponseContract.ResponseSchema;
+import org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
 
 /**
  * Executes database configuration SQL.
@@ -44,6 +45,26 @@ public class DBConfigDAO {
                 + MessageSchema.REG_EXP + " VARCHAR(50) NOT NULL\n\t"
                 + ");";
         db.execSQL(CREATE_MESSAGE_TABLE);
+    }
+
+    /**
+     * Creates the ScopeText Table.
+     * @param db executes SQL.
+     */
+    public void createScopeTextTable(SQLiteDatabase db) {
+        CREATE_SCOPETEXT_TABLE = "CREATE TABLE " + ScopeTextSchema.TABLE_NAME + " (\n\t"
+                + ScopeTextSchema.SCOPETEXT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n\t"
+                + MessageSchema.MESSAGE_ID + " INTEGER UNIQUE NOT NULL,\n\t"
+                + ResponseSchema.RESPONSE_ID + " INTEGER UNIQUE NOT NULL,\n\t"
+                + ScopeTextSchema.NAME + " VARCHAR(50) NOT NULL,\n\t"
+                + ScopeTextSchema.IN_USE + "CHARACTER(1) NOT NULL CHECK(" + ScopeTextSchema.IN_USE
+                + " IS 'Y' OR " + ScopeTextSchema.IN_USE + " IS 'N'),\n\t"
+                + "FOREIGN KEY(" + MessageSchema.MESSAGE_ID + ") REFERENCES MESSAGE("
+                + MessageSchema.MESSAGE_ID + "),\n\t"
+                + "FOREIGN KEY(" + ResponseSchema.RESPONSE_ID + ") REFERENCES RESPONSE("
+                + ResponseSchema.RESPONSE_ID + ")\n\t"
+                + ");";
+        db.execSQL(CREATE_SCOPETEXT_TABLE);
     }
 
     protected String getFOREIGN_KEY_ON() {

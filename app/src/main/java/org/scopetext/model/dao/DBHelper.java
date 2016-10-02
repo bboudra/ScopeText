@@ -17,11 +17,13 @@ public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
     public void onCreate(SQLiteDatabase db) {
         // Initialize tables
         DBConfigDAO dbConfigDAO = new DBConfigDAO();
         dbConfigDAO.createResponseTable(db);
         dbConfigDAO.createMessageTable(db);
+        dbConfigDAO.createScopeTextTable(db);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}

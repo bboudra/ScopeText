@@ -12,6 +12,7 @@ public class ScopeTextContract {
 
     public static abstract class ScopeTextSchema implements BaseColumns {
         public static final String TABLE_NAME = "SCOPETEXT",
+                SCOPETEXT_ID = "SCOPETEXT_ID",
                 NAME = "NAME",
                 MESSAGE_ID = "MESSAGE_ID",
                 RESPONSE_ID = "RESPONSE_ID",

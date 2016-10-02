@@ -1,7 +1,6 @@
 package org.scopetext.presenter;
 
 import org.scopetext.model.dao.DBHelper;
-import org.scopetext.model.schema.DBOperation;
 import org.scopetext.view.ScopeTextListFragment;
 
 /**
@@ -38,7 +37,7 @@ public class Presenter {
                     "initialization.");
 
         // Initialize ScopeTextListFragment
-        ScopeTextListFragment stFragment = new ScopeTextListFragment();
+        ScopeTextListFragment stFragment = ScopeTextListFragment.newInstance();
         stFragManager.addFragment(stFragment);
     }
 
@@ -50,14 +49,9 @@ public class Presenter {
     }
 
     /**
-     * Invokes DBHelper to perform a specific DB read operation.
-     * @param dbOperation The database operation to perform.
+     * Reads all of the ScopeText objects from the database.
      */
-    public void dbReadOperation(DBOperation dbOperation) {
-        switch(dbOperation) {
-            case GET_ALL_SCOPETEXTS:
+    public void getAllScopeTexts() {
 
-                break;
-        }
     }
 }

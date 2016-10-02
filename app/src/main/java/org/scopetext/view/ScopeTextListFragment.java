@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-import org.scopetext.model.schema.DBOperation;
 import org.scopetext.presenter.R;
 
 
@@ -33,7 +32,6 @@ public class ScopeTextListFragment extends Fragment implements Button.OnClickLis
         cf.dbWrite = dbHelper.getReadableDatabase();
         cf.dbRead = dbHelper.getReadableDatabase();*/
         ScopeTextListFragment fragment = new ScopeTextListFragment();
-        fragment.activity = (MainActivity) fragment.getActivity();
         return fragment;
     }
 
@@ -51,7 +49,8 @@ public class ScopeTextListFragment extends Fragment implements Button.OnClickLis
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        activity.dbReadOperation(DBOperation.GET_ALL_SCOPETEXTS);
+        activity = (MainActivity) getActivity();
+        activity.getAllScopeTexts();
         /*final String[] DB_COLUMNS = {
                 ScopeTextSchema._ID,
                 ScopeTextSchema.NAME,
