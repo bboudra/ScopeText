@@ -56,7 +56,7 @@ public class DBConfigDAO {
                 + ScopeTextSchema.SCOPETEXT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n\t"
                 + MessageSchema.MESSAGE_ID + " INTEGER UNIQUE NOT NULL,\n\t"
                 + ResponseSchema.RESPONSE_ID + " INTEGER UNIQUE NOT NULL,\n\t"
-                + ScopeTextSchema.NAME + " VARCHAR(50) NOT NULL,\n\t"
+                + ScopeTextSchema.NAME + " VARCHAR(50) UNIQUE NOT NULL,\n\t"
                 + ScopeTextSchema.IN_USE + "CHARACTER(1) NOT NULL CHECK(" + ScopeTextSchema.IN_USE
                 + " IS 'Y' OR " + ScopeTextSchema.IN_USE + " IS 'N'),\n\t"
                 + "FOREIGN KEY(" + MessageSchema.MESSAGE_ID + ") REFERENCES MESSAGE("

@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import org.scopetext.model.dao.DBHelper;
+import org.scopetext.model.dao.ScopeTextDAO;
 import org.scopetext.presenter.Presenter;
 import org.scopetext.presenter.R;
 import org.scopetext.presenter.ScopeTextFragmentManager;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void getAllScopeTexts() {
-        presenter.getAllScopeTexts();
+        ScopeTextDAO dao = new ScopeTextDAO();
+        presenter.getAllScopeTexts(dao);
     }
 }

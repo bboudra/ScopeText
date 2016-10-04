@@ -1,7 +1,13 @@
 package org.scopetext.presenter;
 
+import android.database.sqlite.SQLiteDatabase;
+
 import org.scopetext.model.dao.DBHelper;
+import org.scopetext.model.dao.ScopeTextDAO;
+import org.scopetext.model.javabean.ScopeText;
 import org.scopetext.view.ScopeTextListFragment;
+
+import java.util.ArrayList;
 
 /**
  * The presenter component in the
@@ -16,6 +22,7 @@ public class Presenter {
     private DBHelper dbHelper;
     private ToolbarManager toolbarManager;
     private ScopeTextFragmentManager stFragManager;
+    private ArrayList<ScopeText> scopeTexts;
 
     /**
      * Initialization that is required upon app startup.
@@ -50,8 +57,19 @@ public class Presenter {
 
     /**
      * Reads all of the ScopeText objects from the database.
+     * @param dao Used to retrieve the ScopeText objects.
      */
-    public void getAllScopeTexts() {
+    public void getAllScopeTexts(ScopeTextDAO dao) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        if(dao != null)
+            scopeTexts = dao.getAllScopeTexts(db);
+    }
 
+    protected ArrayList<ScopeText> getScopeTexts() {
+        return scopeTexts;
+    }
+
+    protected void setScopeTexts(ArrayList<ScopeText> scopeTexts) {
+        this.scopeTexts = scopeTexts;
     }
 }
