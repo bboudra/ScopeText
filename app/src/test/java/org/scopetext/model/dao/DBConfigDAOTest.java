@@ -74,17 +74,17 @@ public class DBConfigDAOTest {
         switch(testName) {
             case CREATE_RESPONSE_TABLE:
                 objUnderTest.createResponseTable(db);
-                actualSQL = objUnderTest.getCREATE_RESPONSE_TABLE();
+                actualSQL = objUnderTest.getCreateResponseTable();
                 tableName = ResponseSchema.TABLE_NAME;
                 break;
             case CREATE_MESSAGE_TABLE:
                 objUnderTest.createMessageTable(db);
-                actualSQL = objUnderTest.getCREATE_MESSAGE_TABLE();
+                actualSQL = objUnderTest.getCreateMessageTable();
                 tableName = MessageSchema.TABLE_NAME;
                 break;
             case CREATE_SCOPETEXT_TABLE:
                 objUnderTest.createScopeTextTable(db);
-                actualSQL = objUnderTest.getCREATE_SCOPETEXT_TABLE();
+                actualSQL = objUnderTest.getCreateScopetextTable();
                 tableName = ScopeTextSchema.TABLE_NAME;
         }
         Mockito.verify(db).execSQL(actualSQL);

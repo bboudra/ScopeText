@@ -62,7 +62,7 @@ public class Presenter {
     public void getAllScopeTexts(ScopeTextDAO dao) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         if(dao != null)
-            scopeTexts = dao.getAllScopeTexts(db);
+            scopeTexts = dao.getAllScopeTexts(db, scopeTexts);
     }
 
     protected ArrayList<ScopeText> getScopeTexts() {
