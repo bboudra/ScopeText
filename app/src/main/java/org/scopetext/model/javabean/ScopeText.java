@@ -1,7 +1,5 @@
 package org.scopetext.model.javabean;
 
-import android.database.Cursor;
-
 /**
  * Java bean that contains all properties of a ScopeText.
  * Created by john.qualls on 9/24/2016.
@@ -13,11 +11,17 @@ public class ScopeText {
     private boolean inUse;
 
     /**
-     * Builds a ScopeText instance based on a database cursor.
-     * @param cursor The database cursor.
+     * ScopeText constructor.
+     * @param name Name of the ScopeText.
+     * @param message The message this ScopeText references.
+     * @param response The response this ScopeText references.
+     * @param inUse Whether or not this ScopeText is in use by the user.
      */
-    public ScopeText(Cursor cursor){
-
+    public ScopeText(String name, Message message, Response response, boolean inUse){
+        this.name = name;
+        this.message = message;
+        this.response = response;
+        this.inUse = inUse;
     }
 
     public String getName() {

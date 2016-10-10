@@ -1,6 +1,7 @@
 package org.scopetext.model.dao;
 
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import org.scopetext.model.javabean.ScopeText;
@@ -36,7 +37,7 @@ public class ScopeTextDAO {
             + " = R." + ResponseSchema.RESPONSE_ID;
         Cursor cursor = db.rawQuery(allScopeTextsSQL, null);
         if(cursor != null)
-            buildScopeTextList(cursor, cachedList);
+            list = buildScopeTextList(cursor, cachedList);
         return list;
     }
 
@@ -49,7 +50,13 @@ public class ScopeTextDAO {
     private ArrayList<ScopeText> buildScopeTextList(Cursor cursor,
         ArrayList<ScopeText> cachedList) {
         if(cachedList == null) {
+            try {
+                while(cursor.moveToFirst()) {
 
+                }
+            } catch (SQLException e) {
+
+            }
         }
         return null;
     }

@@ -10,10 +10,12 @@ import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.scopetext.model.javabean.Message;
 import org.scopetext.model.javabean.ScopeText;
-import org.scopetext.model.schema.MessageContract;
-import org.scopetext.model.schema.ResponseContract;
-import org.scopetext.model.schema.ScopeTextContract;
+import org.scopetext.model.javabean.type.MessageType;
+import org.scopetext.model.schema.MessageContract.MessageSchema;
+import org.scopetext.model.schema.ResponseContract.ResponseSchema;
+import org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
 
 import java.util.ArrayList;
 
@@ -45,14 +47,14 @@ public class ScopeTextDAOTest {
     @Test
     public void getAllScopeTextsSQL(){
         getAllScopeTextSetup();
-        final String GET_ALL_SCOPETEXTS = "SELECT ST." + ScopeTextContract.ScopeTextSchema.NAME + ", M."
-                + MessageContract.MessageSchema.TYPE + ", M." + MessageContract.MessageSchema.REG_EXP + ", R."
-                + ResponseContract.ResponseSchema.ACTION_APP + ", R." + ResponseContract.ResponseSchema.EXTERNAL_APP + ", ST."
-                + ScopeTextContract.ScopeTextSchema.IN_USE + "\n"
-                + "FROM " + ScopeTextContract.ScopeTextSchema.TABLE_NAME + " ST INNER JOIN " + MessageContract.MessageSchema.TABLE_NAME
-                + " M ON ST." + ScopeTextContract.ScopeTextSchema.MESSAGE_ID + " = M." + MessageContract.MessageSchema.MESSAGE_ID + "\n"
-                + "INNER JOIN " + ResponseContract.ResponseSchema.TABLE_NAME + " R ON ST." + ScopeTextContract.ScopeTextSchema.RESPONSE_ID
-                + " = R." + ResponseContract.ResponseSchema.RESPONSE_ID;
+        final String GET_ALL_SCOPETEXTS = "SELECT ST." + ScopeTextSchema.NAME + ", M."
+                + MessageSchema.TYPE + ", M." + MessageSchema.REG_EXP + ", R."
+                + ResponseSchema.ACTION_APP + ", R." + ResponseSchema.EXTERNAL_APP + ", ST."
+                + ScopeTextSchema.IN_USE + "\n"
+                + "FROM " + ScopeTextSchema.TABLE_NAME + " ST INNER JOIN " + MessageSchema.TABLE_NAME
+                + " M ON ST." + ScopeTextSchema.MESSAGE_ID + " = M." + MessageSchema.MESSAGE_ID + "\n"
+                + "INNER JOIN " + ResponseSchema.TABLE_NAME + " R ON ST." + ScopeTextSchema.RESPONSE_ID
+                + " = R." + ResponseSchema.RESPONSE_ID;
 
         // Test
         objUnderTest.getAllScopeTexts(db, null);
@@ -62,8 +64,11 @@ public class ScopeTextDAOTest {
 
     @Test
     public void buildScopeTextListNoCache() {
+        // Setup
         getAllScopeTextSetup();
+        final String REG_EXPR = "REG_EXPR";
         ArrayList<ScopeText> expectedList = new ArrayList<>();
+        Message message = new Message(MessageType.TEXT, REG_EXPR);
 
         // Test
         ArrayList<ScopeText> actualList = objUnderTest.getAllScopeTexts(db, null);
