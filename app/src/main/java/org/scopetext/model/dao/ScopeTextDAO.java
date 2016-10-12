@@ -49,9 +49,18 @@ public class ScopeTextDAO {
      */
     private ArrayList<ScopeText> buildScopeTextList(Cursor cursor,
         ArrayList<ScopeText> cachedList) {
-        if(cachedList == null) {
+        if (cachedList == null) {
             try {
-                while(cursor.moveToFirst()) {
+                String scopeTextName = "",
+                       regularExpression = "",
+                       messageType = "",
+                       actionApp = "",
+                       externalApp = "",
+                       inUse = "";
+
+                while (cursor.moveToNext()) {
+                    scopeTextName = cursor.getString(0);
+                    regularExpression = cursor.getString(1);
 
                 }
             } catch (SQLException e) {
