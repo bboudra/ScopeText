@@ -52,16 +52,19 @@ public class ScopeTextDAO {
         if (cachedList == null) {
             try {
                 String scopeTextName = "",
-                       regularExpression = "",
                        messageType = "",
+                       regularExpression = "",
                        actionApp = "",
                        externalApp = "",
                        inUse = "";
 
                 while (cursor.moveToNext()) {
                     scopeTextName = cursor.getString(0);
-                    regularExpression = cursor.getString(1);
-
+                    messageType = cursor.getString(1);
+                    regularExpression = cursor.getString(2);
+                    actionApp = cursor.getString(3);
+                    externalApp = cursor.getString(4);
+                    inUse = cursor.getString(5);
                 }
             } catch (SQLException e) {
 
