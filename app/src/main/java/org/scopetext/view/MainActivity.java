@@ -6,16 +6,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import org.scopetext.model.dao.DBHelper;
-import org.scopetext.model.dao.ScopeTextDAO;
 import org.scopetext.presenter.Presenter;
 import org.scopetext.presenter.R;
-import org.scopetext.presenter.ScopeTextFragmentManager;
-import org.scopetext.presenter.ToolbarManager;
 
 /**
- * Controller component of the app. Communicates with all of the other
- * components, and handles responses from all of them.
  * @author John Qualls
  * @version 1.0
  */
@@ -31,12 +25,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Setup Presenter
-        DBHelper dbHelper = new DBHelper(this);
-        ToolbarManager toolbarManager = new ToolbarManager(this);
-        ScopeTextFragmentManager stFragManager = new ScopeTextFragmentManager(this);
-        presenter = new Presenter(dbHelper, toolbarManager, stFragManager);
     }
 
     @Override
