@@ -16,7 +16,6 @@ import java.util.ArrayList;
  * Created by john.qualls on 8/9/2016.
  */
 public class ScopeTextDAO {
-    private String allScopeTextsSQL;
 
     /**
      * Reads all existing ScopeText objects from the database.
@@ -24,10 +23,10 @@ public class ScopeTextDAO {
      * @param cachedList The current list of ScopeText objects.
      * @return A list of the resulting ScopeTexts, or null if nothing was retrieved.
      */
-    public ArrayList<ScopeText> getAllScopeTexts(SQLiteDatabase db,
+    public static ArrayList<ScopeText> getAllScopeTexts(SQLiteDatabase db,
         ArrayList<ScopeText> cachedList) {
         ArrayList<ScopeText> list = null;
-        allScopeTextsSQL = "SELECT ST." + ScopeTextSchema.NAME + ", M."
+        final String All_SCOPETEXT_SQL = "SELECT ST." + ScopeTextSchema.NAME + ", M."
             + MessageSchema.TYPE + ", M." + MessageSchema.REG_EXP + ", R."
             + ResponseSchema.ACTION_APP + ", R." + ResponseSchema.EXTERNAL_APP + ", ST."
             + ScopeTextSchema.IN_USE + "\n"
@@ -35,7 +34,7 @@ public class ScopeTextDAO {
             + " M ON ST." + ScopeTextSchema.MESSAGE_ID + " = M." + MessageSchema.MESSAGE_ID + "\n"
             + "INNER JOIN " + ResponseSchema.TABLE_NAME + " R ON ST." + ScopeTextSchema.RESPONSE_ID
             + " = R." + ResponseSchema.RESPONSE_ID;
-        Cursor cursor = db.rawQuery(allScopeTextsSQL, null);
+        Cursor cursor = db.rawQuery(All_SCOPETEXT_SQL, null);
         if(cursor != null)
             list = buildScopeTextList(cursor, cachedList);
         return list;
@@ -47,7 +46,7 @@ public class ScopeTextDAO {
      * @param cursor Used to retrieve the data to populate the java beans.
      * @param cachedList The cached list to check. Null can be passed if there is no cache.
      */
-    private ArrayList<ScopeText> buildScopeTextList(Cursor cursor,
+    protected static ArrayList<ScopeText> buildScopeTextList(Cursor cursor,
         ArrayList<ScopeText> cachedList) {
         if (cachedList == null) {
             try {
@@ -71,13 +70,5 @@ public class ScopeTextDAO {
             }
         }
         return null;
-    }
-
-    public String getAllScopeTextsSQL() {
-        return allScopeTextsSQL;
-    }
-
-    public void setAllScopeTextsSQL(String allScopeTextsSQL) {
-        this.allScopeTextsSQL = allScopeTextsSQL;
     }
 }

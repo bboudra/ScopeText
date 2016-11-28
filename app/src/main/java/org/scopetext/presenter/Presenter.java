@@ -57,12 +57,10 @@ public class Presenter {
 
     /**
      * Reads all of the ScopeText objects from the database.
-     * @param dao Used to retrieve the ScopeText objects.
      */
-    public void getAllScopeTexts(ScopeTextDAO dao) {
+    public void getAllScopeTexts() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        if(dao != null)
-            scopeTexts = dao.getAllScopeTexts(db, scopeTexts);
+        scopeTexts = ScopeTextDAO.getAllScopeTexts(db, scopeTexts);
     }
 
     protected ArrayList<ScopeText> getScopeTexts() {

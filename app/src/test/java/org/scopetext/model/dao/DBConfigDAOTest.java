@@ -15,7 +15,6 @@ import org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
  * Created by john.qualls on 9/30/2016.
  */
 public class DBConfigDAOTest {
-    private DBConfigDAO objUnderTest;
     private enum TestName {
         CREATE_RESPONSE_TABLE,
         CREATE_MESSAGE_TABLE,
@@ -65,31 +64,19 @@ public class DBConfigDAOTest {
 
     private void createTablesTestHelper(TestName testName, String expectedSQL) {
         // Setup
-        objUnderTest = new DBConfigDAO();
         SQLiteDatabase db = Mockito.mock(SQLiteDatabase.class);
 
         // Test
-        String actualSQL = "",
-                tableName = "";
         switch(testName) {
             case CREATE_RESPONSE_TABLE:
-                objUnderTest.createResponseTable(db);
-                actualSQL = objUnderTest.getCreateResponseTable();
-                tableName = ResponseSchema.TABLE_NAME;
+                DBConfigDAO.createResponseTable(db);
                 break;
             case CREATE_MESSAGE_TABLE:
-                objUnderTest.createMessageTable(db);
-                actualSQL = objUnderTest.getCreateMessageTable();
-                tableName = MessageSchema.TABLE_NAME;
+                DBConfigDAO.createMessageTable(db);
                 break;
             case CREATE_SCOPETEXT_TABLE:
-                objUnderTest.createScopeTextTable(db);
-                actualSQL = objUnderTest.getCreateScopetextTable();
-                tableName = ScopeTextSchema.TABLE_NAME;
+                DBConfigDAO.createScopeTextTable(db);
         }
-        Mockito.verify(db).execSQL(actualSQL);
-        Assert.assertEquals("SQL CREATE TABLE " + tableName +
-                        "... Statement is incorrect.", expectedSQL,
-                actualSQL);
+        Mockito.verify(db).execSQL(expectedSQL);
     }
 }

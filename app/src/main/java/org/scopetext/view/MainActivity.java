@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void getAllScopeTexts() {
-        ScopeTextDAO dao = new ScopeTextDAO();
-        presenter.getAllScopeTexts(dao);
+        presenter.getAllScopeTexts();
     }
 }

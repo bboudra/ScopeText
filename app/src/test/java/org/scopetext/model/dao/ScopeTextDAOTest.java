@@ -27,24 +27,17 @@ import java.util.ArrayList;
  * Created by john.qualls on 10/3/2016.
  */
 public class ScopeTextDAOTest {
-    private ScopeTextDAO objUnderTest;
     @Mock
     SQLiteDatabase db;
     @Mock
     Cursor cursor;
-
-
-    @Before
-    public void setup() {
-        objUnderTest = new ScopeTextDAO();
-    }
 
     @Test
     public void getAllScopeTextsSQLError() {
         getAllScopeTextSetup();
         Mockito.when(db.rawQuery(Matchers.anyString(), Matchers.any(String[].class))).
                 thenReturn(null);
-        Assert.assertNull(objUnderTest.getAllScopeTexts(db, null));
+        Assert.assertNull(ScopeTextDAO.getAllScopeTexts(db, null));
     }
 
     @Test
@@ -60,9 +53,8 @@ public class ScopeTextDAOTest {
                 + " = R." + ResponseSchema.RESPONSE_ID;
 
         // Test
-        objUnderTest.getAllScopeTexts(db, null);
-        Mockito.verify(db).rawQuery(objUnderTest.getAllScopeTextsSQL(), null);
-        Assert.assertEquals(GET_ALL_SCOPETEXTS, objUnderTest.getAllScopeTextsSQL());
+        ScopeTextDAO.getAllScopeTexts(db, null);
+        Mockito.verify(db).rawQuery(GET_ALL_SCOPETEXTS, null);
     }
 
     @Test
@@ -89,7 +81,7 @@ public class ScopeTextDAOTest {
         }
 
         // Test
-        ArrayList<ScopeText> actualList = objUnderTest.getAllScopeTexts(db, null);
+        ArrayList<ScopeText> actualList = ScopeTextDAO.getAllScopeTexts(db, null);
         Assert.assertEquals(expectedList, actualList);
     }
 

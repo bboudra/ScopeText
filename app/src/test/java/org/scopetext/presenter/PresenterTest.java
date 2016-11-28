@@ -55,32 +55,4 @@ public class PresenterTest {
         objUnderTest = new Presenter(dbHelper, toolbarManager, stFragManager);
         Mockito.verify(stFragManager).addFragment(Matchers.any(ScopeTextListFragment.class));
     }
-
-    @Test
-    public void getAllScopeTextsTest() {
-        // Setup
-        objUnderTest = new Presenter(dbHelper, toolbarManager, stFragManager);
-        ScopeTextDAO daoMock = Mockito.mock(ScopeTextDAO.class);
-        ArrayList<ScopeText> listMock = Mockito.mock(ArrayList.class);
-        Mockito.when(daoMock.getAllScopeTexts(Matchers.any(SQLiteDatabase.class))).
-                thenReturn(listMock);
-
-        // Test
-        objUnderTest.getAllScopeTexts(daoMock);
-        Assert.assertEquals(listMock, objUnderTest.getScopeTexts());
-    }
-
-    @Test
-    public void getAllScopeTextsNullTest() {
-        // Setup
-        objUnderTest = new Presenter(dbHelper, toolbarManager, stFragManager);
-        ScopeTextDAO daoMock = Mockito.mock(ScopeTextDAO.class);
-        ArrayList<ScopeText> listMock = Mockito.mock(ArrayList.class);
-        Mockito.when(daoMock.getAllScopeTexts(Matchers.any(SQLiteDatabase.class))).
-                thenReturn(listMock);
-
-        // Test
-        objUnderTest.getAllScopeTexts(null);
-        Assert.assertNull(objUnderTest.getScopeTexts());
-    }
 }
