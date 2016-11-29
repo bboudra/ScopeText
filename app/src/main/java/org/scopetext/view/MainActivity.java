@@ -8,10 +8,13 @@ import android.view.MenuItem;
 
 import org.scopetext.presenter.Presenter;
 import org.scopetext.presenter.R;
+import org.scopetext.presenter.ScopeTextPresenter;
 
 /**
- * @author John Qualls
- * @version 1.0
+ * The main view component of the application. Routes all UI interaction to the Presenter component,
+ * where the necessary business logic is executed. Created by john.qualls on 11/28/2016.
+ *
+ * @see Presenter
  */
 public class MainActivity extends AppCompatActivity {
     private Presenter presenter;
@@ -21,21 +24,19 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param savedInstanceState The application's saved content
      */
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        presenter = ScopeTextPresenter.getInstance();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_bar_menu, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_custom_settings:
             default:
@@ -44,6 +45,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void getAllScopeTexts() {
-        presenter.getAllScopeTexts();
+        //presenter.getAllScopeTexts();
     }
 }

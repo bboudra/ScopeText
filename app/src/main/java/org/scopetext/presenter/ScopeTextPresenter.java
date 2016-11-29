@@ -10,19 +10,29 @@ import org.scopetext.view.MainActivity;
 import java.util.ArrayList;
 
 /**
- * Presenter Implementation. So far, this is the only implementation.
- * Created by john.qualls on 11/28/2016.
+ * Presenter Implementation. So far, this is the only implementation. This class is not meant to be
+ * subclassed. Created by john.qualls on 11/28/2016.
+ *
  * @see Presenter
  */
 public class ScopeTextPresenter implements Presenter {
-    private static Presenter presenter = new ScopeTextPresenter();
+    private final static Presenter presenter = new ScopeTextPresenter();
     private DBHelper dbHelper;
     private ToolbarManager toolbarManager;
     private ScopeTextFragmentManager stFragManager;
     private ArrayList<ScopeText> scopeTexts;
 
+    /*
+     * Used for unit testing this singleton class. Params are used to mock out collaborators with
+     * this class.
+     */
+    protected ScopeTextPresenter(DBHelper dbHelper, ToolbarManager toolbarManager,
+                                 ScopeTextFragmentManager stFragManager) {
+
+    }
+
     private ScopeTextPresenter() {
-        // TODO Refactor collaborators
+        // TODO Refactor collaborators.
         /*
         DBHelper dbHelper = new DBHelper();
         ToolbarManager toolbarManager = new ToolbarManager();
@@ -44,12 +54,20 @@ public class ScopeTextPresenter implements Presenter {
         */
     }
 
-    // TODO Refactor methods along with refactoring collaborators
     /**
-     * Getter method for the ToolbarManager singleton instance field.
+     * Gets a reference to this singleton.
+     *
+     * @return The reference.
      */
-    protected ToolbarManager getToolbarManager() {
-        return this.toolbarManager;
+    public static Presenter getInstance() {
+        return ScopeTextPresenter.presenter;
+    }
+
+    /**
+     * @see Presenter#updateMainActivity(MainActivity)
+     */
+    public void updateMainActivity(MainActivity mainActivity) {
+
     }
 
     /**
@@ -68,12 +86,12 @@ public class ScopeTextPresenter implements Presenter {
         this.scopeTexts = scopeTexts;
     }
 
-    /**
-     * Updates the MainActivity reference. This must be invoked when the MainActivity restarts,
-     * so that the new reference propagates through the entire application.
-     * @see org.scopetext.view.MainActivity
-     */
-    public void updateMainActivity(MainActivity mainActivity) {
+    // TODO Refactor methods along with refactoring collaborators.
 
+    /**
+     * Getter method for the ToolbarManager singleton instance field.
+     */
+    protected ToolbarManager getToolbarManager() {
+        return this.toolbarManager;
     }
 }
