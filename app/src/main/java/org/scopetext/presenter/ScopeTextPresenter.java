@@ -10,8 +10,14 @@ import org.scopetext.view.MainActivity;
 import java.util.ArrayList;
 
 /**
- * Presenter Implementation. So far, this is the only implementation. This class is not meant to be
- * subclassed. Created by john.qualls on 11/28/2016.
+ * Presenter Implementation.
+ *
+ * <pre>
+ * NOTES:
+ * 1. Not meant to be subclassed.
+ * 2. Not thread safe.
+ * </pre>
+ * Created by john.qualls on 11/28/2016.
  *
  * @see Presenter
  */
