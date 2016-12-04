@@ -16,6 +16,7 @@ import java.util.ArrayList;
  * NOTES:
  * 1. Not meant to be subclassed.
  * 2. Not thread safe.
+ * 3. Singleton class.
  * </pre>
  * Created by john.qualls on 11/28/2016.
  *
@@ -25,7 +26,7 @@ public class ScopeTextPresenter implements Presenter {
     private final static Presenter presenter = new ScopeTextPresenter();
     private DBHelper dbHelper;
     private ToolbarManager toolbarManager;
-    private ScopeTextFragmentManager stFragManager;
+    private ScopeTextFragmentAction stFragManager;
     private ArrayList<ScopeText> scopeTexts;
 
     /*
@@ -33,7 +34,7 @@ public class ScopeTextPresenter implements Presenter {
      * this class.
      */
     protected ScopeTextPresenter(DBHelper dbHelper, ToolbarManager toolbarManager,
-                                 ScopeTextFragmentManager stFragManager) {
+                                 ScopeTextFragmentAction stFragManager) {
 
     }
 
@@ -42,7 +43,7 @@ public class ScopeTextPresenter implements Presenter {
         /*
         DBHelper dbHelper = new DBHelper();
         ToolbarManager toolbarManager = new ToolbarManager();
-        ScopeTextFragmentManager stFragManager = new ScopeTextFragmentManager();
+        ScopeTextFragmentAction stFragManager = new ScopeTextFragmentAction();
 
 
         if (dbHelper != null && toolbarManager != null && stFragManager != null) {

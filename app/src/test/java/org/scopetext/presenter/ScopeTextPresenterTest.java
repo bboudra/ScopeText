@@ -10,14 +10,14 @@ public class ScopeTextPresenterTest {
     private Presenter objUnderTest;
     DBHelper dbHelper;
     ToolbarManager toolbarManager;
-    ScopeTextFragmentManager stFragManager;
+    ScopeTextFragmentAction stFragManager;
 
     // TODO Refactor tests once presenter collaborators are refactored.
  /*   @Before
     public void mockSetup() {
         dbHelper = Mockito.mock(DBHelper.class);
         toolbarManager = Mockito.mock(ToolbarManager.class);
-        stFragManager = Mockito.mock(ScopeTextFragmentManager.class);
+        stFragManager = Mockito.mock(ScopeTextFragmentAction.class);
     }
 
     @Test(expected = IllegalArgumentException.class)
