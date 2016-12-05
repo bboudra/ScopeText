@@ -43,8 +43,26 @@ public class ScopeTextFragmentActionTest {
     }
 
     @Test
+    public void shouldAssertNullFragManagerForNullActivity() {
+        // Setup Mocks
+        Mockito.when(activity.getSupportFragmentManager()).thenReturn(fragmentManager);
+
+        // Test
+        objUnderTest = new ScopeTextFragmentAction(null, null);
+        objUnderTest.activityRefresh(null);
+        Assert.assertNull(objUnderTest.getFragmentManager());
+    }
+
+    @Test
     public void shouldAssertSameFragManagerAsNewActivity() {
-        Assert.fail("Not Yet Implemented.");
+        // Setup Mocks
+        Mockito.when(activity.getSupportFragmentManager()).thenReturn(fragmentManager);
+
+        // Test
+        objUnderTest = new ScopeTextFragmentAction(null, null);
+        objUnderTest.activityRefresh(activity);
+        Assert.assertEquals("FragmentManager references are not the same.", fragmentManager,
+                objUnderTest.getFragmentManager());
     }
 
     @Test

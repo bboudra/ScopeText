@@ -51,7 +51,9 @@ public class ScopeTextFragmentAction implements FragmentAction {
      * @see FragmentAction#activityRefresh(AppCompatActivity)
      */
     @Override public void activityRefresh(AppCompatActivity activity) {
-
+        if (activity != null) {
+            this.fragmentManager = activity.getSupportFragmentManager();
+        }
     }
 
     /**
@@ -67,14 +69,17 @@ public class ScopeTextFragmentAction implements FragmentAction {
     @Override public void addFragment(int containerId, Fragment fragment, ScopeTextFragment type) {
         if (fragment != null) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            if(fragment instanceof ScopeTextListFragment) {
+            if (fragment instanceof ScopeTextListFragment) {
                 transaction.add(containerId, fragment, type.getName());
-            }
-            else {
+            } else {
                 transaction.replace(containerId, fragment, type.getName());
                 transaction.addToBackStack(null);
             }
             transaction.commit();
         }
+    }
+
+    protected FragmentManager getFragmentManager() {
+        return this.fragmentManager;
     }
 }
