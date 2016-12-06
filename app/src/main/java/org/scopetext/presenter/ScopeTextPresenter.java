@@ -1,11 +1,11 @@
 package org.scopetext.presenter;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AppCompatActivity;
 
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.dao.ScopeTextDAO;
 import org.scopetext.model.javabean.ScopeText;
-import org.scopetext.view.MainActivity;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ public class ScopeTextPresenter implements Presenter {
     private final static Presenter presenter = new ScopeTextPresenter();
     private DBHelper dbHelper;
     private ToolbarManager toolbarManager;
-    private ScopeTextFragmentAction stFragManager;
+    private FragmentAction fragmentAction;
     private ArrayList<ScopeText> scopeTexts;
 
     /*
@@ -34,22 +34,25 @@ public class ScopeTextPresenter implements Presenter {
      * this class.
      */
     protected ScopeTextPresenter(DBHelper dbHelper, ToolbarManager toolbarManager,
-                                 ScopeTextFragmentAction stFragManager) {
-
+                                 FragmentAction fragmentAction) {
+        this.dbHelper = dbHelper;
+        this.toolbarManager = toolbarManager;
+        this.fragmentAction = fragmentAction;
     }
 
     private ScopeTextPresenter() {
+        fragmentAction = ScopeTextFragmentAction.getInstance();
         // TODO Refactor collaborators.
         /*
         DBHelper dbHelper = new DBHelper();
         ToolbarManager toolbarManager = new ToolbarManager();
-        ScopeTextFragmentAction stFragManager = new ScopeTextFragmentAction();
+        ScopeTextFragmentAction fragmentAction = new ScopeTextFragmentAction();
 
 
-        if (dbHelper != null && toolbarManager != null && stFragManager != null) {
+        if (dbHelper != null && toolbarManager != null && fragmentAction != null) {
             this.dbHelper = dbHelper;
             this.toolbarManager = toolbarManager;
-            this.stFragManager = stFragManager;
+            this.fragmentAction = fragmentAction;
         } else {
             throw new IllegalArgumentException(
                     "Cannot have null parameters during Presenter " + "initialization.");
@@ -57,7 +60,7 @@ public class ScopeTextPresenter implements Presenter {
 
         // Initialize ScopeTextListFragment
         ScopeTextListFragment stFragment = ScopeTextListFragment.newInstance();
-        stFragManager.addFragment(stFragment);
+        fragmentAction.addFragment(stFragment);
         */
     }
 
@@ -67,13 +70,22 @@ public class ScopeTextPresenter implements Presenter {
      * @return The reference.
      */
     public static Presenter getInstance() {
-        return ScopeTextPresenter.presenter;
+        return presenter;
     }
 
     /**
-     * @see Presenter#updateMainActivity(MainActivity)
+     * @see Presenter#activityRefresh(AppCompatActivity activity)
      */
-    public void updateMainActivity(MainActivity mainActivity) {
+    public void activityRefresh(AppCompatActivity activity) {
+        if(activity != null) {
+            fragmentAction.activityRefresh(activity);
+        }
+    }
+
+    /**
+     * @see Presenter#addFragment(ScopeTextFragment)
+     */
+    public void addFragment(ScopeTextFragment type) {
 
     }
 

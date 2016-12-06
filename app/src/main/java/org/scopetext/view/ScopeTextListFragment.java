@@ -4,28 +4,24 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 
 import org.scopetext.presenter.R;
 
 
 /**
- * Handles the UI for displaying list of contacts.<br/>
+ * Handles the UI for displaying a list of contacts.
  */
-public class ScopeTextListFragment extends Fragment implements Button.OnClickListener,
-        OnEditorActionListener {
+public class ScopeTextListFragment extends Fragment {
+        //implements Button.OnClickListener,
+        //OnEditorActionListener {
     /*private SQLiteDatabase dbWrite,
                            dbRead;
     private SimpleCursorAdapter adapter;
-    private Cursor cursor;*/
-    private MainActivity activity;
+    private Cursor cursor;
+    private MainActivity activity;*/
 
     public static ScopeTextListFragment newInstance() {
         /*ScopeTextListFragment stf = new ScopeTextListFragment();
@@ -49,9 +45,9 @@ public class ScopeTextListFragment extends Fragment implements Button.OnClickLis
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        activity = (MainActivity) getActivity();
+        /*activity = (MainActivity) getActivity();
         activity.getAllScopeTexts();
-        /*final String[] DB_COLUMNS = {
+        final String[] DB_COLUMNS = {
                 ScopeTextSchema._ID,
                 ScopeTextSchema.NAME,
         };
@@ -76,18 +72,16 @@ public class ScopeTextListFragment extends Fragment implements Button.OnClickLis
     @Override
     public void onDetach() {
         super.onDetach();
-        Log.i("Test", "Contact Fragment onDetach()");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i("Test", "Contact Fragment onDestroy()");
     }
 
-    @Override
+/*    @Override
     public void onClick(View v) {
-/*        if(v.getId() == R.id.delete_button) {
+*//*        if(v.getId() == R.id.delete_button) {
             int rows = dbWrite.delete(Test.TABLE_NAME, null, null);
             Toast.makeText(getActivity(), rows + "", Toast.LENGTH_SHORT).show();
         } else if (v.getId() == R.id.select_button) {
@@ -100,12 +94,12 @@ public class ScopeTextListFragment extends Fragment implements Button.OnClickLis
                     null);
             cursor.moveToFirst();
             adapter.swapCursor(cursor);
-        }*/
-    }
+        }*//*
+    }*/
 
-    @Override
+/*    @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-/*        if (actionId == EditorInfo.IME_ACTION_DONE) {
+*//*        if (actionId == EditorInfo.IME_ACTION_DONE) {
             EditText editText = (EditText) v;
             String value = editText.getText().toString();
             ContentValues values = new ContentValues();
@@ -113,7 +107,7 @@ public class ScopeTextListFragment extends Fragment implements Button.OnClickLis
             values.put(Test.CONTACT_NAME, "Bob");
             dbWrite.insert(Test.TABLE_NAME, null, values);
             return true;
-        }*/
+        }*//*
         return false;
-    }
+    }*/
 }

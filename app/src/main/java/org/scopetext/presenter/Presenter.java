@@ -1,6 +1,6 @@
 package org.scopetext.presenter;
 
-import org.scopetext.view.MainActivity;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * The presenter component in the <a href=http://antonioleiva.com/mvp-android/ "MVP">MVP</a>
@@ -10,10 +10,20 @@ import org.scopetext.view.MainActivity;
  */
 public interface Presenter {
     /**
-     * Updates the MainActivity reference. This must be invoked when the MainActivity restarts, so
+     * Updates the Activity reference. This must be invoked when the Activity restarts, so
      * that the new reference propagates through the entire application.
      *
-     * @see org.scopetext.view.MainActivity
+     * @param activity The new Activity reference.
      */
-    public void updateMainActivity(MainActivity mainActivity);
+    public void activityRefresh(AppCompatActivity activity);
+
+    /**
+     * Invokes FragmentAction implementation to add a new Fragment. Should determine what fragment
+     * to add and to what View container based on the ScopeTextFragment type.
+     *
+     * @param type The ScopeTextFragment type.
+     * @see FragmentAction
+     * @see ScopeTextFragment
+     */
+    public void addFragment(ScopeTextFragment type);
 }
