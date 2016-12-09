@@ -1,8 +1,8 @@
 package org.scopetext.presenter;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 
 import junit.framework.Assert;
 
@@ -45,7 +45,7 @@ public class ScopeTextFragmentActionTest {
     @Test
     public void shouldAssertNullFragManagerForNullActivity() {
         // Setup Mocks
-        Mockito.when(activity.getSupportFragmentManager()).thenReturn(fragmentManager);
+        Mockito.when(activity.getFragmentManager()).thenReturn(fragmentManager);
 
         // Test
         objUnderTest = new ScopeTextFragmentAction(null, null);
@@ -56,7 +56,7 @@ public class ScopeTextFragmentActionTest {
     @Test
     public void shouldAssertSameFragManagerAsNewActivity() {
         // Setup Mocks
-        Mockito.when(activity.getSupportFragmentManager()).thenReturn(fragmentManager);
+        Mockito.when(activity.getFragmentManager()).thenReturn(fragmentManager);
 
         // Test
         objUnderTest = new ScopeTextFragmentAction(null, null);

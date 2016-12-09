@@ -1,6 +1,6 @@
 package org.scopetext.presenter;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 
 /**
  * The presenter component in the <a href=http://antonioleiva.com/mvp-android/ "MVP">MVP</a>
@@ -15,7 +15,7 @@ public interface Presenter {
      *
      * @param activity The new Activity reference.
      */
-    public void activityRefresh(AppCompatActivity activity);
+    public void activityRefresh(Activity activity);
 
     /**
      * Invokes FragmentAction implementation to add a new Fragment. Should determine what fragment

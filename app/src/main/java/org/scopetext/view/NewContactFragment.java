@@ -1,6 +1,7 @@
 package org.scopetext.view;
 
 import android.annotation.SuppressLint;
+import android.app.Fragment;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,7 +9,6 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -116,7 +116,7 @@ public class NewContactFragment extends Fragment
         super.onActivityCreated(savedInstanceState);
 
         // Initializes the loader
-        getLoaderManager().initLoader(0, null, this);
+        //getLoaderManager().initLoader(0, null, this);
 
         // Get ListView from parent activity
         mContactsList = (ListView) getActivity().findViewById(android.R.id.list);
@@ -191,7 +191,7 @@ public class NewContactFragment extends Fragment
             String searchString = form.getText().toString();
             Log.i(LOG_TAG, "Contact Search String: " + searchString);
             mSearchString = searchString;
-            getLoaderManager().restartLoader(0, null, this);
+            //getLoaderManager().restartLoader(0, null, this);
             return true;
         }
         return false;
