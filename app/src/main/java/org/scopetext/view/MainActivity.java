@@ -1,7 +1,7 @@
 package org.scopetext.view;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,12 +17,14 @@ import org.scopetext.presenter.ScopeTextPresenter;
  *
  * @see Presenter
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private Presenter presenter;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Refresh Activity reference and add the main fragment to the UI
         presenter = ScopeTextPresenter.getInstance();
         presenter.activityRefresh(this);
         presenter.addFragment(ScopeTextFragment.SCOPE_TEXT_LIST);
