@@ -1,7 +1,8 @@
 package org.scopetext.presenter;
 
-import android.app.Activity;
-import android.app.Fragment;
+
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * FragmentAction makes it simpler to interact with the Android FragmentManager, and execute
@@ -18,7 +19,7 @@ public interface FragmentAction {
      *
      * @param activity The new Activity reference.
      */
-    public void activityRefresh(Activity activity);
+    public void activityRefresh(AppCompatActivity activity);
 
     /**
      * Adds a new fragment to a View container.

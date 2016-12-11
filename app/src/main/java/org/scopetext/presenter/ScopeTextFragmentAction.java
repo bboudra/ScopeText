@@ -1,9 +1,9 @@
 package org.scopetext.presenter;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 
 import org.scopetext.view.MainActivity;
 import org.scopetext.view.ScopeTextListFragment;
@@ -48,11 +48,11 @@ public class ScopeTextFragmentAction implements FragmentAction {
     }
 
     /**
-     * @see FragmentAction#activityRefresh(Activity)
+     * @see FragmentAction#activityRefresh(AppCompatActivity)
      */
-    @Override public void activityRefresh(Activity activity) {
+    @Override public void activityRefresh(AppCompatActivity activity) {
         if (activity != null) {
-            this.fragmentManager = activity.getFragmentManager();
+            this.fragmentManager = activity.getSupportFragmentManager();
         }
     }
 

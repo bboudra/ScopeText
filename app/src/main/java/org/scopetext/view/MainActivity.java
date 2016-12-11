@@ -1,7 +1,7 @@
 package org.scopetext.view;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,7 +17,7 @@ import org.scopetext.presenter.ScopeTextPresenter;
  *
  * @see Presenter
  */
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     private Presenter presenter;
 
     @Override protected void onCreate(Bundle savedInstanceState) {

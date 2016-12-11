@@ -82,6 +82,7 @@ public class ScopeTextPresenter implements Presenter {
     /**
      * @see Presenter#activityRefresh(AppCompatActivity activity)
      */
+    @Override
     public void activityRefresh(AppCompatActivity activity) {
         if (activity != null) {
             fragmentAction.activityRefresh(activity);
