@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import org.scopetext.presenter.Presenter;
 import org.scopetext.presenter.R;
+import org.scopetext.presenter.ScopeTextFragment;
 import org.scopetext.presenter.ScopeTextPresenter;
 
 /**
@@ -19,16 +20,12 @@ import org.scopetext.presenter.ScopeTextPresenter;
 public class MainActivity extends AppCompatActivity {
     private Presenter presenter;
 
-    /**
-     * Initializes all necessary components.
-     *
-     * @param savedInstanceState The application's saved content
-     */
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         presenter = ScopeTextPresenter.getInstance();
         presenter.activityRefresh(this);
+        presenter.addFragment(ScopeTextFragment.SCOPE_TEXT_LIST);
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -43,9 +40,5 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    protected void getAllScopeTexts() {
-        //presenter.getAllScopeTexts();
     }
 }

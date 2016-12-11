@@ -1,17 +1,21 @@
 package org.scopetext.presenter;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.dao.ScopeTextDAO;
 import org.scopetext.model.javabean.ScopeText;
+import org.scopetext.view.NewContactFragment;
+import org.scopetext.view.ScopeTextListFragment;
 
 import java.util.ArrayList;
 
 /**
  * Presenter Implementation.
- *
+ * <p>
  * <pre>
  * NOTES:
  * 1. Not meant to be subclassed.
@@ -25,7 +29,6 @@ import java.util.ArrayList;
 public class ScopeTextPresenter implements Presenter {
     private final static Presenter presenter = new ScopeTextPresenter();
     private DBHelper dbHelper;
-    private ToolbarManager toolbarManager;
     private FragmentAction fragmentAction;
     private ArrayList<ScopeText> scopeTexts;
 
@@ -33,13 +36,16 @@ public class ScopeTextPresenter implements Presenter {
      * Used for unit testing this singleton class. Params are used to mock out collaborators with
      * this class.
      */
-    protected ScopeTextPresenter(DBHelper dbHelper, ToolbarManager toolbarManager,
-                                 FragmentAction fragmentAction) {
+    protected ScopeTextPresenter(DBHelper dbHelper, FragmentAction fragmentAction) {
         this.dbHelper = dbHelper;
-        this.toolbarManager = toolbarManager;
         this.fragmentAction = fragmentAction;
     }
 
+    /**
+     * Initializes the following application components: <PRE> 1. Fragment Action. <PRE/>
+     *
+     * @see FragmentAction
+     */
     private ScopeTextPresenter() {
         fragmentAction = ScopeTextFragmentAction.getInstance();
         // TODO Refactor collaborators.
@@ -77,8 +83,9 @@ public class ScopeTextPresenter implements Presenter {
      * @see Presenter#activityRefresh(AppCompatActivity activity)
      */
     public void activityRefresh(AppCompatActivity activity) {
-        if(activity != null) {
+        if (activity != null) {
             fragmentAction.activityRefresh(activity);
+            setupActionBar(activity);
         }
     }
 
@@ -86,7 +93,18 @@ public class ScopeTextPresenter implements Presenter {
      * @see Presenter#addFragment(ScopeTextFragment)
      */
     public void addFragment(ScopeTextFragment type) {
-
+        if (type != null) {
+            Fragment fragment = null;
+            switch (type) {
+                case SCOPE_TEXT_LIST:
+                    fragment = ScopeTextListFragment.newInstance();
+                    break;
+                case NEW_CONTACT:
+                    fragment = NewContactFragment.newInstance();
+                    break;
+            }
+            fragmentAction.addFragment(R.id.scopetext_fragment, fragment, type);
+        }
     }
 
     /**
@@ -97,20 +115,21 @@ public class ScopeTextPresenter implements Presenter {
         scopeTexts = ScopeTextDAO.getAllScopeTexts(db, scopeTexts);
     }
 
+    protected void setupActionBar(AppCompatActivity activity) {
+        if (activity != null) {
+            Toolbar toolbar = (Toolbar) activity.findViewById(R.id.actionBar);
+
+            if (toolbar != null) {
+                activity.setSupportActionBar(toolbar);
+            }
+        }
+    }
+
     protected ArrayList<ScopeText> getScopeTexts() {
         return scopeTexts;
     }
 
     protected void setScopeTexts(ArrayList<ScopeText> scopeTexts) {
         this.scopeTexts = scopeTexts;
-    }
-
-    // TODO Refactor methods along with refactoring collaborators.
-
-    /**
-     * Getter method for the ToolbarManager singleton instance field.
-     */
-    protected ToolbarManager getToolbarManager() {
-        return this.toolbarManager;
     }
 }
