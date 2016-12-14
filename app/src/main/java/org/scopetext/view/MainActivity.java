@@ -8,8 +8,8 @@ import android.view.MenuItem;
 
 import org.scopetext.presenter.Presenter;
 import org.scopetext.presenter.R;
-import org.scopetext.presenter.ScopeTextFragment;
 import org.scopetext.presenter.ScopeTextPresenter;
+import org.scopetext.presenter.fragment.ScopeTextFragment;
 
 /**
  * The main view component of the application. Routes all UI interaction to the Presenter component,

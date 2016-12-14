@@ -1,4 +1,4 @@
-package org.scopetext.presenter;
+package org.scopetext.presenter.fragment;
 
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;

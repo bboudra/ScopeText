@@ -2,6 +2,9 @@ package org.scopetext.presenter;
 
 import android.support.v7.app.AppCompatActivity;
 
+import org.scopetext.presenter.fragment.FragmentAction;
+import org.scopetext.presenter.fragment.ScopeTextFragment;
+
 /**
  * The presenter component in the <a href=http://antonioleiva.com/mvp-android/ "MVP">MVP</a>
  * architecture. Middle man between the view and model components. Responsible for routing each UI

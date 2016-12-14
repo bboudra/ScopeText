@@ -8,6 +8,9 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.scopetext.model.dao.DBHelper;
+import org.scopetext.presenter.fragment.FragmentAction;
+import org.scopetext.presenter.fragment.ScopeTextFragment;
+import org.scopetext.presenter.fragment.ScopeTextFragmentAction;
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
 

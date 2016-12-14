@@ -8,6 +8,9 @@ import android.support.v7.widget.Toolbar;
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.dao.ScopeTextDAO;
 import org.scopetext.model.javabean.ScopeText;
+import org.scopetext.presenter.fragment.FragmentAction;
+import org.scopetext.presenter.fragment.ScopeTextFragment;
+import org.scopetext.presenter.fragment.ScopeTextFragmentAction;
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
 
@@ -20,7 +23,7 @@ import java.util.ArrayList;
  * NOTES:
  * 1. Not meant to be subclassed.
  * 2. Not thread safe.
- * 3. Singleton class.
+ * 3. Singleton.
  * </pre>
  * Created by john.qualls on 11/28/2016.
  *

@@ -1,4 +1,4 @@
-package org.scopetext.presenter;
+package org.scopetext.presenter.fragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,7 +15,7 @@ import org.scopetext.view.ScopeTextListFragment;
  * NOTES:
  * 1. Not meant to be subclassed.
  * 2. Not thread safe.
- * 3. Singleton class.
+ * 3. Singleton.
  * </pre>
  * Created by john.qualls on 8/13/2016.
  *
