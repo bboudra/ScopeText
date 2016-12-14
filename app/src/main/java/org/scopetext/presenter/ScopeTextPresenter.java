@@ -36,7 +36,7 @@ public class ScopeTextPresenter implements Presenter {
      * Used for unit testing this singleton class. Params are used to mock out collaborators with
      * this class.
      */
-    protected ScopeTextPresenter(DBHelper dbHelper, FragmentAction fragmentAction) {
+    ScopeTextPresenter(DBHelper dbHelper, FragmentAction fragmentAction) {
         this.dbHelper = dbHelper;
         this.fragmentAction = fragmentAction;
     }
