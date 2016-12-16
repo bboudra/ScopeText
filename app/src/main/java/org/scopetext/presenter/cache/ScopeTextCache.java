@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ScopeTextCache encapsulates the cache for the ScopeText JavaBean objects.
+ * ScopeTextCache encapsulates the cache for ScopeText JavaBean objects.
  * <pre>
  * NOTES:
  * 1. Not meant to be subclassed.
@@ -17,7 +17,7 @@ import java.util.Map;
  * @see Cache
  */
 
-public class ScopeTextCache implements Cache {
+public class ScopeTextCache implements Cache<String, ScopeText> {
     public static final ScopeTextCache singleton = new ScopeTextCache();
     private HashMap<String, ScopeText> cache;
 
@@ -30,6 +30,17 @@ public class ScopeTextCache implements Cache {
     @Override
     public Map<String, ScopeText> getCache() {
         return cache;
+    }
+
+
+    @Override
+    public void load() {
+
+    }
+
+    @Override
+    public void store() {
+
     }
 
     @Override

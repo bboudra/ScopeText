@@ -43,9 +43,10 @@ public class ScopeTextPresenterTest {
     @Test
     public void shouldVerifyNoActivityRefreshForNullActivity() {
         // Test
-        objUnderTest.activityRefresh(null);
+        objUnderTest.activityRefresh(null, dbHelper);
         verifyZeroInteractions(fragmentAction);
         verify(objUnderTest, times(0)).setupActionBar(isA(AppCompatActivity.class));
+        Assert.assertNull(objUnderTest.getDbHelper());
     }
 
     @Test
@@ -54,9 +55,10 @@ public class ScopeTextPresenterTest {
         AppCompatActivity activity = mock(AppCompatActivity.class);
 
         // Test
-        objUnderTest.activityRefresh(activity);
+        objUnderTest.activityRefresh(activity, dbHelper);
         verify(fragmentAction).activityRefresh(activity);
         verify(objUnderTest).setupActionBar(activity);
+        Assert.assertEquals(objUnderTest.getDbHelper(), dbHelper);
     }
 
     @Test

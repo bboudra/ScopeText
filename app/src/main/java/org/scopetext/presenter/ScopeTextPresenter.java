@@ -1,6 +1,7 @@
 package org.scopetext.presenter;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -83,13 +84,14 @@ public class ScopeTextPresenter implements Presenter {
     }
 
     /**
-     * @see Presenter#activityRefresh(AppCompatActivity activity)
+     * @see Presenter#activityRefresh(AppCompatActivity activity, SQLiteOpenHelper dbHelper)
      */
     @Override
-    public void activityRefresh(AppCompatActivity activity) {
+    public void activityRefresh(AppCompatActivity activity, SQLiteOpenHelper dbHelper) {
         if (activity != null) {
             fragmentAction.activityRefresh(activity);
             setupActionBar(activity);
+            this.dbHelper = (DBHelper) dbHelper;
         }
     }
 
@@ -119,7 +121,7 @@ public class ScopeTextPresenter implements Presenter {
         scopeTexts = ScopeTextDAO.getAllScopeTexts(db, scopeTexts);
     }
 
-    protected void setupActionBar(AppCompatActivity activity) {
+    void setupActionBar(AppCompatActivity activity) {
         if (activity != null) {
             Toolbar toolbar = (Toolbar) activity.findViewById(R.id.actionBar);
 
@@ -127,6 +129,10 @@ public class ScopeTextPresenter implements Presenter {
                 activity.setSupportActionBar(toolbar);
             }
         }
+    }
+
+    DBHelper getDbHelper() {
+        return this.dbHelper;
     }
 
     protected ArrayList<ScopeText> getScopeTexts() {

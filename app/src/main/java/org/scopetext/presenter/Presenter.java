@@ -1,5 +1,6 @@
 package org.scopetext.presenter;
 
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 
 import org.scopetext.presenter.fragment.FragmentAction;
@@ -13,12 +14,13 @@ import org.scopetext.presenter.fragment.ScopeTextFragment;
  */
 public interface Presenter {
     /**
-     * Updates the Activity reference. This must be invoked when the Activity restarts, so
-     * that the new reference propagates through the entire application.
+     * Updates the Activity, and SQLiteOpenHelper references. This must be invoked when the Activity
+     * restarts, so that the new references propagate through the entire application.
      *
      * @param activity The new Activity reference.
+     * @param dbHelper Required for database transactions.
      */
-    public void activityRefresh(AppCompatActivity activity);
+    public void activityRefresh(AppCompatActivity activity, SQLiteOpenHelper dbHelper);
 
     /**
      * Invokes FragmentAction implementation to add a new Fragment. Should determine what fragment
