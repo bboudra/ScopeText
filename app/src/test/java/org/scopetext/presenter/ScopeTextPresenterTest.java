@@ -43,6 +43,7 @@ public class ScopeTextPresenterTest {
     @Test
     public void shouldVerifyNoActivityRefreshForNullActivity() {
         // Test
+        objUnderTest = spy(new ScopeTextPresenter(null, fragmentAction));
         objUnderTest.activityRefresh(null, dbHelper);
         verifyZeroInteractions(fragmentAction);
         verify(objUnderTest, times(0)).setupActionBar(isA(AppCompatActivity.class));
@@ -55,6 +56,7 @@ public class ScopeTextPresenterTest {
         AppCompatActivity activity = mock(AppCompatActivity.class);
 
         // Test
+        objUnderTest = spy(new ScopeTextPresenter(null, fragmentAction));
         objUnderTest.activityRefresh(activity, dbHelper);
         verify(fragmentAction).activityRefresh(activity);
         verify(objUnderTest).setupActionBar(activity);

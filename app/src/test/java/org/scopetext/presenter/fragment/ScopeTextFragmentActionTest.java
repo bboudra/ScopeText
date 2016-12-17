@@ -40,7 +40,7 @@ public class ScopeTextFragmentActionTest {
         Mockito.when(fragmentManager.beginTransaction()).thenReturn(fragmentTransaction);
 
         // SUT setup
-        objUnderTest = new ScopeTextFragmentAction(activity, fragmentManager);
+        objUnderTest = new ScopeTextFragmentAction(fragmentManager);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class ScopeTextFragmentActionTest {
         Mockito.when(activity.getSupportFragmentManager()).thenReturn(fragmentManager);
 
         // Test
-        objUnderTest = new ScopeTextFragmentAction(null, null);
+        objUnderTest = new ScopeTextFragmentAction(null);
         objUnderTest.activityRefresh(null);
         Assert.assertNull(objUnderTest.getFragmentManager());
     }
@@ -60,7 +60,7 @@ public class ScopeTextFragmentActionTest {
         Mockito.when(activity.getSupportFragmentManager()).thenReturn(fragmentManager);
 
         // Test
-        objUnderTest = new ScopeTextFragmentAction(null, null);
+        objUnderTest = new ScopeTextFragmentAction(null);
         objUnderTest.activityRefresh(activity);
         Assert.assertEquals("FragmentManager references are not the same.", fragmentManager,
                 objUnderTest.getFragmentManager());

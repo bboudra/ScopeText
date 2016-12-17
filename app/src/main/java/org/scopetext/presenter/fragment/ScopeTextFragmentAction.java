@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import org.scopetext.view.MainActivity;
 import org.scopetext.view.ScopeTextListFragment;
 
 /**
@@ -24,15 +23,13 @@ import org.scopetext.view.ScopeTextListFragment;
 public class ScopeTextFragmentAction implements FragmentAction {
     private final static ScopeTextFragmentAction scopeTextFragmentAction =
             new ScopeTextFragmentAction();
-    private MainActivity mainActivity;
     private FragmentManager fragmentManager;
 
     /*
      * Used for unit testing this singleton class. Params are used to mock out collaborators with
      * this class.
      */
-    protected ScopeTextFragmentAction(MainActivity mainActivity, FragmentManager fragmentManager) {
-        this.mainActivity = mainActivity;
+    protected ScopeTextFragmentAction(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
     }
 
