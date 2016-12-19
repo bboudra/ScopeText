@@ -23,7 +23,6 @@ import org.scopetext.view.ScopeTextListFragment;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ScopeTextFragmentActionTest {
-    private static final String TEST_TAG = "TEST_TAG";
     private ScopeTextFragmentAction objUnderTest;
     @Mock
     private MainActivity activity;

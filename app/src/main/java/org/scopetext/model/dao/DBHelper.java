@@ -20,9 +20,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db) {
         // Initialize tables
-        DBConfigDAO.createResponseTable(db);
-        DBConfigDAO.createMessageTable(db);
-        DBConfigDAO.createScopeTextTable(db);
+        if(db != null) {
+            DBConfigDAO.createResponseTable(db);
+            DBConfigDAO.createMessageTable(db);
+            DBConfigDAO.createScopeTextTable(db);
+        }
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
