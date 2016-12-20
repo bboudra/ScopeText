@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.scopetext.view.MainActivity;
+import android.database.sqlite.SQLiteException;
 
 /**
  * Unit tests for DBHelper.java
@@ -47,7 +48,20 @@ public class DBHelperTest {
 
     @Test
     public void itShouldVerifyReadableDatabaseForValidDB() {
-        fail("Not Yet Implemented!");
+        // Mock setup
+        objUnderTest = spy(new DBHelper(mainActivity));
+        doReturn(db).when(objUnderTest).getReadableDatabase();
+
+        // Test
+        assertEquals(db, objUnderTest.getReadableDB());
+    }
+
+    @Test(expected = SQLiteException.class)
+    public void itShouldAssertExceptionForIDBError() {
+        // Mock setup
+        objUnderTest = spy(new DBHelper(mainActivity));
+        doThrow(new SQLiteException()).when(objUnderTest).getReadableDatabase();
+        objUnderTest.getReadableDB();
     }
 
     @Test
