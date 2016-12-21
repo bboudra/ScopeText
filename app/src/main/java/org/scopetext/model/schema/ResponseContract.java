@@ -7,12 +7,11 @@ import android.provider.BaseColumns;
  */
 public class ResponseContract {
     // Prevent accidental instantiation
-    private ResponseContract(){}
+    private ResponseContract() {
+    }
 
     public static abstract class ResponseSchema implements BaseColumns {
-        public static final String TABLE_NAME = "RESPONSE",
-                RESPONSE_ID = "RESPONSE_ID",
-                ACTION_APP = "ACTION_APP",
-                EXTERNAL_APP = "EXTERNAL_APP";
+        public static final String TABLE_NAME = "RESPONSE", RESPONSE_ID = "RESPONSE_ID",
+                ACTION_APP = "ACTION_APP", EXTERNAL_APP = "EXTERNAL_APP";
     }
 }

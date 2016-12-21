@@ -21,7 +21,8 @@ import org.scopetext.presenter.fragment.ScopeTextFragment;
 public class MainActivity extends AppCompatActivity {
     private Presenter presenter;
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -31,13 +32,15 @@ public class MainActivity extends AppCompatActivity {
         presenter.addFragment(ScopeTextFragment.SCOPE_TEXT_LIST);
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_bar_menu, menu);
         return true;
     }
 
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_custom_settings:
             default:

@@ -32,50 +32,37 @@ import org.scopetext.presenter.R;
 /**
  * Handles the UI when the user adds a new contact.
  */
-public class NewContactFragment extends Fragment
-    implements LoaderCallbacks<Cursor>, OnItemClickListener, OnEditorActionListener{
+public class NewContactFragment extends Fragment implements LoaderCallbacks<Cursor>,
+        OnItemClickListener, OnEditorActionListener {
 
-    @SuppressLint("InlinedApi")
-    private static final String[] PROJECTION =
-            {
-                    Phone._ID,
-                    Phone.LOOKUP_KEY,
-                    Phone.DISPLAY_NAME_PRIMARY,
-                    Phone.NUMBER
-            };
+    @SuppressLint("InlinedApi") private static final String[] PROJECTION =
+            {Phone._ID, Phone.LOOKUP_KEY, Phone.DISPLAY_NAME_PRIMARY, Phone.NUMBER};
 
     /*
  * Defines an array that contains column names to move from
  * the Cursor to the ListView.
  */
-    @SuppressLint("InlinedApi")
-    private final static String[] FROM_COLUMNS = {
-            Phone.DISPLAY_NAME_PRIMARY,
-            Phone.NUMBER
-    };
+    @SuppressLint("InlinedApi") private final static String[] FROM_COLUMNS =
+            {Phone.DISPLAY_NAME_PRIMARY, Phone.NUMBER};
     /*
      * Defines an array that contains resource ids for the layout views
      * that get the Cursor column contents. The id is pre-defined in
      * the Android framework, so it is prefaced with "android.R.id"
      */
-    private final static int[] TO_IDS = {
-            android.R.id.text1,
-            android.R.id.text2
-    };
+    private final static int[] TO_IDS = {android.R.id.text1, android.R.id.text2};
 
     // Defines the text expression
-    @SuppressLint("InlinedApi")
-    private static final String SELECTION =
-                    Phone.DISPLAY_NAME_PRIMARY + " LIKE ?" +
-                            " AND " + Phone.TYPE + " = "+ "'" + Phone.TYPE_MOBILE + "'" +
-                            " AND " + Data.MIMETYPE + " = " +
-                            "'" + Phone.CONTENT_ITEM_TYPE + "'";
+    @SuppressLint("InlinedApi") private static final String SELECTION =
+            Phone.DISPLAY_NAME_PRIMARY + " LIKE ?" +
+                    " AND " + Phone.TYPE + " = " + "'" + Phone.TYPE_MOBILE + "'" +
+                    " AND " + Data.MIMETYPE + " = " +
+                    "'" + Phone.CONTENT_ITEM_TYPE + "'";
 
     private static final String SORT_ORDER = Phone.TYPE + " ASC ";
     // Defines a variable for the search string
     private String mSearchString;
     // Defines the array to hold values that replace the ?
-    private String[] mSelectionArgs = { "" };
+    private String[] mSelectionArgs = {""};
     // Define global mutable variables
     // Define a ListView object
     ListView mContactsList;
@@ -97,6 +84,7 @@ public class NewContactFragment extends Fragment
 
     /**
      * Replaces constructor.
+     *
      * @return A new instance of fragment NewContactFragment.
      */
     // TODO: Pass in parameters for fragment communication.
@@ -122,15 +110,16 @@ public class NewContactFragment extends Fragment
         mContactsList = (ListView) getActivity().findViewById(android.R.id.list);
 
         // Get a cursor adapter
-        mCursorAdapter = new SimpleCursorAdapter(getActivity(), R.layout.new_contact_list_item,
-                null, FROM_COLUMNS, TO_IDS, 0);
+        mCursorAdapter =
+                new SimpleCursorAdapter(getActivity(), R.layout.new_contact_list_item, null,
+                        FROM_COLUMNS, TO_IDS, 0);
         mContactsList.setAdapter(mCursorAdapter);
 
         // Set on click listener to list view
         mContactsList.setOnItemClickListener(this);
 
         // Set edit text search button listener
-        EditText form = (EditText)getActivity().findViewById(R.id.search_edit_text);
+        EditText form = (EditText) getActivity().findViewById(R.id.search_edit_text);
         form.setOnEditorActionListener(this);
     }
 
@@ -161,14 +150,8 @@ public class NewContactFragment extends Fragment
          */
         mSelectionArgs[0] = "%" + mSearchString + "%";
         // Starts the query
-        return new CursorLoader(
-                getActivity(),
-                Data.CONTENT_URI,
-                PROJECTION,
-                SELECTION,
-                mSelectionArgs,
-                SORT_ORDER
-        );
+        return new CursorLoader(getActivity(), Data.CONTENT_URI, PROJECTION, SELECTION,
+                mSelectionArgs, SORT_ORDER);
     }
 
     @Override
@@ -184,7 +167,7 @@ public class NewContactFragment extends Fragment
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if(actionId == EditorInfo.IME_ACTION_SEARCH) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             Log.i(LOG_TAG, "Search Button clicked.");
             // Get EditText input from the user
             EditText form = (EditText) v;

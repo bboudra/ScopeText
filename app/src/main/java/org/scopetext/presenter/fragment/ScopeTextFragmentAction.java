@@ -47,7 +47,8 @@ public class ScopeTextFragmentAction implements FragmentAction {
     /**
      * @see FragmentAction#activityRefresh(AppCompatActivity)
      */
-    @Override public void activityRefresh(AppCompatActivity activity) {
+    @Override
+    public void activityRefresh(AppCompatActivity activity) {
         if (activity != null) {
             this.fragmentManager = activity.getSupportFragmentManager();
         }
@@ -63,7 +64,8 @@ public class ScopeTextFragmentAction implements FragmentAction {
      * @param type Used to retrieve the tag name for the new Fragment.
      * @see FragmentAction#addFragment(int, Fragment, ScopeTextFragment)
      */
-    @Override public void addFragment(int containerId, Fragment fragment, ScopeTextFragment type) {
+    @Override
+    public void addFragment(int containerId, Fragment fragment, ScopeTextFragment type) {
         if (fragment != null) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             if (fragment instanceof ScopeTextListFragment) {

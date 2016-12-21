@@ -6,8 +6,8 @@ import java.util.Map;
 
 /**
  * ScopeTextCache contains the most up to date ScopeText objects from the database. The cache is
- * updated every 5 minutes, and whenever a ScopeText is changed in the database.
- * Created by john.qualls on 11/29/2016.
+ * updated every 5 minutes, and whenever a ScopeText is changed in the database. Created by
+ * john.qualls on 11/29/2016.
  */
 public class ScopeTextCache implements Cache {
 

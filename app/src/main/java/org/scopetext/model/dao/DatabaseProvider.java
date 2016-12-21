@@ -1,19 +1,14 @@
-package org.scopetext.model;
+package org.scopetext.model.dao;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * DatabaseProvider provides access to ScopeText's SQLiteDatabase.
- * Created by john.qualls on 12/20/2016.
+ * DatabaseProvider provides access to ScopeText's SQLiteDatabase. Created by john.qualls on
+ * 12/20/2016.
  */
 
 public interface DatabaseProvider {
-    /**
-     * @see SQLiteOpenHelper#getReadableDatabase()
-     */
-    public SQLiteDatabase getReadableDB();
-
     /**
      * @see SQLiteOpenHelper#getWritableDatabase()
      */

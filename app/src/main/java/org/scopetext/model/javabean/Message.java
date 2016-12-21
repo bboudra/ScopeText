@@ -3,8 +3,7 @@ package org.scopetext.model.javabean;
 import org.scopetext.model.javabean.type.MessageType;
 
 /**
- * Java bean that contains all properties of a Message.
- * Created by john.qualls on 9/24/2016.
+ * Java bean that contains all properties of a Message. Created by john.qualls on 9/24/2016.
  */
 public class Message {
     MessageType type;
@@ -12,6 +11,7 @@ public class Message {
 
     /**
      * Message constructor
+     *
      * @param type The type of message, only text messages are allowed at the moment.
      * @param regularExpression The regular expression used to search incoming messages.
      */

@@ -23,6 +23,8 @@ public class DBHelperTest {
     MainActivity mainActivity;
     @Mock
     SQLiteDatabase db;
+    @Mock
+    SQLiteDatabase db2;
 
     @Before
     public void setup() {
@@ -40,32 +42,22 @@ public class DBHelperTest {
 
     @Test
     public void itShouldVerifyCorrectTableCreationsDuringOnCreate() {
+        // Mock setup
+        objUnderTest = spy(new DBHelper(mainActivity));
+        doReturn(db).when(objUnderTest).getWritableDatabase();
+
+        // Test
         objUnderTest.onCreate(db);
         verify(db).execSQL(DBConfigDAO.getCreateMessageTable());
         verify(db).execSQL(DBConfigDAO.getCreateResponseTable());
         verify(db).execSQL(DBConfigDAO.getCreateScoptextTable());
+        assertEquals(db, objUnderTest.getWriteableDB());
     }
 
     @Test
-    public void itShouldVerifyReadableDatabaseForValidDB() {
+    public void itShouldAssertDBForValidInstantiation() {
         // Mock setup
         objUnderTest = spy(new DBHelper(mainActivity));
-        doReturn(db).when(objUnderTest).getReadableDatabase();
-
-        // Test
-        assertEquals(db, objUnderTest.getReadableDB());
-    }
-
-    @Test(expected = SQLiteException.class)
-    public void itShouldAssertExceptionForIDBError() {
-        // Mock setup
-        objUnderTest = spy(new DBHelper(mainActivity));
-        doThrow(new SQLiteException()).when(objUnderTest).getReadableDatabase();
-        objUnderTest.getReadableDB();
-    }
-
-    @Test
-    public void itShouldVerifyWriteableDatabaseForValidDB() {
-        fail("Not Yet Implemented!");
+        doReturn(db).when(objUnderTest).getWritableDatabase();
     }
 }

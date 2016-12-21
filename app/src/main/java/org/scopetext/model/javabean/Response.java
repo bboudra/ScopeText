@@ -4,8 +4,7 @@ import org.scopetext.model.javabean.type.ActionApp;
 import org.scopetext.model.javabean.type.ExternalApp;
 
 /**
- * Java bean that contains all properties of a Response.
- * Created by john.qualls on 9/24/2016.
+ * Java bean that contains all properties of a Response. Created by john.qualls on 9/24/2016.
  */
 public class Response {
     ActionApp action;
@@ -13,6 +12,7 @@ public class Response {
 
     /**
      * Response constructor.
+     *
      * @param action Which action to perform on the external application.
      * @param externalApp Which external app will be affected.
      */

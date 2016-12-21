@@ -7,8 +7,7 @@ import org.scopetext.model.schema.ResponseContract.ResponseSchema;
 import org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
 
 /**
- * Executes database configuration SQL.
- * Created by john.qualls on 9/30/2016.
+ * Executes database configuration SQL. Created by john.qualls on 9/30/2016.
  */
 public class DBConfigDAO {
     public static final String FOREIGN_KEY_ON = "PRAGMA FOREIGN_KEY = ON";

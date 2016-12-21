@@ -15,8 +15,8 @@ import org.scopetext.presenter.R;
  * Handles the UI for displaying a list of contacts.
  */
 public class ScopeTextListFragment extends Fragment {
-        //implements Button.OnClickListener,
-        //OnEditorActionListener {
+    //implements Button.OnClickListener,
+    //OnEditorActionListener {
     /*private SQLiteDatabase dbWrite,
                            dbRead;
     private SimpleCursorAdapter adapter;
