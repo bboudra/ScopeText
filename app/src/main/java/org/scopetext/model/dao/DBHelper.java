@@ -20,11 +20,9 @@ public class DBHelper extends SQLiteOpenHelper implements DatabaseProvider {
     private static final String DATABASE_NAME = "ScopeText.db";
     private static int DATABASE_VERSION = 1;
     public final String LOG_TAG = "DBHelper.java";
-    private SQLiteDatabase writeableDB;
 
     public DBHelper(Context context) throws SQLiteException {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        writeableDB = getWritableDatabase();
     }
 
     public void onCreate(SQLiteDatabase db) {
@@ -48,12 +46,8 @@ public class DBHelper extends SQLiteOpenHelper implements DatabaseProvider {
     }
 
     @Override
-    public SQLiteDatabase getWriteableDB() {
-        return null;
-    }
-
-    SQLiteDatabase getWriteableDBRef() {
-        return writeableDB;
+    public SQLiteDatabase getWriteableDB() throws SQLiteException {
+        return getWritableDatabase();
     }
 }
 

@@ -4,6 +4,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,22 +44,30 @@ public class DBHelperTest {
 
     @Test
     public void itShouldVerifyCorrectTableCreationsDuringOnCreate() {
+        objUnderTest.onCreate(db);
+        verify(db).execSQL(DBConfigDAO.getCreateMessageTable());
+        verify(db).execSQL(DBConfigDAO.getCreateResponseTable());
+        verify(db).execSQL(DBConfigDAO.getCreateScoptextTable());
+    }
+
+    @Test
+    public void itShouldAssertValidWriteableDB() {
         // Mock setup
         objUnderTest = spy(new DBHelper(mainActivity));
         doReturn(db).when(objUnderTest).getWritableDatabase();
 
         // Test
-        objUnderTest.onCreate(db);
-        verify(db).execSQL(DBConfigDAO.getCreateMessageTable());
-        verify(db).execSQL(DBConfigDAO.getCreateResponseTable());
-        verify(db).execSQL(DBConfigDAO.getCreateScoptextTable());
         assertEquals(db, objUnderTest.getWriteableDB());
     }
 
-    @Test
-    public void itShouldAssertDBForValidInstantiation() {
+    @Test(expected = SQLiteException.class)
+    public void itShouldAssertExceptionForInvalidWriteableDB() {
         // Mock setup
         objUnderTest = spy(new DBHelper(mainActivity));
-        doReturn(db).when(objUnderTest).getWritableDatabase();
+        doThrow(new SQLiteException()).when(objUnderTest).getWritableDatabase();
+
+        // Test
+        assertEquals(db, objUnderTest.getWriteableDB());
+        fail("Expected SQLiteException, but no Exception was thrown.");
     }
 }
