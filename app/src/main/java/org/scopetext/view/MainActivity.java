@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         presenter = ScopeTextPresenter.getInstance();
         presenter.activityRefresh(this, new DBHelper(this));
         presenter.addFragment(ScopeTextFragment.SCOPE_TEXT_LIST);
+
     }
 
     @Override

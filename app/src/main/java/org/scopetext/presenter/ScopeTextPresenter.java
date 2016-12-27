@@ -118,7 +118,7 @@ public class ScopeTextPresenter implements Presenter {
      */
     public void getAllScopeTexts() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        scopeTexts = ScopeTextDAO.getAllScopeTexts(db, scopeTexts);
+        //scopeTexts = ScopeTextDAO.getAllScopeTexts(db, scopeTexts);
     }
 
     void setupActionBar(AppCompatActivity activity) {
