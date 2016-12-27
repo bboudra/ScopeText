@@ -2,26 +2,32 @@ package org.scopetext.model.dao;
 
 import android.os.AsyncTask;
 
-import org.scopetext.view.MainActivity;
-
 /**
- * SQLTask executes any SQL statement for this application.
+ * SQLTask executes any SQL statement in the application.
  * <PRE>
+ * NOTES:
  * 1. Not meant to be subclassed.
  * 2. Thread safe.
  * <PRE/>
  * Created by john.qualls on 9/20/2016.
  */
 public class SQLTask extends AsyncTask<Object, Integer, Object> {
+    public enum Task {
+        GET_ALL_SCOPE_TEXTS;
+    }
 
     /**
      * Executes any SQL statement asynchronously.
      * @param params The parameters must be of the following type, and order:
-     * <PRE>
-     * 1. DBHelper - Needed to retrieve the writeable database reference. This is accessed in a
-     * thread safe manner to avoid race conditions.
-     * 2. TODO - Define Enum for specific SQL queries
-     * <PRE/>
+     *<ol>
+     *     <li>
+     *         DBHelper - Needed to retrieve the writeable database reference. This is accessed in a
+     *         thread safe manner to avoid race conditions.
+     *     </li>
+     *     <li>
+     *         TODO - Define Enum for specific SQL queries
+     *     </li>
+     *</ol>
      * @return
      */
     @Override
