@@ -10,8 +10,9 @@ public class ContactContract {
     private ContactContract() {
     }
 
-    public static abstract class ContractSchema implements BaseColumns {
-        public static final String TABLE_NAME = "CONTRACT", ID = "CONTACT_ID", DISPLAY_NAME =
-                "DISPLAY_NAME";
+    public static abstract class ContactSchema implements BaseColumns {
+        public static final String TABLE_NAME = "CONTACT";
+        public static final String ID = "CONTACT_ID";
+        public static final String NAME = "NAME";
     }
 }

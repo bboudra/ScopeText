@@ -1,7 +1,7 @@
 package org.scopetext.model.dao;
 
 import android.database.sqlite.SQLiteDatabase;
-
+import org.scopetext.model.schema.ContactContract.ContactSchema;
 import org.scopetext.model.schema.MessageContract.MessageSchema;
 import org.scopetext.model.schema.ResponseContract.ResponseSchema;
 import org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
@@ -26,7 +26,7 @@ public class DBConfigDAO {
                     " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n\t" + MessageSchema.TYPE +
                     " VARCHAR(4) NOT NULL CHECK(" + MessageSchema.TYPE + " IS 'TEXT'),\n\t" +
                     MessageSchema.REG_EXP + " VARCHAR(50) NOT NULL\n\t" + ");";
-    private static final String CREATE_SCOPTEXT_TABLE =
+    private static final String CREATE_SCOPETEXT_TABLE =
             "CREATE TABLE " + ScopeTextSchema.TABLE_NAME + " (\n\t" +
                     ScopeTextSchema.SCOPETEXT_ID +
                     " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n\t" +
@@ -39,7 +39,11 @@ public class DBConfigDAO {
                     ") REFERENCES MESSAGE(" + MessageSchema.MESSAGE_ID + "),\n\t" +
                     "FOREIGN KEY(" + ResponseSchema.RESPONSE_ID + ") REFERENCES RESPONSE(" +
                     ResponseSchema.RESPONSE_ID + ")\n\t" + ");";
-
+    private static final String CREATE_CONTACT_TABLE =
+            "CREATE TABLE " + ContactSchema.TABLE_NAME + " (\n\t" +
+                    ContactSchema.ID +
+                    " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n\t" +
+                    ScopeTextSchema.NAME + " VARCHAR(50) NOT NULL" + ");";
     /**
      * Creates the Response Table.
      *
@@ -64,7 +68,16 @@ public class DBConfigDAO {
      * @param db executes SQL.
      */
     public static void createScopeTextTable(SQLiteDatabase db) {
-        db.execSQL(CREATE_SCOPTEXT_TABLE);
+        db.execSQL(CREATE_SCOPETEXT_TABLE);
+    }
+
+    /**
+     * Creates the Contact Table.
+     *
+     * @param db executes SQL.
+     */
+    public static void createContactTable(SQLiteDatabase db) {
+        db.execSQL(CREATE_CONTACT_TABLE);
     }
 
     /*
@@ -79,6 +92,6 @@ public class DBConfigDAO {
     }
 
     public static String getCreateScoptextTable() {
-        return CREATE_SCOPTEXT_TABLE;
+        return CREATE_SCOPETEXT_TABLE;
     }
 }

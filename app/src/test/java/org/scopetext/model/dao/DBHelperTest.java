@@ -70,4 +70,17 @@ public class DBHelperTest {
         assertEquals(db, objUnderTest.getWriteableDB());
         fail("Expected SQLiteException, but no Exception was thrown.");
     }
+
+    @Test
+    public void itShouldNotExecuteFKSetupSQLWhenDBIsReadOnly() {
+        when(db.isReadOnly()).thenReturn(true);
+        objUnderTest.onOpenHelper(db);
+        verify(db, times(0)).execSQL(isA(String.class));
+    }
+
+    @Test
+    public void itShouldExecuteFKSetupSQLWhenDBIsNotReadOnly() {
+        objUnderTest.onOpenHelper(db);
+        verify(db).execSQL(isA(String.class));
+    }
 }

@@ -34,6 +34,21 @@ public class DBHelper extends SQLiteOpenHelper implements DatabaseProvider {
         }
     }
 
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        onOpenHelper(db);
+    }
+
+    /*
+     * Needed for unit testing to avoid interacting with Android API super.onOpen() call.
+     */
+    void onOpenHelper(SQLiteDatabase db) {
+        if (!db.isReadOnly()) {
+            db.execSQL(DBConfigDAO.FOREIGN_KEY_ON);
+        }
+    }
+
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
