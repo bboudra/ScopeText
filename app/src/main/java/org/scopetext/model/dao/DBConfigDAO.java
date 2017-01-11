@@ -1,6 +1,9 @@
 package org.scopetext.model.dao;
 
 import android.database.sqlite.SQLiteDatabase;
+
+import org.scopetext.model.javabean.ScopeText;
+import org.scopetext.model.schema.ContactAssocContract.ContactAssocSchema;
 import org.scopetext.model.schema.ContactContract.ContactSchema;
 import org.scopetext.model.schema.MessageContract.MessageSchema;
 import org.scopetext.model.schema.ResponseContract.ResponseSchema;
@@ -30,20 +33,32 @@ public class DBConfigDAO {
             "CREATE TABLE " + ScopeTextSchema.TABLE_NAME + " (\n\t" +
                     ScopeTextSchema.SCOPETEXT_ID +
                     " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n\t" +
-                    MessageSchema.MESSAGE_ID + " INTEGER UNIQUE NOT NULL,\n\t" +
-                    ResponseSchema.RESPONSE_ID + " INTEGER UNIQUE NOT NULL,\n\t" +
+                    MessageSchema.MESSAGE_ID + " INTEGER UNIQUE,\n\t" +
+                    ResponseSchema.RESPONSE_ID + " INTEGER UNIQUE,\n\t" +
                     ScopeTextSchema.NAME + " VARCHAR(50) UNIQUE NOT NULL,\n\t" +
                     ScopeTextSchema.IN_USE + "CHARACTER(1) NOT NULL CHECK(" +
                     ScopeTextSchema.IN_USE + " IS 'Y' OR " + ScopeTextSchema.IN_USE +
-                    " IS 'N'),\n\t" + "FOREIGN KEY(" + MessageSchema.MESSAGE_ID +
-                    ") REFERENCES MESSAGE(" + MessageSchema.MESSAGE_ID + "),\n\t" +
-                    "FOREIGN KEY(" + ResponseSchema.RESPONSE_ID + ") REFERENCES RESPONSE(" +
-                    ResponseSchema.RESPONSE_ID + ")\n\t" + ");";
+                    " IS 'N'),\n\t" + "FOREIGN KEY(" + ScopeTextSchema.MESSAGE_ID +
+                    ") REFERENCES " + MessageSchema.TABLE_NAME + "(" + ScopeTextSchema.MESSAGE_ID +
+                    ") ON DELETE CASCADE,\n\t" + "FOREIGN KEY(" + ScopeTextSchema.RESPONSE_ID +
+                    ") REFERENCES " + ResponseSchema.TABLE_NAME + " (" +
+                    ResponseSchema.RESPONSE_ID + ") ON DELETE CASCADE);";
     private static final String CREATE_CONTACT_TABLE =
             "CREATE TABLE " + ContactSchema.TABLE_NAME + " (\n\t" +
                     ContactSchema.ID +
                     " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n\t" +
-                    ScopeTextSchema.NAME + " VARCHAR(50) NOT NULL" + ");";
+                    ContactSchema.NAME + " VARCHAR(50) NOT NULL" + ");";
+    private static final String CREATE_CONTACT_ASSOC_TABLE =
+            "CREATE TABLE " + ContactAssocSchema.TABLE_NAME + " (\n\t" +
+                    ContactAssocSchema.CONTACT_ASSOC_ID +
+                    " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n\t" +
+                    ContactAssocSchema.SCOPETEXT_ID + " INTEGER," + "\n\t" +
+                    ContactAssocSchema.CONTACT_ID + " INTEGER,\n\t" +
+                    "FOREIGN KEY(" + ContactAssocSchema.SCOPETEXT_ID + ") REFERENCES " +
+                    ScopeTextSchema.TABLE_NAME + "(" + ScopeTextSchema.SCOPETEXT_ID +
+                    ") ON DELETE CASCADE,\n\t" + "FOREIGN KEY(" + ContactAssocSchema.CONTACT_ID +
+                    ")" + " REFERENCES " + ContactSchema.TABLE_NAME + "(" + ContactSchema.ID +
+                    ") " + "ON DELETE CASCADE);";
     /**
      * Creates the Response Table.
      *
@@ -78,6 +93,15 @@ public class DBConfigDAO {
      */
     public static void createContactTable(SQLiteDatabase db) {
         db.execSQL(CREATE_CONTACT_TABLE);
+    }
+
+    /**
+     * Creates the ContactAssoc Table.
+     *
+     * @param db executes SQL.
+     */
+    public static void createContactAssocTable(SQLiteDatabase db) {
+        db.execSQL(CREATE_CONTACT_ASSOC_TABLE);
     }
 
     /*
