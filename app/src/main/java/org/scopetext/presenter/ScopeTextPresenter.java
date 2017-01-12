@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import org.scopetext.model.dao.DBHelper;
+import org.scopetext.model.dao.SQL;
 import org.scopetext.model.dao.ScopeTextDAO;
 import org.scopetext.model.javabean.ScopeText;
 import org.scopetext.presenter.fragment.FragmentAction;
@@ -98,6 +99,7 @@ public class ScopeTextPresenter implements Presenter {
     /**
      * @see Presenter#addFragment(ScopeTextFragment)
      */
+    @Override
     public void addFragment(ScopeTextFragment type) {
         if (type != null) {
             Fragment fragment = null;
@@ -111,6 +113,11 @@ public class ScopeTextPresenter implements Presenter {
             }
             fragmentAction.addFragment(R.id.scopetext_fragment, fragment, type);
         }
+    }
+
+    @Override
+    public <T> T executeSQL(SQL sql) {
+        return null;
     }
 
     /**

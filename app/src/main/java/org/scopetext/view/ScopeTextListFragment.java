@@ -45,6 +45,7 @@ public class ScopeTextListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         /*activity = (MainActivity) getActivity();
         activity.getAllScopeTexts();
         final String[] DB_COLUMNS = {

@@ -3,6 +3,7 @@ package org.scopetext.presenter;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 
+import org.scopetext.model.dao.SQL;
 import org.scopetext.presenter.fragment.FragmentAction;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
 
@@ -31,4 +32,12 @@ public interface Presenter {
      * @see ScopeTextFragment
      */
     public void addFragment(ScopeTextFragment type);
+
+    /**
+     * Executes a specific SQL statement in the background.
+     * @param sql The SQL statement.
+     * @return The resulting object(s).
+     */
+    public <T> T executeSQL(SQL sql);
+
 }

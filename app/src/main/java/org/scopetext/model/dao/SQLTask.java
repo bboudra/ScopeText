@@ -21,8 +21,8 @@ public class SQLTask extends AsyncTask<Object, Integer, Object> {
      * @param params The parameters must be of the following type, and order:
      *<ol>
      *     <li>
-     *         DBHelper - Needed to retrieve the writeable database reference. This is accessed in a
-     *         thread safe manner to avoid race conditions.
+     *         DBHelper - Needed to retrieve the writeable database reference in a thread safe
+     *         manner.
      *     </li>
      *     <li>
      *         TODO - Define Enum for specific SQL queries
