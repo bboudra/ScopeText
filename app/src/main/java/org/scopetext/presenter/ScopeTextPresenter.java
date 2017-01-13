@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.dao.SQL;
+import org.scopetext.model.dao.SQLTask;
 import org.scopetext.model.dao.ScopeTextDAO;
 import org.scopetext.model.javabean.ScopeText;
 import org.scopetext.presenter.fragment.FragmentAction;
@@ -17,6 +18,7 @@ import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Presenter Implementation.
@@ -105,7 +107,7 @@ public class ScopeTextPresenter implements Presenter {
             Fragment fragment = null;
             switch (type) {
                 case SCOPE_TEXT_LIST:
-                    fragment = ScopeTextListFragment.newInstance();
+                    fragment = ScopeTextListFragment.newInstance(presenter);
                     break;
                 case NEW_CONTACT:
                     fragment = NewContactFragment.newInstance();
@@ -116,7 +118,7 @@ public class ScopeTextPresenter implements Presenter {
     }
 
     @Override
-    public <T> T executeSQL(SQL sql) {
+    public List<Object> executeSQL(SQL sql) {
         return null;
     }
 

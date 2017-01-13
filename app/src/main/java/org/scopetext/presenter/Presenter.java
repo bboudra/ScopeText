@@ -7,6 +7,8 @@ import org.scopetext.model.dao.SQL;
 import org.scopetext.presenter.fragment.FragmentAction;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
 
+import java.util.List;
+
 /**
  * The presenter component in the <a href=http://antonioleiva.com/mvp-android/ "MVP">MVP</a>
  * architecture. Middle man between the view and model components. Responsible for routing each UI
@@ -34,10 +36,10 @@ public interface Presenter {
     public void addFragment(ScopeTextFragment type);
 
     /**
-     * Executes a specific SQL statement in the background.
+     * Executes a specific SQL statement asynchronously.
      * @param sql The SQL statement.
      * @return The resulting object(s).
      */
-    public <T> T executeSQL(SQL sql);
+    public List<Object> executeSQL(SQL sql);
 
 }

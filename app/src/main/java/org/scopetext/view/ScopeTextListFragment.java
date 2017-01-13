@@ -8,13 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.scopetext.model.dao.SQL;
+import org.scopetext.presenter.Presenter;
 import org.scopetext.presenter.R;
+import org.scopetext.presenter.ScopeTextPresenter;
 
 
 /**
  * Handles the UI for displaying a list of contacts.
  */
 public class ScopeTextListFragment extends Fragment {
+    private Presenter presenter;
     //implements Button.OnClickListener,
     //OnEditorActionListener {
     /*private SQLiteDatabase dbWrite,
@@ -23,11 +27,12 @@ public class ScopeTextListFragment extends Fragment {
     private Cursor cursor;
     private MainActivity activity;*/
 
-    public static ScopeTextListFragment newInstance() {
+    public static ScopeTextListFragment newInstance(Presenter presenter) {
         /*ScopeTextListFragment stf = new ScopeTextListFragment();
         cf.dbWrite = dbHelper.getReadableDatabase();
         cf.dbRead = dbHelper.getReadableDatabase();*/
         ScopeTextListFragment fragment = new ScopeTextListFragment();
+        fragment.presenter = presenter;
         return fragment;
     }
 
@@ -45,7 +50,7 @@ public class ScopeTextListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        presenter.executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS);
         /*activity = (MainActivity) getActivity();
         activity.getAllScopeTexts();
         final String[] DB_COLUMNS = {
