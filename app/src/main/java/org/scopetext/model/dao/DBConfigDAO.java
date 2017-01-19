@@ -2,7 +2,6 @@ package org.scopetext.model.dao;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import org.scopetext.model.javabean.ScopeText;
 import org.scopetext.model.schema.ContactAssocContract.ContactAssocSchema;
 import org.scopetext.model.schema.ContactContract.ContactSchema;
 import org.scopetext.model.schema.MessageContract.MessageSchema;
@@ -45,7 +44,7 @@ public class DBConfigDAO {
                     ResponseSchema.RESPONSE_ID + ") ON DELETE CASCADE);";
     private static final String CREATE_CONTACT_TABLE =
             "CREATE TABLE " + ContactSchema.TABLE_NAME + " (\n\t" +
-                    ContactSchema.ID +
+                    ContactSchema.CONTACT_ID +
                     " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n\t" +
                     ContactSchema.NAME + " VARCHAR(50) NOT NULL" + ");";
     private static final String CREATE_CONTACT_ASSOC_TABLE =
@@ -57,7 +56,7 @@ public class DBConfigDAO {
                     "FOREIGN KEY(" + ContactAssocSchema.SCOPETEXT_ID + ") REFERENCES " +
                     ScopeTextSchema.TABLE_NAME + "(" + ScopeTextSchema.SCOPETEXT_ID +
                     ") ON DELETE CASCADE,\n\t" + "FOREIGN KEY(" + ContactAssocSchema.CONTACT_ID +
-                    ")" + " REFERENCES " + ContactSchema.TABLE_NAME + "(" + ContactSchema.ID +
+                    ")" + " REFERENCES " + ContactSchema.TABLE_NAME + "(" + ContactSchema.CONTACT_ID +
                     ") " + "ON DELETE CASCADE);";
     /**
      * Creates the Response Table.

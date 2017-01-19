@@ -4,7 +4,10 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import org.scopetext.model.javabean.Contact;
 import org.scopetext.model.javabean.ScopeText;
+import org.scopetext.model.schema.ContactAssocContract.ContactAssocSchema;
+import org.scopetext.model.schema.ContactContract.ContactSchema;
 import org.scopetext.model.schema.MessageContract.MessageSchema;
 import org.scopetext.model.schema.ResponseContract.ResponseSchema;
 import org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
@@ -21,30 +24,27 @@ public class ScopeTextDAO {
      * Reads all existing ScopeText objects from the database.
      *
      * @param db Used to retrieve data from the database.
-     * @param cachedList The current list of ScopeText objects.
      * @return A list of the resulting ScopeTexts, or null if nothing was retrieved.
      */
-    public static List<ScopeText> getAllScopeTexts(SQLiteDatabase db,
-                                                   ArrayList<ScopeText> cachedList) {
-        List<ScopeText> list = new ArrayList<>(0);
+    public static List<Object> getAllScopeTextsAndContacts(SQLiteDatabase db) {
+        List<Object> list = new ArrayList<>(0);
         final String All_SCOPETEXT_SQL =
-                "SELECT ST." + ScopeTextSchema.NAME + ", M." + MessageSchema.TYPE + ", M." +
-                        MessageSchema.REG_EXP + ", R." + ResponseSchema.ACTION_APP + ", R." +
-                        ResponseSchema.EXTERNAL_APP + ", ST." + ScopeTextSchema.IN_USE + "\n" +
-                        "FROM " + ScopeTextSchema.TABLE_NAME + " ST INNER JOIN " +
-                        MessageSchema.TABLE_NAME + " M ON ST." + ScopeTextSchema.MESSAGE_ID +
-                        " = M." + MessageSchema.MESSAGE_ID + "\n" + "INNER JOIN " +
-                        ResponseSchema.TABLE_NAME + " R ON ST." + ScopeTextSchema.RESPONSE_ID +
-                        " = R." + ResponseSchema.RESPONSE_ID;
+                "SELECT ST." + ScopeTextSchema.NAME + ", C." + ContactSchema.NAME + ", ST." +
+                        ScopeTextSchema.IN_USE +
+                        "FROM " + ScopeTextSchema.TABLE_NAME + "ST, " + ContactSchema.TABLE_NAME
+                        + "C\n" + "LEFT JOIN " + ContactAssocSchema.TABLE_NAME
+                        + "CA ON ST." + ScopeTextSchema.SCOPETEXT_ID + " = CA." +
+                        ContactAssocSchema.SCOPETEXT_ID
+                        + "WHERE C." + ContactSchema.CONTACT_ID + " = CA." +
+                        ContactAssocSchema.CONTACT_ID + ";";
         Cursor cursor = db.rawQuery(All_SCOPETEXT_SQL, null);
         if (cursor != null) {
-            list = buildScopeTextList(cursor, cachedList);
+            //list = buildScopeTextList(cursor, cachedList);
         }
         return list;
     }
 
-    private static List<ScopeText> buildScopeTextList(Cursor cursor,
-                                                             List<ScopeText> cachedList) {
+    private static List<ScopeText> buildScopeTextList(Cursor cursor, List<ScopeText> cachedList) {
         List<ScopeText> list = new ArrayList<>();
         if (cachedList == null) {
             try {

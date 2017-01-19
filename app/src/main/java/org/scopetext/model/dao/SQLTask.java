@@ -1,5 +1,6 @@
 package org.scopetext.model.dao;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
 import java.util.List;
@@ -36,10 +37,34 @@ public class SQLTask extends AsyncTask<Object, Integer, Object> {
      */
     @Override
     protected List<Object> doInBackground(Object... params) throws IllegalArgumentException {
-        if(params.length != 2) {
-            throw new IllegalArgumentException("Incorrect number of parameters.");
+        // Validate arguments
+        if(params.length == 2) {
+            List<Object> results = null;
+            Object param1 = params[0];
+            Object param2 = params[1];
+            if(param1 != null && param2 != null && param1 instanceof DBHelper
+                    && param2 instanceof SQL) {
+                // Delegate SQL to execute
+                DBHelper dbHelper = (DBHelper) param1;
+                SQL sql = (SQL) param2;
+                SQLiteDatabase db = null;
+                switch (sql) {
+                    case SELECT_ALL_SCOPETEXTS_CONTACTS:
+                        db = dbHelper.getReadableDatabase();
+                        results = getAllScopeTextsAndContacts(db);
+                        break;
+                }
+                return results;
+            }
         }
+        throw new IllegalArgumentException();
+    }
 
-        return null;
+    /*
+     * The following methods are wrappers of the DAO static methods to ease
+     * unit testing.
+     */
+    List<Object> getAllScopeTextsAndContacts(SQLiteDatabase db) {
+        return ScopeTextDAO.getAllScopeTextsAndContacts(db);
     }
 }

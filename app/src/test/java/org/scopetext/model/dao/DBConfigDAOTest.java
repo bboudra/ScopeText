@@ -1,6 +1,5 @@
 package org.scopetext.model.dao;
 
-import static org.junit.Assert.*;
 import android.database.sqlite.SQLiteDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -79,7 +78,7 @@ public class DBConfigDAOTest {
     public void itShouldVerifyContactCreateTableSQL(){
         // Setup
         String expectedSQL = "CREATE TABLE " + ContactSchema.TABLE_NAME + " (\n\t" +
-                ContactSchema.ID +
+                ContactSchema.CONTACT_ID +
                 " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n\t" +
                 ContactSchema.NAME + " VARCHAR(50) NOT NULL" + ");";
 
@@ -99,7 +98,7 @@ public class DBConfigDAOTest {
                 "FOREIGN KEY(" + ContactAssocSchema.SCOPETEXT_ID + ") REFERENCES " +
                 ScopeTextSchema.TABLE_NAME + "(" + ScopeTextSchema.SCOPETEXT_ID +
                 ") ON DELETE CASCADE,\n\t" + "FOREIGN KEY(" + ContactAssocSchema.CONTACT_ID +
-                ")" + " REFERENCES " + ContactSchema.TABLE_NAME + "(" + ContactSchema.ID +
+                ")" + " REFERENCES " + ContactSchema.TABLE_NAME + "(" + ContactSchema.CONTACT_ID +
                 ") " + "ON DELETE CASCADE);";
 
         // Test
