@@ -1,6 +1,7 @@
 package org.scopetext.model.dao;
 
 
+import static org.mockito.Mockito.*;
 import android.database.sqlite.SQLiteDatabase;
 
 import org.junit.Test;
@@ -9,8 +10,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.scopetext.model.schema.ContactAssocContract.ContactAssocSchema;
 import org.scopetext.model.schema.ContactContract.ContactSchema;
-import org.scopetext.model.schema.MessageContract.MessageSchema;
-import org.scopetext.model.schema.ResponseContract.ResponseSchema;
 import org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
 
 /**
@@ -18,21 +17,22 @@ import org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ScopeTextDAOTest {
-
     @Mock
-    SQLiteDatabase db;
+    private SQLiteDatabase db;
 
     @Test
     public void itShouldVerifySQL() {
         String All_SCOPETEXT_SQL =
                 "SELECT ST." + ScopeTextSchema.NAME + ", C." + ContactSchema.NAME + ", ST." +
                         ScopeTextSchema.IN_USE +
-                        "FROM " + ScopeTextSchema.TABLE_NAME + "ST, " + ContactSchema.TABLE_NAME
-                        + "C\n" + "LEFT JOIN " + ContactAssocSchema.TABLE_NAME
-                        + "CA ON ST." + ScopeTextSchema.SCOPETEXT_ID + " = CA." +
-                        ContactAssocSchema.SCOPETEXT_ID
-                        + "WHERE C." + ContactSchema.CONTACT_ID + " = CA." +
-                        ContactAssocSchema.CONTACT_ID + ";";
-
+                        "\nFROM " + ScopeTextSchema.TABLE_NAME + " ST" +
+                        "\nLEFT JOIN " + ContactAssocSchema.TABLE_NAME +
+                        " CA ON ST." + ScopeTextSchema.SCOPETEXT_ID + " = CA." +
+                        ContactAssocSchema.SCOPETEXT_ID +
+                        "\nLEFT JOIN " + ContactSchema.TABLE_NAME +
+                        " C ON C." + ContactSchema.CONTACT_ID + " = CA." +
+                        ContactAssocSchema.CONTACT_ID;
+        ScopeTextDAO.getAllScopeTextsAndContacts(db);
+        verify(db).rawQuery(All_SCOPETEXT_SQL, null);
     }
 }

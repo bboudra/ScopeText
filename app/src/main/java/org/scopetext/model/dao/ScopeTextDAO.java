@@ -27,26 +27,26 @@ public class ScopeTextDAO {
      * @return A list of the resulting ScopeTexts, or null if nothing was retrieved.
      */
     public static List<Object> getAllScopeTextsAndContacts(SQLiteDatabase db) {
-        List<Object> list = new ArrayList<>(0);
+        List<Object> list = new ArrayList<>();
         final String All_SCOPETEXT_SQL =
                 "SELECT ST." + ScopeTextSchema.NAME + ", C." + ContactSchema.NAME + ", ST." +
                         ScopeTextSchema.IN_USE +
-                        "FROM " + ScopeTextSchema.TABLE_NAME + "ST, " + ContactSchema.TABLE_NAME
-                        + "C\n" + "LEFT JOIN " + ContactAssocSchema.TABLE_NAME
-                        + "CA ON ST." + ScopeTextSchema.SCOPETEXT_ID + " = CA." +
-                        ContactAssocSchema.SCOPETEXT_ID
-                        + "WHERE C." + ContactSchema.CONTACT_ID + " = CA." +
-                        ContactAssocSchema.CONTACT_ID + ";";
+                        "\nFROM " + ScopeTextSchema.TABLE_NAME + " ST" +
+                        "\nLEFT JOIN " + ContactAssocSchema.TABLE_NAME +
+                        " CA ON ST." + ScopeTextSchema.SCOPETEXT_ID + " = CA." +
+                        ContactAssocSchema.SCOPETEXT_ID +
+                        "\nLEFT JOIN " + ContactSchema.TABLE_NAME +
+                        " C ON C." + ContactSchema.CONTACT_ID + " = CA." +
+                        ContactAssocSchema.CONTACT_ID;
         Cursor cursor = db.rawQuery(All_SCOPETEXT_SQL, null);
         if (cursor != null) {
-            //list = buildScopeTextList(cursor, cachedList);
+            list = buildScopeTextList(cursor);
         }
         return list;
     }
 
-    private static List<ScopeText> buildScopeTextList(Cursor cursor, List<ScopeText> cachedList) {
-        List<ScopeText> list = new ArrayList<>();
-        if (cachedList == null) {
+    private static List<Object> buildScopeTextList(Cursor cursor) {
+        List<Object> list = new ArrayList<>();
             try {
                 String scopeTextName = "",
                         messageType = "",
@@ -54,7 +54,6 @@ public class ScopeTextDAO {
                         actionApp = "",
                         externalApp = "",
                         inUse = "";
-
                 while (cursor.moveToNext()) {
                     scopeTextName = cursor.getString(0);
                     messageType = cursor.getString(1);
@@ -66,7 +65,6 @@ public class ScopeTextDAO {
             } catch (SQLException e) {
 
             }
-        }
         return list;
     }
 }
