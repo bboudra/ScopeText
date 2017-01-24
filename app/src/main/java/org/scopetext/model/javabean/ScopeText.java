@@ -17,6 +17,8 @@ public class ScopeText extends BaseObservable {
     private boolean inUse;
     private List<Contact> contacts;
 
+    public ScopeText(){}
+
     /**
      * ScopeText constructor.
      *
