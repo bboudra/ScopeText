@@ -2,6 +2,7 @@ package org.scopetext.presenter;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -37,7 +38,7 @@ public class ScopeTextPresenter implements Presenter {
     private final static Presenter presenter = new ScopeTextPresenter();
     private DBHelper dbHelper;
     private FragmentAction fragmentAction;
-    private ArrayList<ScopeText> scopeTexts;
+    private List<ScopeText> scopeTexts;
 
     /*
      * Used for unit testing this singleton class. Params are used to mock out collaborators with
@@ -118,16 +119,21 @@ public class ScopeTextPresenter implements Presenter {
     }
 
     @Override
-    public List<Object> executeSQL(SQL sql) {
-        return null;
+    public void executeSQL(SQL sql) {
+        switch (sql) {
+            case SELECT_ALL_SCOPETEXTS_CONTACTS:
+                new SQLTask(presenter).execute(dbHelper, sql);
+                break;
+        }
     }
 
-    /**
-     * Reads all of the ScopeText objects from the database.
-     */
-    public void getAllScopeTexts() {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        //scopeTexts = ScopeTextDAO.getAllScopeTexts(db, scopeTexts);
+    @Override
+    public void retrieveSQLTaskResults(List<Object> results) {
+        if(results != null && !results.isEmpty()) {
+            if(results.get(0) instanceof ScopeText) {
+                // TODO Add ScopeTexts and update existing ones
+            }
+        }
     }
 
     void setupActionBar(AppCompatActivity activity) {
@@ -144,11 +150,11 @@ public class ScopeTextPresenter implements Presenter {
         return this.dbHelper;
     }
 
-    protected ArrayList<ScopeText> getScopeTexts() {
+    List<ScopeText> getScopeTexts() {
         return scopeTexts;
     }
 
-    protected void setScopeTexts(ArrayList<ScopeText> scopeTexts) {
+    void setScopeTexts(ArrayList<ScopeText> scopeTexts) {
         this.scopeTexts = scopeTexts;
     }
 }

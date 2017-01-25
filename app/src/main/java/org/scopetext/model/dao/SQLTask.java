@@ -3,6 +3,8 @@ package org.scopetext.model.dao;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
+import org.scopetext.presenter.Presenter;
+
 import java.util.List;
 
 /**
@@ -16,8 +18,13 @@ import java.util.List;
  */
 public class SQLTask extends AsyncTask<Object, Integer, Object> {
     private static final int ARG_SIZE = 2;
+    private Presenter presenter;
     public enum Task {
         GET_ALL_SCOPE_TEXTS;
+    }
+
+    public SQLTask(Presenter presenter) {
+        this.presenter = presenter;
     }
 
     /**
@@ -60,10 +67,16 @@ public class SQLTask extends AsyncTask<Object, Integer, Object> {
         throw new IllegalArgumentException();
     }
 
+    @Override
+    protected void onPostExecute(Object result) {
+        List<Object> list = (List<Object>) result;
+        presenter.retrieveSQLTaskResults(list);
+    }
+
     /*
-     * The following methods are wrappers of the DAO static methods to ease
-     * unit testing.
-     */
+         * The following methods are wrappers of the DAO static methods to ease
+         * unit testing.
+         */
     List<Object> getAllScopeTextsAndContacts(SQLiteDatabase db) {
         return ScopeTextDAO.getAllScopeTextsAndContacts(db);
     }

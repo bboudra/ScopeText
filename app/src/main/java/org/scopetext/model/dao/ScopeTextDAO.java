@@ -13,6 +13,7 @@ import org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 /**
@@ -38,7 +39,8 @@ public class ScopeTextDAO {
                         ContactAssocSchema.SCOPETEXT_ID +
                         "\nLEFT JOIN " + ContactSchema.TABLE_NAME +
                         " C ON C." + ContactSchema.CONTACT_ID + " = CA." +
-                        ContactAssocSchema.CONTACT_ID;
+                        ContactAssocSchema.CONTACT_ID +
+                        "\nORDER BY ST." + ScopeTextSchema.SCOPETEXT_ID;
         Cursor cursor = db.rawQuery(All_SCOPETEXT_SQL, null);
         if (cursor != null) {
             list = buildScopeTextList(cursor);
@@ -51,11 +53,13 @@ public class ScopeTextDAO {
         if(cursor.moveToFirst()) {
             String name = null,
                     contactName = null,
-                    inUseStr = null;
+                    inUseStr = null,
+                    prevName = null;
             boolean inUse = false;
             ScopeText scopeText = null;
             Contact contact = null;
             List<Contact> contacts = null;
+            int row = 0;
             while (cursor.moveToNext()) {
                 // Get DB data
                 name = cursor.getString(0);
@@ -65,16 +69,36 @@ public class ScopeTextDAO {
                     inUse = inUseStr.equals(IS_IN_USE) ? true : false;
                 }
 
-                // Build ScopeText and Contact Objects
-                scopeText = new ScopeText();
-                scopeText.setName(name);
-                scopeText.setInUse(inUse);
-                contact = new Contact();
-                contact.setName(contactName);
-                contacts = new Vector();
-                contacts.add(contact);
-                scopeText.setContacts(contacts);
-                list.add(scopeText);
+                // TODO refactor by using .contains() and adding .equals to ScopeText class
+                // Check if record is an additional contact
+                if(!list.isEmpty()) {
+                    scopeText = (ScopeText) list.get(row - 1);
+                    prevName = scopeText.getName();
+                } else {
+                    scopeText = null;
+                    prevName = null;
+                }
+                if(prevName != null && prevName.equals(name)) {
+                    // Add contact
+                    contact = new Contact();
+                    contact.setName(contactName);
+                    contacts = scopeText.getContacts();
+                    if(contacts != null) {
+                        contacts.add(contact);
+                    }
+                } else {
+                    // Add ScopeText
+                    scopeText = new ScopeText();
+                    scopeText.setName(name);
+                    scopeText.setInUse(inUse);
+                    contact = new Contact();
+                    contact.setName(contactName);
+                    contacts = new Vector();
+                    contacts.add(contact);
+                    scopeText.setContacts(contacts);
+                    list.add(scopeText);
+                }
+                row++;
             }
         }
         return list;

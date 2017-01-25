@@ -38,8 +38,12 @@ public interface Presenter {
     /**
      * Executes a specific SQL statement asynchronously.
      * @param sql The SQL statement.
-     * @return The resulting object(s).
      */
-    public List<Object> executeSQL(SQL sql);
+    public void executeSQL(SQL sql);
 
+    /**
+     * Retrieves results from asynchronous SQLTask calls
+     * @param results The results from the SQL.
+     */
+    public void retrieveSQLTaskResults(List<Object> results);
 }
