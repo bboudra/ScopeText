@@ -69,7 +69,6 @@ public class ScopeTextDAO {
                     inUse = inUseStr.equals(IS_IN_USE) ? true : false;
                 }
 
-                // TODO refactor by using .contains() and adding .equals to ScopeText class
                 // Check if record is an additional contact
                 if(!list.isEmpty()) {
                     scopeText = (ScopeText) list.get(row - 1);

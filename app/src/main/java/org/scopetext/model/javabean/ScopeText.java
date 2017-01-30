@@ -8,7 +8,8 @@ import com.android.databinding.library.baseAdapters.BR;
 import java.util.List;
 
 /**
- * Java bean that contains all properties of a ScopeText. Created by john.qualls on 9/24/2016.
+ * Java bean that contains all properties of a ScopeText.
+ * Created by john.qualls on 9/24/2016.
  */
 public class ScopeText extends BaseObservable {
     private String name;
@@ -17,23 +18,6 @@ public class ScopeText extends BaseObservable {
     private boolean inUse;
     private List<Contact> contacts;
 
-    public ScopeText(){}
-
-    /**
-     * ScopeText constructor.
-     *
-     * @param name Name of the ScopeText.
-     * @param message The message this ScopeText references.
-     * @param response The response this ScopeText references.
-     * @param inUse Whether or not this ScopeText is in use by the user.
-     */
-    public ScopeText(String name, Message message, Response response, boolean inUse) {
-        this.name = name;
-        this.message = message;
-        this.response = response;
-        this.inUse = inUse;
-    }
-
     @Bindable
     public String getName() {
         return name;
@@ -41,9 +25,9 @@ public class ScopeText extends BaseObservable {
 
     public void setName(String name) {
         this.name = name;
+        notifyPropertyChanged(BR.name);
     }
 
-    @Bindable
     public Message getMessage() {
         return message;
     }
@@ -52,7 +36,6 @@ public class ScopeText extends BaseObservable {
         this.message = message;
     }
 
-    @Bindable
     public Response getResponse() {
         return response;
     }
@@ -68,6 +51,7 @@ public class ScopeText extends BaseObservable {
 
     public void setInUse(boolean inUse) {
         this.inUse = inUse;
+        notifyPropertyChanged(BR.inUse);
     }
 
     @Bindable
@@ -77,5 +61,6 @@ public class ScopeText extends BaseObservable {
 
     public void setContacts(List contact) {
         contacts = contact;
+        notifyPropertyChanged(BR.contacts);
     }
 }

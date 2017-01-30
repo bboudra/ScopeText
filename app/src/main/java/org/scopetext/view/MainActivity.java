@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import org.scopetext.model.dao.DBHelper;
+import org.scopetext.model.dao.SQL;
 import org.scopetext.presenter.Presenter;
 import org.scopetext.presenter.R;
 import org.scopetext.presenter.ScopeTextPresenter;
@@ -30,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         presenter = ScopeTextPresenter.getInstance();
         presenter.activityRefresh(this, new DBHelper(this));
         presenter.addFragment(ScopeTextFragment.SCOPE_TEXT_LIST);
-
     }
 
     @Override

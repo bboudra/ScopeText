@@ -56,26 +56,7 @@ public class ScopeTextPresenter implements Presenter {
      */
     private ScopeTextPresenter() {
         fragmentAction = ScopeTextFragmentAction.getInstance();
-        // TODO Refactor collaborators.
-        /*
-        DBHelper dbHelper = new DBHelper();
-        ToolbarManager toolbarManager = new ToolbarManager();
-        ScopeTextFragmentAction fragmentAction = new ScopeTextFragmentAction();
-
-
-        if (dbHelper != null && toolbarManager != null && fragmentAction != null) {
-            this.dbHelper = dbHelper;
-            this.toolbarManager = toolbarManager;
-            this.fragmentAction = fragmentAction;
-        } else {
-            throw new IllegalArgumentException(
-                    "Cannot have null parameters during Presenter " + "initialization.");
-        }
-
-        // Initialize ScopeTextListFragment
-        ScopeTextListFragment stFragment = ScopeTextListFragment.newInstance();
-        fragmentAction.addFragment(stFragment);
-        */
+        executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS);
     }
 
     /**
@@ -146,7 +127,8 @@ public class ScopeTextPresenter implements Presenter {
         }
     }
 
-    DBHelper getDbHelper() {
+    // TODO - Remove public access modifier when done with testing.
+    public DBHelper getDbHelper() {
         return this.dbHelper;
     }
 
