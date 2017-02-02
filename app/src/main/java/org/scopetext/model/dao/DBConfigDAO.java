@@ -56,8 +56,10 @@ public class DBConfigDAO {
                     "FOREIGN KEY(" + ContactAssocSchema.SCOPETEXT_ID + ") REFERENCES " +
                     ScopeTextSchema.TABLE_NAME + "(" + ScopeTextSchema.SCOPETEXT_ID +
                     ") ON DELETE CASCADE,\n\t" + "FOREIGN KEY(" + ContactAssocSchema.CONTACT_ID +
-                    ")" + " REFERENCES " + ContactSchema.TABLE_NAME + "(" + ContactSchema.CONTACT_ID +
+                    ")" + " REFERENCES " + ContactSchema.TABLE_NAME + "(" +
+                    ContactSchema.CONTACT_ID +
                     ") " + "ON DELETE CASCADE);";
+
     /**
      * Creates the Response Table.
      *

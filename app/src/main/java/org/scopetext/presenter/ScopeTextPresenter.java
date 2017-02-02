@@ -1,10 +1,8 @@
 package org.scopetext.presenter;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
-import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,16 +10,13 @@ import android.support.v7.widget.Toolbar;
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.dao.SQL;
 import org.scopetext.model.dao.SQLTask;
-import org.scopetext.model.dao.ScopeTextDAO;
 import org.scopetext.model.javabean.ScopeText;
 import org.scopetext.presenter.fragment.FragmentAction;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
 import org.scopetext.presenter.fragment.ScopeTextFragmentAction;
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
-import org.scopetext.view.ScopeTextListFragmentTest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -94,9 +89,6 @@ public class ScopeTextPresenter implements Presenter {
                 case SCOPE_TEXT_LIST:
                     fragment = ScopeTextListFragment.newInstance(presenter);
                     break;
-                case SCOPE_TEXT_LIST_TEST:
-                    fragment = ScopeTextListFragmentTest.newInstance((ScopeTextPresenter) presenter);
-                    break;
                 case NEW_CONTACT:
                     fragment = NewContactFragment.newInstance();
                     break;
@@ -116,10 +108,10 @@ public class ScopeTextPresenter implements Presenter {
 
     @Override
     public void retrieveSQLTaskResults(List<Object> results) {
-        if(results != null && !results.isEmpty()) {
-            if(results.get(0) instanceof ScopeText) {
+        if (results != null && !results.isEmpty()) {
+            if (results.get(0) instanceof ScopeText) {
                 scopeTexts = new ObservableArrayList<>();
-                for(Object obj : results) {
+                for (Object obj : results) {
                     scopeTexts.add((ScopeText) obj);
                 }
             }

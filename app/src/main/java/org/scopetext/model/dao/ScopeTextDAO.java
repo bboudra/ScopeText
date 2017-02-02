@@ -1,9 +1,7 @@
 package org.scopetext.model.dao;
 
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.databinding.tool.processing.Scope;
 
 import org.scopetext.model.javabean.Contact;
 import org.scopetext.model.javabean.ScopeText;
@@ -13,7 +11,6 @@ import org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
 /**
@@ -50,7 +47,7 @@ public class ScopeTextDAO {
 
     private static List<Object> buildScopeTextList(Cursor cursor) {
         List<Object> list = new ArrayList<>();
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             String name = null,
                     contactName = null,
                     inUseStr = null,
@@ -70,19 +67,19 @@ public class ScopeTextDAO {
                 }
 
                 // Check if record is an additional contact
-                if(!list.isEmpty()) {
+                if (!list.isEmpty()) {
                     scopeText = (ScopeText) list.get(row - 1);
                     prevName = scopeText.getName();
                 } else {
                     scopeText = null;
                     prevName = null;
                 }
-                if(prevName != null && prevName.equals(name)) {
+                if (prevName != null && prevName.equals(name)) {
                     // Add contact
                     contact = new Contact();
                     contact.setName(contactName);
                     contacts = scopeText.getContacts();
-                    if(contacts != null) {
+                    if (contacts != null) {
                         contacts.add(contact);
                     }
                 } else {
