@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         // Refresh Activity reference and add the main fragment to the UI
         presenter = ScopeTextPresenter.getInstance();
         presenter.activityRefresh(this, new DBHelper(this));
-        presenter.addFragment(ScopeTextFragment.SCOPE_TEXT_LIST_TEST);
+        presenter.addFragment(ScopeTextFragment.SCOPE_TEXT_LIST);
     }
 
     @Override

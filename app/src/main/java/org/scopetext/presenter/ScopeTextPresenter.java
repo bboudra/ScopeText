@@ -54,6 +54,7 @@ public class ScopeTextPresenter implements Presenter {
      */
     private ScopeTextPresenter() {
         fragmentAction = ScopeTextFragmentAction.getInstance();
+        scopeTexts = new ObservableArrayList<>();
         //executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS);
     }
 
@@ -87,7 +88,7 @@ public class ScopeTextPresenter implements Presenter {
             Fragment fragment = null;
             switch (type) {
                 case SCOPE_TEXT_LIST:
-                    fragment = ScopeTextListFragment.newInstance(presenter);
+                    fragment = ScopeTextListFragment.newInstance((ScopeTextPresenter)presenter);
                     break;
                 case NEW_CONTACT:
                     fragment = NewContactFragment.newInstance();
