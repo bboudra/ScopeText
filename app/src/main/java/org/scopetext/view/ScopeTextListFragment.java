@@ -1,6 +1,5 @@
 package org.scopetext.view;
 
-import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import org.scopetext.model.javabean.ScopeText;
 import org.scopetext.presenter.R;
 import org.scopetext.presenter.ScopeTextPresenter;
-import org.scopetext.presenter.databinding.FragmentScopetextRowBinding;
 
 
 /**
@@ -52,30 +50,25 @@ public class ScopeTextListFragment extends Fragment implements View.OnClickListe
         super.onActivityCreated(savedInstanceState);
 
         // Setup Buttons
-/*        Button addButton = (Button) getActivity().findViewById(R.id.AddButton),
+        Button addButton = (Button) getActivity().findViewById(R.id.AddButton),
                 removeButton = (Button) getActivity().findViewById(R.id.RemoveButton);
         addButton.setOnClickListener(this);
-        removeButton.setOnClickListener(this);*/
+        removeButton.setOnClickListener(this);
 
         // Setup test ScopeTexts
+        presenter.setScopeTexts(new ObservableArrayList<ScopeText>());
         scopeTexts = presenter.getScopeTexts();
-
-        // Setup DataBinding
-        FragmentScopetextRowBinding binding = DataBindingUtil.setContentView(this,
-                R.layout.fragment_scopetext_list);
-        binding.set
-
     }
 
     @Override
     public void onClick(View v) {
-/*        ScopeText scopeText = new ScopeText();
+        ScopeText scopeText = new ScopeText();
         if (v.getId() == R.id.AddButton) {
             scopeText.setName(SCOPETEXT_NAME + scopeTextCount);
             scopeTexts.add(scopeText);
             scopeTextCount++;
         } else {
             scopeTexts.remove(scopeTexts.size() - 1);
-        }*/
+        }
     }
 }
