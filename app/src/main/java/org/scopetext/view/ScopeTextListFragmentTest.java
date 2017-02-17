@@ -3,8 +3,6 @@ package org.scopetext.view;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,7 +14,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import org.scopetext.model.dao.SQL;
-import org.scopetext.model.javabean.ScopeText;
 import org.scopetext.model.schema.ContactContract;
 import org.scopetext.model.schema.ScopeTextContract;
 import org.scopetext.presenter.R;
@@ -26,7 +23,7 @@ import org.scopetext.presenter.ScopeTextPresenter;
 /**
  * Handles the UI for displaying a list of contacts.
  */
-public class ScopeTextListFragmentTest extends Fragment implements View.OnClickListener {
+public class ScopeTextListFragmentTest extends Fragment {
     private ScopeTextPresenter presenter;
 
     public static ScopeTextListFragmentTest newInstance(ScopeTextPresenter presenter) {
@@ -47,32 +44,17 @@ public class ScopeTextListFragmentTest extends Fragment implements View.OnClickL
                 .inflate(inflater, R.layout.fragment_scopetext_list, container, false);
         View view = binding.getRoot();*/
 
-        return inflater.inflate(R.layout.fragment_scopetext_list_test, container, false);
+        return inflater.inflate(R.layout.fragment_scopetext_list, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        // Setup test ScopeTexts
-        Toast.makeText(getActivity(), "Yay!", Toast.LENGTH_LONG).show();
-        presenter.setScopeTexts(new ObservableArrayList<ScopeText>());
-    }
-
-    public void addScopeText() {
-
-    }
-
-    public void removeScopeText() {
-
     }
 
     @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.AddButton) {
-            Toast.makeText(getActivity(), "Add ScopeText", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getActivity(), "Remove ScopeText", Toast.LENGTH_LONG).show();
-        }
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
     }
 }

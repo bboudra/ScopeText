@@ -2,8 +2,6 @@ package org.scopetext.presenter;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableList;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +17,6 @@ import org.scopetext.presenter.fragment.ScopeTextFragment;
 import org.scopetext.presenter.fragment.ScopeTextFragmentAction;
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
-import org.scopetext.view.ScopeTextListFragmentTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +38,7 @@ public class ScopeTextPresenter implements Presenter {
     private final static Presenter presenter = new ScopeTextPresenter();
     private DBHelper dbHelper;
     private FragmentAction fragmentAction;
-    private ObservableList<ScopeText> scopeTexts;
+    private List<ScopeText> scopeTexts;
 
     /*
      * Used for unit testing this singleton class. Params are used to mock out collaborators with
@@ -59,7 +56,7 @@ public class ScopeTextPresenter implements Presenter {
      */
     private ScopeTextPresenter() {
         fragmentAction = ScopeTextFragmentAction.getInstance();
-        //executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS);
+        executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS);
     }
 
     /**
@@ -94,9 +91,6 @@ public class ScopeTextPresenter implements Presenter {
                 case SCOPE_TEXT_LIST:
                     fragment = ScopeTextListFragment.newInstance(presenter);
                     break;
-                case SCOPE_TEXT_LIST_TEST:
-                    fragment = ScopeTextListFragmentTest.newInstance((ScopeTextPresenter) presenter);
-                    break;
                 case NEW_CONTACT:
                     fragment = NewContactFragment.newInstance();
                     break;
@@ -118,10 +112,7 @@ public class ScopeTextPresenter implements Presenter {
     public void retrieveSQLTaskResults(List<Object> results) {
         if(results != null && !results.isEmpty()) {
             if(results.get(0) instanceof ScopeText) {
-                scopeTexts = new ObservableArrayList<>();
-                for(Object obj : results) {
-                    scopeTexts.add((ScopeText) obj);
-                }
+                // TODO Add ScopeTexts and update existing ones
             }
         }
     }
@@ -141,13 +132,11 @@ public class ScopeTextPresenter implements Presenter {
         return this.dbHelper;
     }
 
-    // TODO - Remove public access modifier when done with testing.
-    public ObservableList<ScopeText> getScopeTexts() {
+    List<ScopeText> getScopeTexts() {
         return scopeTexts;
     }
 
-    // TODO - Remove public access modifier when done with testing.
-    public void setScopeTexts(ObservableList<ScopeText> scopeTexts) {
+    void setScopeTexts(ArrayList<ScopeText> scopeTexts) {
         this.scopeTexts = scopeTexts;
     }
 }

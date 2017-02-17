@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.dao.SQL;
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         // Refresh Activity reference and add the main fragment to the UI
         presenter = ScopeTextPresenter.getInstance();
         presenter.activityRefresh(this, new DBHelper(this));
-        presenter.addFragment(ScopeTextFragment.SCOPE_TEXT_LIST_TEST);
+        presenter.addFragment(ScopeTextFragment.SCOPE_TEXT_LIST);
     }
 
     @Override
