@@ -9,11 +9,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,10 +27,7 @@ import org.scopetext.presenter.ScopeTextPresenter;
  * Handles the UI for displaying a list of contacts.
  */
 public class ScopeTextListFragmentTest extends Fragment implements View.OnClickListener {
-    private static final String SCOPETEXT_NAME = "ScopeText";
     private ScopeTextPresenter presenter;
-    private ObservableList<ScopeText> scopeTexts;
-    private int scopeTextCount;
 
     public static ScopeTextListFragmentTest newInstance(ScopeTextPresenter presenter) {
         ScopeTextListFragmentTest fragment = new ScopeTextListFragmentTest();
@@ -59,26 +54,25 @@ public class ScopeTextListFragmentTest extends Fragment implements View.OnClickL
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // Setup Buttons
-        Button addButton = (Button) getActivity().findViewById(R.id.AddButton),
-               removeButton = (Button) getActivity().findViewById(R.id.RemoveButton);
-        addButton.setOnClickListener(this);
-        removeButton.setOnClickListener(this);
-
         // Setup test ScopeTexts
+        Toast.makeText(getActivity(), "Yay!", Toast.LENGTH_LONG).show();
         presenter.setScopeTexts(new ObservableArrayList<ScopeText>());
-        scopeTexts = presenter.getScopeTexts();
+    }
+
+    public void addScopeText() {
+
+    }
+
+    public void removeScopeText() {
+
     }
 
     @Override
     public void onClick(View v) {
-        ScopeText scopeText = new ScopeText();
         if(v.getId() == R.id.AddButton) {
-            scopeText.setName(SCOPETEXT_NAME + scopeTextCount);
-            scopeTexts.add(scopeText);
-            scopeTextCount++;
+            Toast.makeText(getActivity(), "Add ScopeText", Toast.LENGTH_LONG).show();
         } else {
-            scopeTexts.remove(scopeTexts.size() - 1);
+            Toast.makeText(getActivity(), "Remove ScopeText", Toast.LENGTH_LONG).show();
         }
     }
 }
