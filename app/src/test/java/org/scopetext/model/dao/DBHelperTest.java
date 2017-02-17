@@ -48,6 +48,8 @@ public class DBHelperTest {
         verify(db).execSQL(DBConfigDAO.getCreateMessageTable());
         verify(db).execSQL(DBConfigDAO.getCreateResponseTable());
         verify(db).execSQL(DBConfigDAO.getCreateScoptextTable());
+        verify(db).execSQL(DBConfigDAO.getCreateContactTable());
+        verify(db).execSQL(DBConfigDAO.getCreateContactAssocTable());
     }
 
     @Test

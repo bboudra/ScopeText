@@ -1,6 +1,5 @@
 package org.scopetext.presenter;
 
-import android.databinding.tool.processing.Scope;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -15,7 +14,6 @@ import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.javabean.ScopeText;
 import org.scopetext.presenter.fragment.FragmentAction;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
-import org.scopetext.presenter.fragment.ScopeTextFragmentAction;
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
 

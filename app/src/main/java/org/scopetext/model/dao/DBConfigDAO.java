@@ -35,7 +35,7 @@ public class DBConfigDAO {
                     MessageSchema.MESSAGE_ID + " INTEGER UNIQUE,\n\t" +
                     ResponseSchema.RESPONSE_ID + " INTEGER UNIQUE,\n\t" +
                     ScopeTextSchema.NAME + " VARCHAR(50) UNIQUE NOT NULL,\n\t" +
-                    ScopeTextSchema.IN_USE + "CHARACTER(1) NOT NULL CHECK(" +
+                    ScopeTextSchema.IN_USE + " CHARACTER(1) NOT NULL CHECK(" +
                     ScopeTextSchema.IN_USE + " IS 'Y' OR " + ScopeTextSchema.IN_USE +
                     " IS 'N'),\n\t" + "FOREIGN KEY(" + ScopeTextSchema.MESSAGE_ID +
                     ") REFERENCES " + MessageSchema.TABLE_NAME + "(" + ScopeTextSchema.MESSAGE_ID +
@@ -56,8 +56,10 @@ public class DBConfigDAO {
                     "FOREIGN KEY(" + ContactAssocSchema.SCOPETEXT_ID + ") REFERENCES " +
                     ScopeTextSchema.TABLE_NAME + "(" + ScopeTextSchema.SCOPETEXT_ID +
                     ") ON DELETE CASCADE,\n\t" + "FOREIGN KEY(" + ContactAssocSchema.CONTACT_ID +
-                    ")" + " REFERENCES " + ContactSchema.TABLE_NAME + "(" + ContactSchema.CONTACT_ID +
+                    ")" + " REFERENCES " + ContactSchema.TABLE_NAME + "(" +
+                    ContactSchema.CONTACT_ID +
                     ") " + "ON DELETE CASCADE);";
+
     /**
      * Creates the Response Table.
      *
@@ -116,5 +118,13 @@ public class DBConfigDAO {
 
     public static String getCreateScoptextTable() {
         return CREATE_SCOPETEXT_TABLE;
+    }
+
+    public static String getCreateContactAssocTable() {
+        return CREATE_CONTACT_ASSOC_TABLE;
+    }
+
+    public static String getCreateContactTable() {
+        return CREATE_CONTACT_TABLE;
     }
 }

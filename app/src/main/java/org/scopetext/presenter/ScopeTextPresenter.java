@@ -1,8 +1,6 @@
 package org.scopetext.presenter;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.dao.SQL;
 import org.scopetext.model.dao.SQLTask;
-import org.scopetext.model.dao.ScopeTextDAO;
 import org.scopetext.model.javabean.ScopeText;
 import org.scopetext.presenter.fragment.FragmentAction;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
@@ -56,26 +53,6 @@ public class ScopeTextPresenter implements Presenter {
      */
     private ScopeTextPresenter() {
         fragmentAction = ScopeTextFragmentAction.getInstance();
-        // TODO Refactor collaborators.
-        /*
-        DBHelper dbHelper = new DBHelper();
-        ToolbarManager toolbarManager = new ToolbarManager();
-        ScopeTextFragmentAction fragmentAction = new ScopeTextFragmentAction();
-
-
-        if (dbHelper != null && toolbarManager != null && fragmentAction != null) {
-            this.dbHelper = dbHelper;
-            this.toolbarManager = toolbarManager;
-            this.fragmentAction = fragmentAction;
-        } else {
-            throw new IllegalArgumentException(
-                    "Cannot have null parameters during Presenter " + "initialization.");
-        }
-
-        // Initialize ScopeTextListFragment
-        ScopeTextListFragment stFragment = ScopeTextListFragment.newInstance();
-        fragmentAction.addFragment(stFragment);
-        */
     }
 
     /**
@@ -129,8 +106,8 @@ public class ScopeTextPresenter implements Presenter {
 
     @Override
     public void retrieveSQLTaskResults(List<Object> results) {
-        if(results != null && !results.isEmpty()) {
-            if(results.get(0) instanceof ScopeText) {
+        if (results != null && !results.isEmpty()) {
+            if (results.get(0) instanceof ScopeText) {
                 // TODO Add ScopeTexts and update existing ones
             }
         }

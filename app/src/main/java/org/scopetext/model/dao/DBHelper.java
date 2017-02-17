@@ -31,6 +31,8 @@ public class DBHelper extends SQLiteOpenHelper implements DatabaseProvider {
             DBConfigDAO.createResponseTable(db);
             DBConfigDAO.createMessageTable(db);
             DBConfigDAO.createScopeTextTable(db);
+            DBConfigDAO.createContactTable(db);
+            DBConfigDAO.createContactAssocTable(db);
         }
     }
 
