@@ -1,9 +1,15 @@
 package org.scopetext.model.javabean;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+
+import com.android.databinding.library.baseAdapters.BR;
+
 import java.util.List;
 
 /**
- * Java bean that contains all properties of a ScopeText. Created by john.qualls on 9/24/2016.
+ * Java bean that contains all properties of a ScopeText.
+ * Created by john.qualls on 9/24/2016.
  */
 public class ScopeText {
     private String name;
