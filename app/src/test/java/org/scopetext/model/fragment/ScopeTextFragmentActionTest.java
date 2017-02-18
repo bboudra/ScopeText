@@ -1,4 +1,4 @@
-package org.scopetext.presenter.fragment;
+package org.scopetext.model.fragment;
 
 
 import android.support.v4.app.Fragment;

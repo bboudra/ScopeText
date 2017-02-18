@@ -9,13 +9,12 @@ import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.dao.SQL;
 import org.scopetext.model.dao.SQLTask;
 import org.scopetext.model.javabean.ScopeText;
-import org.scopetext.presenter.fragment.FragmentAction;
-import org.scopetext.presenter.fragment.ScopeTextFragment;
-import org.scopetext.presenter.fragment.ScopeTextFragmentAction;
+import org.scopetext.model.fragment.FragmentAction;
+import org.scopetext.model.fragment.ScopeTextFragment;
+import org.scopetext.model.fragment.ScopeTextFragmentAction;
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +34,6 @@ public class ScopeTextPresenter implements Presenter {
     private final static Presenter presenter = new ScopeTextPresenter();
     private DBHelper dbHelper;
     private FragmentAction fragmentAction;
-    private List<ScopeText> scopeTexts;
 
     /*
      * Used for unit testing this singleton class. Params are used to mock out collaborators with
@@ -108,7 +106,7 @@ public class ScopeTextPresenter implements Presenter {
     public void retrieveSQLTaskResults(List<Object> results) {
         if (results != null && !results.isEmpty()) {
             if (results.get(0) instanceof ScopeText) {
-                // TODO Add ScopeTexts and update existing ones
+
             }
         }
     }
@@ -125,13 +123,5 @@ public class ScopeTextPresenter implements Presenter {
 
     DBHelper getDbHelper() {
         return this.dbHelper;
-    }
-
-    List<ScopeText> getScopeTexts() {
-        return scopeTexts;
-    }
-
-    void setScopeTexts(ArrayList<ScopeText> scopeTexts) {
-        this.scopeTexts = scopeTexts;
     }
 }

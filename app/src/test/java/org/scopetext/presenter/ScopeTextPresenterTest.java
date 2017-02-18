@@ -12,8 +12,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.javabean.ScopeText;
-import org.scopetext.presenter.fragment.FragmentAction;
-import org.scopetext.presenter.fragment.ScopeTextFragment;
+import org.scopetext.model.fragment.FragmentAction;
+import org.scopetext.model.fragment.ScopeTextFragment;
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
 
@@ -126,50 +126,7 @@ public class ScopeTextPresenterTest {
     }
 
     @Test
-    public void itShouldAssertCacheUpdateForScopeTextSQL() {
-        // TODO Implement .equals() methods for java beans
-        // Setup
-        List<Object> expectedResults = new ArrayList<>(1);
-        String name = "name1";
-        ScopeText scopeText = new ScopeText();
-        scopeText.setName(name);
-        expectedResults.add(scopeText);
+    public void itShouldVerifyNoInteractionsWithViewForNullSQLResults() {
 
-        // Test
-        objUnderTest.retrieveSQLTaskResults(expectedResults);
-        List<ScopeText> actualResults = objUnderTest.getScopeTexts();
-        Assert.assertEquals(name, actualResults.get(0).getName());
     }
-
-    // TODO Refactor tests once presenter collaborators are refactored.
- /*   @Before
-    public void mockSetup() {
-        dbHelper = mock(DBHelper.class);
-        toolbarManager = mock(ToolbarManager.class);
-        fragmentAction = mock(ScopeTextFragmentAction.class);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void nullDBHelperTest() {
-        dbHelper = null;
-        objUnderTest = new ScopeTextPresenter(dbHelper, toolbarManager, fragmentAction);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void nullToolbarManagerTest() {
-        toolbarManager = null;
-        objUnderTest = new copeTextPresenter(dbHelper, toolbarManager, fragmentAction);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void nullSTFragManagerTest() {
-        fragmentAction = null;
-        objUnderTest = new ScopeTextPresenter(dbHelper, toolbarManager, fragmentAction);
-    }
-
-    @Test
-    public void addFragmentOnStartupTest() {
-        objUnderTest = new ScopeTextPresenter(dbHelper, toolbarManager, fragmentAction);
-        verify(fragmentAction).addFragment(Matchers.any(ScopeTextListFragment.class));
-    }*/
 }

@@ -4,8 +4,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 
 import org.scopetext.model.dao.SQL;
-import org.scopetext.presenter.fragment.FragmentAction;
-import org.scopetext.presenter.fragment.ScopeTextFragment;
+import org.scopetext.model.fragment.FragmentAction;
+import org.scopetext.model.fragment.ScopeTextFragment;
 
 import java.util.List;
 
