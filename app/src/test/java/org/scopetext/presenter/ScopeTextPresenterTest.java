@@ -126,7 +126,7 @@ public class ScopeTextPresenterTest {
     }
 
     @Test
-    public void itShouldVerifyNoInteractionsWithViewForNullSQLResults() {
+    public void itShouldAssertErrorForScopeTextDBRetrieveError() {
 
     }
 }

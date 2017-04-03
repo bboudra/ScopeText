@@ -19,7 +19,7 @@ import org.scopetext.model.fragment.ScopeTextFragment;
  * @see Presenter
  */
 public class MainActivity extends AppCompatActivity {
-    private Presenter presenter;
+    private static Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         presenter = ScopeTextPresenter.getInstance();
         presenter.activityRefresh(this, new DBHelper(this));
         presenter.addFragment(ScopeTextFragment.SCOPE_TEXT_LIST);
-
     }
 
     @Override
@@ -48,4 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 }

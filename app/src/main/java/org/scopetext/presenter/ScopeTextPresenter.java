@@ -34,6 +34,7 @@ public class ScopeTextPresenter implements Presenter {
     private final static Presenter presenter = new ScopeTextPresenter();
     private DBHelper dbHelper;
     private FragmentAction fragmentAction;
+    private RecyclerViewAdapter recyclerViewAdapter;
 
     /*
      * Used for unit testing this singleton class. Params are used to mock out collaborators with
@@ -72,6 +73,14 @@ public class ScopeTextPresenter implements Presenter {
             setupActionBar(activity);
             this.dbHelper = (DBHelper) dbHelper;
         }
+    }
+
+    /**
+     * @see Presenter#setRecyclerViewAdapter(String)
+     */
+    @Override
+    public void setRecyclerViewAdapter(String classname) {
+
     }
 
     /**

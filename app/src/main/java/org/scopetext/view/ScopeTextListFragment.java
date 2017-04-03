@@ -39,6 +39,7 @@ public class ScopeTextListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        presenter.setRecyclerViewAdapter(ScopeTextListFragment.class.getName());
         presenter.executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS);
     }
 

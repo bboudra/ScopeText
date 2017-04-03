@@ -20,7 +20,7 @@
     </style>
 
     <style name="AppTheme.ScopeTextHeader" parent="AppTheme.TitleText">
-        <item name="android:layout_weight">.40</item>
+        <item name="android:layout_weight">.50</item>
     </style>
 
     <style name="AppTheme.EditText">
