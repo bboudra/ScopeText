@@ -3,7 +3,6 @@ package org.scopetext.model.cache;
 import org.scopetext.model.javabean.ScopeText;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * ScopeTextCache contains the most up to date ScopeText objects from the database. The cache is

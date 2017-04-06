@@ -1,4 +1,4 @@
-package org.scopetext.model.fragment;
+package org.scopetext.presenter.fragment;
 
 
 import android.support.v4.app.Fragment;
@@ -22,11 +22,20 @@ public interface FragmentAction {
     public void activityRefresh(AppCompatActivity activity);
 
     /**
-     * Adds a new fragment to a View container.
+     * Adds a new Fragment to a View container.
      *
      * @param containerId The View container id.
-     * @param fragment The new Fragment to add.
+     * @param Fragment The new Fragment to add.
      * @param type Used to retrieve the tag name for the new Fragment.
      */
-    public void addFragment(int containerId, Fragment fragment, ScopeTextFragment type);
+    public void addFragment(int containerId, Fragment Fragment, ScopeTextFragment type);
+
+    /**
+     * Retrieves the specified active Fragment.
+     *
+     * @param fragment The name of the Fragment to retrieve.
+     * @return The specified Fragment, or null if it does not exist in the collection of active
+     * Fragments.
+     */
+    public Fragment getFragment(ScopeTextFragment fragment);
 }

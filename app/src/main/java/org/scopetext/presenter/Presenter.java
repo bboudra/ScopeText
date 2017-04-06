@@ -4,8 +4,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 
 import org.scopetext.model.dao.SQL;
-import org.scopetext.model.fragment.FragmentAction;
-import org.scopetext.model.fragment.ScopeTextFragment;
+import org.scopetext.presenter.fragment.FragmentAction;
+import org.scopetext.presenter.fragment.ScopeTextFragment;
 
 import java.util.List;
 
@@ -26,8 +26,8 @@ public interface Presenter {
     public void activityRefresh(AppCompatActivity activity, SQLiteOpenHelper dbHelper);
 
     /**
-     * Sets up a new RecyclerViewAdapter for the given class's UI. The UI must contain a
-     * RecyclerView element in it's xml layout.
+     * Sets up a new RecyclerViewAdapter for the given Fragment classname. The Fragment must contain
+     * a RecyclerView element in it's xml layout.
      * @param classname The class with the desired UI to apply the adapter.
      */
     public void setRecyclerViewAdapter(String classname);

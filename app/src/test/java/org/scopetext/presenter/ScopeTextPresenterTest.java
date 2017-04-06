@@ -11,14 +11,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.scopetext.model.dao.DBHelper;
-import org.scopetext.model.javabean.ScopeText;
-import org.scopetext.model.fragment.FragmentAction;
-import org.scopetext.model.fragment.ScopeTextFragment;
+import org.scopetext.presenter.fragment.FragmentAction;
+import org.scopetext.presenter.fragment.ScopeTextFragment;
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.eq;

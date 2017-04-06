@@ -1,7 +1,6 @@
 package org.scopetext.model.cache;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Cache provides an interface for all types of cache in this application.
