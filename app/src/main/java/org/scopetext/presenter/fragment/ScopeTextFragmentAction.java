@@ -78,6 +78,11 @@ public class ScopeTextFragmentAction implements FragmentAction {
         }
     }
 
+    @Override
+    public Fragment getFragment(ScopeTextFragment fragment) {
+        return null;
+    }
+
     protected FragmentManager getFragmentManager() {
         return this.fragmentManager;
     }

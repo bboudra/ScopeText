@@ -3,8 +3,6 @@ package org.scopetext.presenter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import junit.framework.Assert;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +14,7 @@ import org.scopetext.presenter.fragment.ScopeTextFragment;
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.isA;
@@ -32,10 +31,9 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class ScopeTextPresenterTest {
     private ScopeTextPresenter objUnderTest;
-    @Mock
-    DBHelper dbHelper;
-    @Mock
-    FragmentAction fragmentAction;
+    private boolean isRecyclerViewSet;
+    @Mock DBHelper dbHelper;
+    @Mock FragmentAction fragmentAction;
 
 
     @Before
@@ -50,7 +48,7 @@ public class ScopeTextPresenterTest {
         objUnderTest.activityRefresh(null, dbHelper);
         verifyZeroInteractions(fragmentAction);
         verify(objUnderTest, times(0)).setupActionBar(isA(AppCompatActivity.class));
-        Assert.assertNull(objUnderTest.getDbHelper());
+        assertNull(objUnderTest.getDbHelper());
     }
 
     @Test
@@ -63,7 +61,7 @@ public class ScopeTextPresenterTest {
         objUnderTest.activityRefresh(activity, dbHelper);
         verify(fragmentAction).activityRefresh(activity);
         verify(objUnderTest).setupActionBar(activity);
-        Assert.assertEquals(objUnderTest.getDbHelper(), dbHelper);
+        assertEquals(objUnderTest.getDbHelper(), dbHelper);
     }
 
     @Test
@@ -72,7 +70,7 @@ public class ScopeTextPresenterTest {
         try {
             objUnderTest.setupActionBar(null);
         } catch (NullPointerException npe) {
-            Assert.fail("Parameter should not be referenced if it is null.");
+            fail("Parameter should not be referenced if it is null.");
         }
     }
 
@@ -122,7 +120,22 @@ public class ScopeTextPresenterTest {
     }
 
     @Test
-    public void itShouldAssertErrorForScopeTextDBRetrieveError() {
+    public void itShouldAssertFalseForNullFragmentName() {
+        isRecyclerViewSet = objUnderTest.setRecyclerViewAdapter(null);
+        assertFalse("RecyclerView was set with a null Fragment name.", isRecyclerViewSet);
+    }
 
+    @Test
+    public void itShouldAssertFalseForInvalidFragmentName() {
+        ScopeTextFragment fragment = ScopeTextFragment.NEW_CONTACT;
+        isRecyclerViewSet = objUnderTest.setRecyclerViewAdapter(fragment);
+        assertFalse("RecyclerView was set with an invalid Fragment name: " + fragment.getName(), isRecyclerViewSet);
+    }
+
+    @Test
+    public void itShouldAssertAdapterImplForScopeTextListFragment() {
+        ScopeTextFragment fragment = ScopeTextFragment.SCOPE_TEXT_LIST;
+        isRecyclerViewSet = objUnderTest.setRecyclerViewAdapter(fragment);
+        assertTrue("RecyclerView should have been set with Fragment name: " + fragment.getName(), isRecyclerViewSet);
     }
 }

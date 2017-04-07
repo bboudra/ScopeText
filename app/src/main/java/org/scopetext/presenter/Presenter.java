@@ -28,9 +28,10 @@ public interface Presenter {
     /**
      * Sets up a new RecyclerViewAdapter for the given Fragment classname. The Fragment must contain
      * a RecyclerView element in it's xml layout.
-     * @param classname The class with the desired UI to apply the adapter.
+     * @param fragmentName The class with the desired UI to apply the adapter.
+     * @return Whether or not the RecyclerViewAdapter was successfully setup.
      */
-    public void setRecyclerViewAdapter(String classname);
+    public boolean setRecyclerViewAdapter(ScopeTextFragment fragmentName);
 
     /**
      * Invokes FragmentAction implementation to add a new Fragment. Should determine what fragment

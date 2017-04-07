@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.dao.SQL;
@@ -16,6 +17,7 @@ import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Presenter Implementation.
@@ -76,11 +78,29 @@ public class ScopeTextPresenter implements Presenter {
     }
 
     /**
-     * @see Presenter#setRecyclerViewAdapter(String)
+     * @see Presenter#setRecyclerViewAdapter(ScopeTextFragment)
      */
     @Override
-    public void setRecyclerViewAdapter(String classname) {
+    public boolean setRecyclerViewAdapter(ScopeTextFragment fragmentName) {
+        boolean result = false;
+        RecyclerViewAdapter adapter = null;
+        Fragment fragment = null;
 
+        // Setup RecyclerViewAdapter based on Fragment name
+        if(fragmentName == null) {
+            // TODO put in logger class
+/*            Log.e(ScopeTextPresenter.class.getName(), "Cannot set RecyclerViewAdapter with null"
+            + " Fragment name.");*/
+        }
+        else if(fragmentName == ScopeTextFragment.SCOPE_TEXT_LIST) {
+
+        }
+        else {
+            // TODO put in logger class
+/*            Log.e(ScopeTextPresenter.class.getName(), "Cannot set RecyclerViewAdapter with"
+                    + " Fragment: " + fragmentName.getName());*/
+        }
+        return result;
     }
 
     /**
