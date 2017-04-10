@@ -39,7 +39,7 @@ public class ScopeTextPresenter implements Presenter {
     private DBHelper dbHelper;
     private FragmentAction fragmentAction;
     private Cache scopeTextCache;
-    private List<RecyclerViewAdapter> recyclerViewAdapters;
+    private RecyclerViewAdapter recyclerViewAdapter;
     private AppCompatActivity activity;
 
     /*
@@ -78,6 +78,7 @@ public class ScopeTextPresenter implements Presenter {
     @Override
     public void activityRefresh(AppCompatActivity activity, SQLiteOpenHelper dbHelper) {
         if (activity != null) {
+            this.activity = activity;
             fragmentAction.activityRefresh(activity);
             setupActionBar();
             this.dbHelper = (DBHelper) dbHelper;
@@ -101,13 +102,14 @@ public class ScopeTextPresenter implements Presenter {
         }
         else if(fragmentName == ScopeTextFragment.SCOPE_TEXT_LIST) {
             // Get RecyclerView and LayoutManager
-            fragment = fragmentAction.getFragment(fragmentName);
             RecyclerView recyclerView = (RecyclerView) activity.findViewById(R.id.scopetext_list);
             RecyclerView.LayoutManager adapterItemLayout = new LinearLayoutManager(activity);
+            recyclerView.setLayoutManager(adapterItemLayout);
 
             // Setup adapter
             adapter = new ScopeTextListAdapter(scopeTextCache.getCache(), this);
-            recyclerView.setAdapter(adapter);
+            recyclerView.setAdapter((RecyclerView.Adapter) adapter);
+            result = true;
         }
         else {
             // TODO put in logger class

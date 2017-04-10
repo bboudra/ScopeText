@@ -1,6 +1,7 @@
 package org.scopetext.presenter;
 
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import org.junit.Before;
@@ -8,13 +9,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.scopetext.model.cache.Cache;
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.presenter.fragment.FragmentAction;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.isA;
@@ -32,43 +38,53 @@ import static org.mockito.Mockito.when;
 public class ScopeTextPresenterTest {
     private ScopeTextPresenter objUnderTest;
     private boolean isRecyclerViewSet;
-    @Mock DBHelper dbHelper;
-    @Mock FragmentAction fragmentAction;
+    @Mock
+    DBHelper dbHelper;
+    @Mock
+    FragmentAction fragmentAction;
+    @Mock
+    private Cache cache;
+    @Mock
+    private AppCompatActivity activity;
 
 
     @Before
     public void mockSetup() {
-        objUnderTest = spy(new ScopeTextPresenter(dbHelper, fragmentAction));
+        objUnderTest = spy(new ScopeTextPresenter(dbHelper, fragmentAction, cache));
+        objUnderTest.activityRefresh(activity, dbHelper);
     }
 
     @Test
-    public void shouldVerifyNoActivityRefreshForNullActivity() {
+    public void itShouldVerifyNoActivityRefreshForNullActivity() {
         // Test
-        objUnderTest = spy(new ScopeTextPresenter(null, fragmentAction));
+        objUnderTest.activityRefresh(null, null);
+        verifyZeroInteractions(fragmentAction);
+        verify(objUnderTest, times(0)).setupActionBar();
+    }
+
+    @Test
+    public void itShouldVerifyNoDBRefreshForNullActivity() {
+        // Test
+        objUnderTest = spy(new ScopeTextPresenter(null, fragmentAction, cache));
         objUnderTest.activityRefresh(null, dbHelper);
         verifyZeroInteractions(fragmentAction);
-        verify(objUnderTest, times(0)).setupActionBar(isA(AppCompatActivity.class));
         assertNull(objUnderTest.getDbHelper());
     }
 
     @Test
     public void itShouldVerifyActivityRefresh() {
-        // Mock Setup
-        AppCompatActivity activity = mock(AppCompatActivity.class);
-
-        // Test
-        objUnderTest = spy(new ScopeTextPresenter(null, fragmentAction));
+        objUnderTest = spy(new ScopeTextPresenter(null, fragmentAction, cache));
         objUnderTest.activityRefresh(activity, dbHelper);
         verify(fragmentAction).activityRefresh(activity);
-        verify(objUnderTest).setupActionBar(activity);
+        verify(objUnderTest).setupActionBar();
         assertEquals(objUnderTest.getDbHelper(), dbHelper);
     }
 
     @Test
     public void itShouldVerifyNoActivityReferenceForNullActivity() {
-        // Test
+        objUnderTest.activityRefresh(null,dbHelper);
         try {
-            objUnderTest.setupActionBar(null);
+            objUnderTest.setupActionBar();
         } catch (NullPointerException npe) {
             fail("Parameter should not be referenced if it is null.");
         }
@@ -76,24 +92,20 @@ public class ScopeTextPresenterTest {
 
     @Test
     public void itShouldVerifyNoActionBarSetupForNullActivity() {
-        // Test
-        AppCompatActivity activity = mock(AppCompatActivity.class);
-
-        // Test
-        objUnderTest.setupActionBar(activity);
+        objUnderTest.activityRefresh(null,dbHelper);
+        objUnderTest.setupActionBar();
         verify(activity, times(0)).setSupportActionBar(null);
     }
 
     @Test
     public void itShouldVerifyActionBarSetupForValidToolbar() {
-        // Test
-        AppCompatActivity activity = mock(AppCompatActivity.class);
+        // Mock setup
+        objUnderTest.activityRefresh(activity, dbHelper);
         Toolbar toolbar = mock(Toolbar.class);
         when(activity.findViewById(anyInt())).thenReturn(toolbar);
 
         // Test
-        objUnderTest.setupActionBar(activity);
-        verify(activity).findViewById(R.id.actionBar);
+        objUnderTest.setupActionBar();
         verify(activity).setSupportActionBar(toolbar);
     }
 
@@ -129,15 +141,22 @@ public class ScopeTextPresenterTest {
     public void itShouldAssertFalseForInvalidFragmentName() {
         ScopeTextFragment fragment = ScopeTextFragment.NEW_CONTACT;
         isRecyclerViewSet = objUnderTest.setRecyclerViewAdapter(fragment);
-        assertFalse("RecyclerView was set with an invalid Fragment name: " + fragment.getName(), isRecyclerViewSet);
+        assertFalse("RecyclerView was set with an invalid Fragment name: " + fragment.getName(),
+                isRecyclerViewSet);
     }
 
     @Test
     public void itShouldAssertAdapterImplForScopeTextListFragment() {
+        // Mock setup
+        RecyclerView recyclerView = mock(RecyclerView.class);
+        when(activity.findViewById(R.id.scopetext_list)).thenReturn(recyclerView);
+
+        // Test
         ScopeTextFragment fragment = ScopeTextFragment.SCOPE_TEXT_LIST;
         isRecyclerViewSet = objUnderTest.setRecyclerViewAdapter(fragment);
-        assertTrue("RecyclerView should have been set with Fragment name: " + fragment.getName(), isRecyclerViewSet);
+        verify(recyclerView).setAdapter(isA(RecyclerView.Adapter.class));
+        verify(recyclerView).setLayoutManager(isA(RecyclerView.LayoutManager.class));
+        assertTrue("RecyclerView should have been set with Fragment name: " + fragment.getName(),
+                isRecyclerViewSet);
     }
-
-
 }
