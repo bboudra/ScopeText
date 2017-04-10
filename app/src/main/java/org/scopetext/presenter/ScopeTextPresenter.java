@@ -3,9 +3,12 @@ package org.scopetext.presenter;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
+import org.scopetext.model.cache.Cache;
+import org.scopetext.model.cache.ScopeTextCache;
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.dao.SQL;
 import org.scopetext.model.dao.SQLTask;
@@ -17,7 +20,6 @@ import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Presenter Implementation.
@@ -36,15 +38,19 @@ public class ScopeTextPresenter implements Presenter {
     private final static Presenter presenter = new ScopeTextPresenter();
     private DBHelper dbHelper;
     private FragmentAction fragmentAction;
+    private Cache scopeTextCache;
     private List<RecyclerViewAdapter> recyclerViewAdapters;
+    private AppCompatActivity activity;
 
     /*
      * Used for unit testing this singleton class. Params are used to mock out collaborators with
      * this class.
      */
-    ScopeTextPresenter(DBHelper dbHelper, FragmentAction fragmentAction) {
+    ScopeTextPresenter(DBHelper dbHelper, FragmentAction fragmentAction,
+                       Cache scopeTextCache) {
         this.dbHelper = dbHelper;
         this.fragmentAction = fragmentAction;
+        this.scopeTextCache = scopeTextCache;
     }
 
     /**
@@ -54,6 +60,7 @@ public class ScopeTextPresenter implements Presenter {
      */
     private ScopeTextPresenter() {
         fragmentAction = ScopeTextFragmentAction.getInstance();
+        scopeTextCache = ScopeTextCache.getInstance();
     }
 
     /**
@@ -72,7 +79,7 @@ public class ScopeTextPresenter implements Presenter {
     public void activityRefresh(AppCompatActivity activity, SQLiteOpenHelper dbHelper) {
         if (activity != null) {
             fragmentAction.activityRefresh(activity);
-            setupActionBar(activity);
+            setupActionBar();
             this.dbHelper = (DBHelper) dbHelper;
         }
     }
@@ -93,7 +100,14 @@ public class ScopeTextPresenter implements Presenter {
             + " Fragment name.");*/
         }
         else if(fragmentName == ScopeTextFragment.SCOPE_TEXT_LIST) {
+            // Get RecyclerView and LayoutManager
+            fragment = fragmentAction.getFragment(fragmentName);
+            RecyclerView recyclerView = (RecyclerView) activity.findViewById(R.id.scopetext_list);
+            RecyclerView.LayoutManager adapterItemLayout = new LinearLayoutManager(activity);
 
+            // Setup adapter
+            adapter = new ScopeTextListAdapter(scopeTextCache.getCache(), this);
+            recyclerView.setAdapter(adapter);
         }
         else {
             // TODO put in logger class
@@ -140,7 +154,12 @@ public class ScopeTextPresenter implements Presenter {
         }
     }
 
-    void setupActionBar(AppCompatActivity activity) {
+    @Override
+    public RecyclerView.ViewHolder initializeViewHolder(ScopeTextFragment fragmentName) {
+        return null;
+    }
+
+    void setupActionBar() {
         if (activity != null) {
             Toolbar toolbar = (Toolbar) activity.findViewById(R.id.actionBar);
 

@@ -2,6 +2,7 @@ package org.scopetext.presenter;
 
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 
 import org.scopetext.model.dao.SQL;
 import org.scopetext.presenter.fragment.FragmentAction;
@@ -27,7 +28,8 @@ public interface Presenter {
 
     /**
      * Sets up a new RecyclerViewAdapter for the given Fragment classname. The Fragment must contain
-     * a RecyclerView element in it's xml layout.
+     * a RecyclerView element in it's corresponding xml layout in order to successfully setup a
+     * RecyclerViewAdapter implementation.
      * @param fragmentName The class with the desired UI to apply the adapter.
      * @return Whether or not the RecyclerViewAdapter was successfully setup.
      */
@@ -56,4 +58,12 @@ public interface Presenter {
      * @param results The results from the SQL.
      */
     public void retrieveSQLTaskResults(List<Object> results);
+
+    /**
+     * Creates a new ViewHolder which is needed as part of the RecyclerViewAdapter setup.
+     * @param fragmentName The name of the Fragment that corresponds to the
+     * RecyclerViewAdapter.
+     * @return
+     */
+    public RecyclerView.ViewHolder initializeViewHolder(ScopeTextFragment fragmentName);
 }

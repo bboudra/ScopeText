@@ -138,4 +138,6 @@ public class ScopeTextPresenterTest {
         isRecyclerViewSet = objUnderTest.setRecyclerViewAdapter(fragment);
         assertTrue("RecyclerView should have been set with Fragment name: " + fragment.getName(), isRecyclerViewSet);
     }
+
+
 }
