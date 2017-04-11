@@ -23,13 +23,7 @@ import java.util.List;
 
 /**
  * Presenter Implementation.
- * <p>
- * <pre>
- * NOTES:
- * 1. Not meant to be subclassed.
- * 2. Not thread safe.
- * 3. Singleton.
- * </pre>
+
  * Created by john.qualls on 11/28/2016.
  *
  * @see Presenter

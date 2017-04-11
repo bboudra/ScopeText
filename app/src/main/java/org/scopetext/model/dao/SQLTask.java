@@ -48,7 +48,7 @@ public class SQLTask extends AsyncTask<Object, Integer, Object> {
                 switch (sql) {
                     case SELECT_ALL_SCOPETEXTS_CONTACTS:
                         db = dbHelper.getReadableDatabase();
-                        results = getAllScopeTextsAndContacts(db);
+                        results = ScopeTextDAO.getAllScopeTextsAndContacts(db);
                         break;
                 }
                 return results;
@@ -61,13 +61,5 @@ public class SQLTask extends AsyncTask<Object, Integer, Object> {
     protected void onPostExecute(Object result) {
         List<Object> list = (List<Object>) result;
         presenter.retrieveSQLTaskResults(list);
-    }
-
-    /*
-         * The following methods are wrappers of the DAO static methods to ease
-         * unit testing.
-         */
-    List<Object> getAllScopeTextsAndContacts(SQLiteDatabase db) {
-        return ScopeTextDAO.getAllScopeTextsAndContacts(db);
     }
 }
