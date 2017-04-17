@@ -3,16 +3,20 @@ package org.scopetext.model.dao;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.scopetext.presenter.Presenter;
 
-import static org.junit.Assert.fail;
+import java.util.List;
+
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.isNull;
+import static org.mockito.Mockito.isA;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for SQLTask.java Created by john.qualls on 12/21/2016.
@@ -75,19 +79,16 @@ public class SQLTaskTest {
         fail(ILLEGAL_ARG_MSG);
     }
 
-
-    // TODO Finish test
-/*    @Test
+    @Test
     public void itShouldVerifySelectAllScopeTextsAndContacts() {
         // Mock setup
         Cursor cursor = mock(Cursor.class);
         when(dbHelper.getReadableDatabase()).thenReturn(db);
-        when(db.rawQuery(isA(String.class), isNull())).thenReturn(cursor);
-        when(objUnderTest.getAllScopeTextsAndContacts(isA(SQLiteDatabase.class))).thenReturn(null);
+        when(db.rawQuery(isA(String.class), (String[]) isNull())).thenReturn(cursor);
 
         // Test
-        objUnderTest.doInBackground(dbHelper, SQL.SELECT_ALL_SCOPETEXTS_CONTACTS);
-        verify(objUnderTest).getAllScopeTextsAndContacts(db);
-    }*/
+        List<Object> result = objUnderTest.doInBackground(dbHelper, SQL.SELECT_ALL_SCOPETEXTS_CONTACTS);
+        assertTrue(result.isEmpty());
+    }
 
 }

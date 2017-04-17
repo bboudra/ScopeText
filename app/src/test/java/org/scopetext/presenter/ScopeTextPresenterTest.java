@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.scopetext.model.cache.Cache;
 import org.scopetext.model.dao.DBHelper;
+import org.scopetext.model.dao.SQL;
+import org.scopetext.model.dao.SQLTask;
 import org.scopetext.presenter.fragment.FragmentAction;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
 import org.scopetext.view.NewContactFragment;
@@ -46,12 +48,13 @@ public class ScopeTextPresenterTest {
     private Cache cache;
     @Mock
     private AppCompatActivity activity;
+    @Mock
+    private SQLTask sqlTask;
 
 
     @Before
     public void mockSetup() {
         objUnderTest = spy(new ScopeTextPresenter(dbHelper, fragmentAction, cache));
-        objUnderTest.activityRefresh(activity, dbHelper);
     }
 
     @Test
@@ -148,6 +151,7 @@ public class ScopeTextPresenterTest {
     @Test
     public void itShouldAssertAdapterImplForScopeTextListFragment() {
         // Mock setup
+        objUnderTest.activityRefresh(activity, dbHelper);
         RecyclerView recyclerView = mock(RecyclerView.class);
         when(activity.findViewById(R.id.scopetext_list)).thenReturn(recyclerView);
 
@@ -159,4 +163,21 @@ public class ScopeTextPresenterTest {
         assertTrue("RecyclerView should have been set with Fragment name: " + fragment.getName(),
                 isRecyclerViewSet);
     }
+
+    @Test
+    public void itShouldNotExecuteSQLForNullSQL() {
+        assertFalse("SQLTask should not be executed with null a SQL.",objUnderTest.executeSQL(null, sqlTask));
+    }
+
+    @Test
+    public void itShouldNotExecuteSQLForNullSQLTask() {
+        assertFalse("SQLTask should not be executed with null a SQLTask.",objUnderTest.executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS, null));
+    }
+
+    @Test
+    public void itShouldExecuteSQLForSelectAllScopeTextsSQL() {
+        assertTrue("SQLTask should be executed with a valid SQL and SQLTask.",objUnderTest.executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS, sqlTask));
+    }
+
+
 }

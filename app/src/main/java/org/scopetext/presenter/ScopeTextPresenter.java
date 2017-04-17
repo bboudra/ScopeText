@@ -133,12 +133,17 @@ public class ScopeTextPresenter implements Presenter {
     }
 
     @Override
-    public void executeSQL(SQL sql) {
-        switch (sql) {
-            case SELECT_ALL_SCOPETEXTS_CONTACTS:
-                new SQLTask(presenter).execute(dbHelper, sql);
-                break;
+    public boolean executeSQL(SQL sql, SQLTask task) {
+        boolean beganExecution = false;
+        if(sql != null && task != null) {
+            switch (sql) {
+                case SELECT_ALL_SCOPETEXTS_CONTACTS:
+                    task.execute(dbHelper, sql);
+                    beganExecution = true;
+                    break;
+            }
         }
+        return beganExecution;
     }
 
     @Override

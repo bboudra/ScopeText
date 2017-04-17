@@ -49,7 +49,7 @@ public class ScopeTextDAOTest {
 
     @Test
     public void itShouldAssertEmptyResultSetForNullCursor() {
-        resultSet = ScopeTextDAO.getAllScopeTextsAndContacts(db);
+        resultSet = (List<Object>) ScopeTextDAO.getAllScopeTextsAndContacts(db);
         assertEquals(resultSet.size(), 0);
     }
 
@@ -67,7 +67,7 @@ public class ScopeTextDAOTest {
         when(db.rawQuery(isA(String.class), (String[])isNull())).thenReturn(cursor);
 
         // Test
-        resultSet = ScopeTextDAO.getAllScopeTextsAndContacts(db);
+        resultSet = (List<Object>) ScopeTextDAO.getAllScopeTextsAndContacts(db);
         ScopeText scopeText = (ScopeText) resultSet.get(0);
         Contact contact = (Contact) scopeText.getContacts().get(0);
         assertEquals(1, resultSet.size());
@@ -91,7 +91,7 @@ public class ScopeTextDAOTest {
         when(db.rawQuery(isA(String.class), (String[])isNull())).thenReturn(cursor);
 
         // Test
-        resultSet = ScopeTextDAO.getAllScopeTextsAndContacts(db);
+        resultSet = (List<Object>) ScopeTextDAO.getAllScopeTextsAndContacts(db);
         ScopeText scopeText = (ScopeText) resultSet.get(0);
         Contact contact = (Contact) scopeText.getContacts().get(0),
                 contact2 = (Contact) scopeText.getContacts().get(1);
@@ -119,7 +119,7 @@ public class ScopeTextDAOTest {
         when(db.rawQuery(isA(String.class), (String[])isNull())).thenReturn(cursor);
 
         // Test
-        resultSet = ScopeTextDAO.getAllScopeTextsAndContacts(db);
+        resultSet = (List<Object>) ScopeTextDAO.getAllScopeTextsAndContacts(db);
         ScopeText scopeText1 = (ScopeText) resultSet.get(0),
                 scopeText2 = (ScopeText) resultSet.get(1);
         Contact contact1 = (Contact) scopeText1.getContacts().get(0),

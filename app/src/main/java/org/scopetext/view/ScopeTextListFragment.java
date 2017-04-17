@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.scopetext.model.dao.SQL;
+import org.scopetext.model.dao.SQLTask;
 import org.scopetext.presenter.Presenter;
 import org.scopetext.presenter.R;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
@@ -41,7 +42,7 @@ public class ScopeTextListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         presenter.setRecyclerViewAdapter(ScopeTextFragment.SCOPE_TEXT_LIST);
-        presenter.executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS);
+        presenter.executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS, new SQLTask(presenter));
     }
 
     @Override

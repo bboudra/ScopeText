@@ -48,7 +48,7 @@ public class SQLTask extends AsyncTask<Object, Integer, Object> {
                 switch (sql) {
                     case SELECT_ALL_SCOPETEXTS_CONTACTS:
                         db = dbHelper.getReadableDatabase();
-                        results = ScopeTextDAO.getAllScopeTextsAndContacts(db);
+                        results = (List<Object>) ScopeTextDAO.getAllScopeTextsAndContacts(db);
                         break;
                 }
                 return results;

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 
 import org.scopetext.model.dao.SQL;
+import org.scopetext.model.dao.SQLTask;
 import org.scopetext.presenter.fragment.FragmentAction;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
 
@@ -49,8 +50,10 @@ public interface Presenter {
      * Executes a specific SQL statement asynchronously.
      *
      * @param sql The SQL statement.
+     * @param sqlTask The SQLTask instance to execute.
+     * @return Whether or not the sql began execution successfully.
      */
-    public void executeSQL(SQL sql);
+    public boolean executeSQL(SQL sql, SQLTask sqlTask);
 
     /**
      * Retrieves results from asynchronous SQLTask calls

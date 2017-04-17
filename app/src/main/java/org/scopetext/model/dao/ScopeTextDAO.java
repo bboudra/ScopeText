@@ -25,8 +25,8 @@ public class ScopeTextDAO {
      * @param db Used to retrieve data from the database.
      * @return A list of the resulting ScopeTexts, or null if nothing was retrieved.
      */
-    public static List<Object> getAllScopeTextsAndContacts(SQLiteDatabase db) {
-        List<Object> list = new ArrayList<>();
+    public static List<? extends Object> getAllScopeTextsAndContacts(SQLiteDatabase db) {
+        List<ScopeText> list = new ArrayList<>();
         final String All_SCOPETEXT_SQL =
                 "SELECT ST." + ScopeTextSchema.NAME + ", C." + ContactSchema.NAME + ", ST." +
                         ScopeTextSchema.IN_USE +
@@ -40,13 +40,12 @@ public class ScopeTextDAO {
                         "\nORDER BY ST." + ScopeTextSchema.SCOPETEXT_ID;
         Cursor cursor = db.rawQuery(All_SCOPETEXT_SQL, null);
         if (cursor != null) {
-            list = buildScopeTextList(cursor);
+            list = buildScopeTextList(cursor, list);
         }
         return list;
     }
 
-    private static List<Object> buildScopeTextList(Cursor cursor) {
-        List<Object> list = new ArrayList<>();
+    private static List<ScopeText> buildScopeTextList(Cursor cursor, List<ScopeText> list) {
         if (cursor.moveToFirst()) {
             String name = null,
                     contactName = null,
