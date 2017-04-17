@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.scopetext.model.javabean.ScopeText;
 
@@ -48,7 +49,10 @@ public class ScopeTextListAdapter extends RecyclerView.Adapter<ScopeTextListAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        /*ScopeText item = mDataset.get(position);
 
+        ((TextView) holder.mLinearLayout.getChildAt(0)).setText(item.getKey());
+        ((TextView) holder.mLinearLayout.getChildAt(1)).setText(item.getValue());*/
     }
 
     @Override

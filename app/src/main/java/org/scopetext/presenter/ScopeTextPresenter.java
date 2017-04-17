@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import org.scopetext.model.cache.Cache;
 import org.scopetext.model.cache.ScopeTextCache;
@@ -156,9 +158,11 @@ public class ScopeTextPresenter implements Presenter {
     }
 
     @Override
-    public RecyclerView.ViewHolder initializeViewHolder(ScopeTextFragment fragmentName) {
-        return null;
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position,
+                                 List<Object> dataSet, LinearLayout linearLayout) {
+
     }
+
 
     void setupActionBar() {
         if (activity != null) {

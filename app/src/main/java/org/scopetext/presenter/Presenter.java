@@ -3,6 +3,8 @@ package org.scopetext.presenter;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import org.scopetext.model.dao.SQL;
 import org.scopetext.model.dao.SQLTask;
@@ -63,10 +65,12 @@ public interface Presenter {
     public void retrieveSQLTaskResults(List<Object> results);
 
     /**
-     * Creates a new ViewHolder which is needed as part of the RecyclerViewAdapter setup.
-     * @param fragmentName The name of the Fragment that corresponds to the
-     * RecyclerViewAdapter.
-     * @return
+     *
+     * @param viewHolder
+     * @param position
+     * @param dataSet
+     * @param linearLayout
      */
-    public RecyclerView.ViewHolder initializeViewHolder(ScopeTextFragment fragmentName);
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position,
+                                 List<Object> dataSet, LinearLayout linearLayout);
 }

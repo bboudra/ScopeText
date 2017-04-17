@@ -165,19 +165,18 @@ public class ScopeTextPresenterTest {
     }
 
     @Test
-    public void itShouldNotExecuteSQLForNullSQL() {
+    public void itShouldAssertNoExecutionSQLForNullSQL() {
         assertFalse("SQLTask should not be executed with null a SQL.",objUnderTest.executeSQL(null, sqlTask));
     }
 
     @Test
-    public void itShouldNotExecuteSQLForNullSQLTask() {
+    public void itShouldAssertNoExecutionSQLForNullSQLTask() {
         assertFalse("SQLTask should not be executed with null a SQLTask.",objUnderTest.executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS, null));
     }
 
     @Test
-    public void itShouldExecuteSQLForSelectAllScopeTextsSQL() {
+    public void itShouldAssertExecutionSQLForSelectAllScopeTextsSQL() {
         assertTrue("SQLTask should be executed with a valid SQL and SQLTask.",objUnderTest.executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS, sqlTask));
     }
-
 
 }
