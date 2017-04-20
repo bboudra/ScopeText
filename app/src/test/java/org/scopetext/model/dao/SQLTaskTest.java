@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.scopetext.presenter.Presenter;
+import org.scopetext.presenter.ScopeTextPresenter;
 
 import java.util.List;
 
@@ -28,9 +28,9 @@ public class SQLTaskTest {
     private SQLTask objUnderTest;
     @Mock private DBHelper dbHelper;
     @Mock
-    SQLiteDatabase db;
+    private SQLiteDatabase db;
     @Mock
-    Presenter presenter;
+    private ScopeTextPresenter presenter;
 
     @Before
     public void before() {

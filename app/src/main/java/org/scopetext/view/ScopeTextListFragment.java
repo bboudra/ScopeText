@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 
 import org.scopetext.model.dao.SQL;
 import org.scopetext.model.dao.SQLTask;
-import org.scopetext.presenter.Presenter;
 import org.scopetext.presenter.R;
+import org.scopetext.presenter.ScopeTextPresenter;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
 
 
@@ -19,9 +19,9 @@ import org.scopetext.presenter.fragment.ScopeTextFragment;
  * Handles the UI for displaying a list of contacts.
  */
 public class ScopeTextListFragment extends Fragment {
-    private Presenter presenter;
+    private ScopeTextPresenter presenter;
 
-    public static ScopeTextListFragment newInstance(Presenter presenter) {
+    public static ScopeTextListFragment newInstance(ScopeTextPresenter presenter) {
         ScopeTextListFragment fragment = new ScopeTextListFragment();
         fragment.presenter = presenter;
         return fragment;

@@ -3,7 +3,7 @@ package org.scopetext.model.dao;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
-import org.scopetext.presenter.Presenter;
+import org.scopetext.presenter.ScopeTextPresenter;
 
 import java.util.List;
 
@@ -13,13 +13,13 @@ import java.util.List;
  */
 public class SQLTask extends AsyncTask<Object, Integer, Object> {
     private static final int ARG_SIZE = 2;
-    private Presenter presenter;
+    private ScopeTextPresenter presenter;
 
     public enum Task {
         GET_ALL_SCOPE_TEXTS;
     }
 
-    public SQLTask(Presenter presenter) {
+    public SQLTask(ScopeTextPresenter presenter) {
         this.presenter = presenter;
     }
 

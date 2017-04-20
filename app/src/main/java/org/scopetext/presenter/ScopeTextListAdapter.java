@@ -19,14 +19,14 @@ import java.util.List;
 public class ScopeTextListAdapter extends RecyclerView.Adapter<ScopeTextListAdapter.ViewHolder>
         implements RecyclerViewAdapter {
     private List<ScopeText> scopeTexts;
-    private Presenter presenter;
+    private ScopeTextPresenter presenter;
 
     /**
      * Creates a new instance with a data set that is used for display.
      * @param scopeTexts The data set.
      * @param presenter The presenter to handle business logic.
      */
-    public ScopeTextListAdapter (List<ScopeText> scopeTexts, Presenter presenter){
+    public ScopeTextListAdapter (List<ScopeText> scopeTexts, ScopeTextPresenter presenter){
         this.scopeTexts = scopeTexts;
         this.presenter = presenter;
     }
@@ -49,7 +49,7 @@ public class ScopeTextListAdapter extends RecyclerView.Adapter<ScopeTextListAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        /*ScopeText item = mDataset.get(position);
+/*        ScopeText item = mDataset.get(position);
 
         ((TextView) holder.mLinearLayout.getChildAt(0)).setText(item.getKey());
         ((TextView) holder.mLinearLayout.getChildAt(1)).setText(item.getValue());*/

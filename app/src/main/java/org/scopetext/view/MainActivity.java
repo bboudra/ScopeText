@@ -7,7 +7,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import org.scopetext.model.dao.DBHelper;
-import org.scopetext.presenter.Presenter;
 import org.scopetext.presenter.R;
 import org.scopetext.presenter.ScopeTextPresenter;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
@@ -16,10 +15,10 @@ import org.scopetext.presenter.fragment.ScopeTextFragment;
  * The main view component of the application. Routes all UI interaction to the Presenter component,
  * where the necessary business logic is executed. Created by john.qualls on 11/28/2016.
  *
- * @see Presenter
+ * @see ScopeTextPresenter
  */
 public class MainActivity extends AppCompatActivity {
-    private static Presenter presenter;
+    private static ScopeTextPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
