@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
+import org.androidannotations.annotations.EBean;
 import org.scopetext.model.cache.Cache;
 import org.scopetext.model.cache.ScopeTextCache;
 import org.scopetext.model.dao.DBHelper;
@@ -173,19 +175,41 @@ public class ScopeTextPresenter {
     }
 
     /**
-     * Call back from the ScopeTextListAdapter.onBindView(), which is used to populate each View in
+     * Call back from the RecyclerViewAdapter.onBindView(), which is used to populate each View in
      * the ViewHolder. The dataSet is used to populate the view.
      *
      * @param viewHolder Used to retrieve the View at the dataSet position.
      * @param position The dataSet position.
      * @param dataSet The dataSet to populate the view.
      * @param fragmentName The name of the Fragment that uses the calling RecyclerViewAdapter.
+     * @throws IllegalArgumentException Thrown if any of the arguments are not valid.
+     * @throws IllegalStateException Thrown if the dataset is not in the correct state.
+     *
      */
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position,
-                                 List<Object> dataSet, ScopeTextFragment fragmentName) {
+    public void onBindViewHolder(ScopeTextViewHolder viewHolder, int position,
+                                 List<? extends Object> dataSet, ScopeTextFragment fragmentName)
+            throws IllegalArgumentException {
+        if(validBindViewHolderArguments(viewHolder, dataSet)) {
+            if(ScopeTextFragment.SCOPE_TEXT_LIST == fragmentName) {
+                ScopeText scopeText = (ScopeText) dataSet.get(position);
+                String scopeTextName = scopeText.getName();
 
+                if(scopeTextName != null) {
+                    ((TextView) viewHolder.getViewGroup().getChildAt(0)).setText(scopeText.getName());
+                    ((TextView) viewHolder.getViewGroup().getChildAt(1))
+                            .setText(scopeText.getContacts().get(0).getName());
+                }
+                else {
+                    throw new IllegalStateException("ScopeText from dataSet is in an " +
+                            "invalid state");
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException(
+                    "Either ScopeTextViewHolder or dataSet have an invalid value.");
+        }
     }
-
 
     void setupActionBar() {
         if (activity != null) {
@@ -199,5 +223,10 @@ public class ScopeTextPresenter {
 
     DBHelper getDbHelper() {
         return this.dbHelper;
+    }
+
+    private boolean validBindViewHolderArguments(ScopeTextViewHolder viewHolder,
+                                                 List<? extends Object> dataSet) {
+        return viewHolder != null && dataSet != null && !dataSet.isEmpty();
     }
 }

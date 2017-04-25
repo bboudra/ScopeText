@@ -3,6 +3,9 @@ package org.scopetext.presenter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,10 +16,15 @@ import org.scopetext.model.cache.Cache;
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.dao.SQL;
 import org.scopetext.model.dao.SQLTask;
+import org.scopetext.model.javabean.Contact;
+import org.scopetext.model.javabean.ScopeText;
 import org.scopetext.presenter.fragment.FragmentAction;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -40,6 +48,9 @@ import static org.mockito.Mockito.when;
 public class ScopeTextPresenterTest {
     private ScopeTextPresenter objUnderTest;
     private boolean isRecyclerViewSet;
+    private int viewHolderPosition;
+    private List<ScopeText> viewHolderDataSet;
+
     @Mock
     DBHelper dbHelper;
     @Mock
@@ -50,6 +61,8 @@ public class ScopeTextPresenterTest {
     private AppCompatActivity activity;
     @Mock
     private SQLTask sqlTask;
+    @Mock
+    private ScopeTextViewHolder viewHolder;
 
 
     @Before
@@ -178,5 +191,96 @@ public class ScopeTextPresenterTest {
     public void itShouldAssertExecutionSQLForSelectAllScopeTextsSQL() {
         assertTrue("SQLTask should be executed with a valid SQL and SQLTask.",objUnderTest.executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS, sqlTask));
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void itShouldAssertIllegalArgumentExceptionForNullViewHolder() {
+        viewHolderDataSet = new ArrayList<>();
+        objUnderTest.onBindViewHolder(null, viewHolderPosition, viewHolderDataSet,
+                ScopeTextFragment.SCOPE_TEXT_LIST);
+        fail("IllegalArgumentException should have been thrown from null ViewHolder.");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void itShouldAssertIllegalArgumentExceptionForNullDataSet() {
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet,
+                ScopeTextFragment.SCOPE_TEXT_LIST);
+        fail("IllegalArgumentException should have been thrown from null DataSet.");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void itShouldAssertIllegalArgumentExceptionForInvalidFragmentName() {
+        viewHolderDataSet = new ArrayList<>();
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet,
+                ScopeTextFragment.NEW_CONTACT);
+        fail("IllegalArgumentException should have been thrown from invalid FragmentName.");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void itShouldAssertIllegalArgumentExceptionForNullFragmentName() {
+        viewHolderDataSet = new ArrayList<>();
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet,
+                null);
+        fail("IllegalArgumentException should have been thrown from invalid FragmentName.");
+    }
+
+    @Test
+    public void itShouldAssertScopeTextNameAndContactNameForValidScopeTextListArguments() {
+
+        // Setup ScopeText
+        String stName = "ScopeText",
+               contactName = "Contact";
+        ScopeText scopeText = new ScopeText();
+        scopeText.setName(stName);
+        Contact contact = new Contact();
+        contact.setName(contactName);
+        List<Contact> contacts = new ArrayList<>(1);
+        contacts.add(contact);
+        scopeText.setContacts(contacts);
+
+        // Setup Mocks
+        viewHolderDataSet = new ArrayList<>(1);
+        viewHolderDataSet.add(scopeText);
+        LinearLayout linearLayout = mock(LinearLayout.class);
+        TextView scopeTextView = mock(TextView.class);
+        TextView contactView = mock(TextView.class);
+        when(viewHolder.getViewGroup()).thenReturn(linearLayout);
+        when(linearLayout.getChildAt(0)).thenReturn(scopeTextView);
+        when(linearLayout.getChildAt(1)).thenReturn(contactView);
+
+        // Test
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet,
+                ScopeTextFragment.SCOPE_TEXT_LIST);
+        verify(scopeTextView).setText(stName);
+        verify(contactView).setText(contactName);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void itShouldAssertIllegalStateExceptionForNullScopeText() {
+        // Setup ScopeText
+        String stName = "ScopeText",
+                contactName = "Contact";
+        ScopeText scopeText = new ScopeText();
+        Contact contact = new Contact();
+        contact.setName("Contact");
+        List<Contact> contacts = new ArrayList<>(1);
+        contacts.add(contact);
+        scopeText.setContacts(contacts);
+
+        // Setup Mocks
+        viewHolderDataSet = new ArrayList<>(1);
+        viewHolderDataSet.add(scopeText);
+        LinearLayout linearLayout = mock(LinearLayout.class);
+        TextView scopeTextView = mock(TextView.class);
+        TextView contactView = mock(TextView.class);
+        when(viewHolder.getViewGroup()).thenReturn(linearLayout);
+        when(linearLayout.getChildAt(0)).thenReturn(scopeTextView);
+        when(linearLayout.getChildAt(1)).thenReturn(contactView);
+
+        // Test
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet,
+                ScopeTextFragment.SCOPE_TEXT_LIST);
+        fail("IllegalStateException should have been thrown with a null ScopeText name.");
+    }
+
 
 }

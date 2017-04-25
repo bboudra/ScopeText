@@ -47,7 +47,7 @@ public class ScopeText {
     }
 
 
-    public List getContacts() {
+    public List<Contact> getContacts() {
         return contacts;
     }
 

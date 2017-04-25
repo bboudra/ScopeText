@@ -7,6 +7,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.scopetext.model.javabean.ScopeText;
+import org.scopetext.presenter.fragment.FragmentAction;
+import org.scopetext.presenter.fragment.ScopeTextFragment;
 
 import java.util.List;
 
@@ -31,12 +33,17 @@ public class ScopeTextListAdapter extends RecyclerView.Adapter<ScopeTextListAdap
         this.presenter = presenter;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public LinearLayout mLinearLayout;
+    public static class ViewHolder extends RecyclerView.ViewHolder implements ScopeTextViewHolder {
+        private LinearLayout linearLayout;
 
         public ViewHolder(LinearLayout v) {
             super(v);
-            mLinearLayout = v;
+            linearLayout = v;
+        }
+
+        @Override
+        public ViewGroup getViewGroup() {
+            return linearLayout;
         }
     }
 
@@ -49,10 +56,7 @@ public class ScopeTextListAdapter extends RecyclerView.Adapter<ScopeTextListAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-/*        ScopeText item = mDataset.get(position);
-
-        ((TextView) holder.mLinearLayout.getChildAt(0)).setText(item.getKey());
-        ((TextView) holder.mLinearLayout.getChildAt(1)).setText(item.getValue());*/
+        presenter.onBindViewHolder(holder, position, scopeTexts, ScopeTextFragment.SCOPE_TEXT_LIST);
     }
 
     @Override
