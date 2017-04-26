@@ -194,7 +194,7 @@ public class ScopeTextPresenter {
                 ScopeText scopeText = (ScopeText) dataSet.get(position);
                 String scopeTextName = scopeText.getName();
 
-                if(scopeTextName != null) {
+                if(scopeTextName != null && !scopeTextName.isEmpty()) {
                     ((TextView) viewHolder.getViewGroup().getChildAt(0)).setText(scopeText.getName());
                     ((TextView) viewHolder.getViewGroup().getChildAt(1))
                             .setText(scopeText.getContacts().get(0).getName());
