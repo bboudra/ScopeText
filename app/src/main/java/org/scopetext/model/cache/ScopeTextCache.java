@@ -13,6 +13,9 @@ public class ScopeTextCache implements Cache<ScopeText> {
     private static final Cache cache = new ScopeTextCache();
     private List<ScopeText> scopeTexts;
 
+    // Prevent Instantiation
+    private ScopeTextCache() {}
+
     public static Cache getInstance() {
         return cache;
     }
@@ -25,13 +28,5 @@ public class ScopeTextCache implements Cache<ScopeText> {
     @Override
     public List<ScopeText> getCache() {
         return scopeTexts;
-    }
-
-    /*
-         * Updates the cache at a specific interval. The update to the map must be thread safe in order
-         * to guarantee clients get the correct data.
-         */
-    private void updateCache() {
-
     }
 }

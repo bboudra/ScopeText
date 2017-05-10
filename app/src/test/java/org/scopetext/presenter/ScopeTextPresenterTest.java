@@ -7,11 +7,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.scopetext.model.cache.Cache;
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.dao.SQL;
@@ -22,18 +21,17 @@ import org.scopetext.presenter.fragment.FragmentAction;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
-import org.junit.runners.Parameterized.Parameters;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.isA;
@@ -47,33 +45,29 @@ import static org.mockito.Mockito.when;
 /**
  * Unit tests for Presenter.java Created by john.qualls on 8/25/2016.
  */
-@RunWith(Enclosed.class)
+@RunWith(MockitoJUnitRunner.class)
 public class ScopeTextPresenterTest {
-    private static boolean isRecyclerViewSet;
-    private static int viewHolderPosition;
-    private static ScopeTextPresenter objUnderTest;
-    private static List<ScopeText> viewHolderDataSet;
-    private static DBHelper dbHelper;
-    private static FragmentAction fragmentAction;
-    private static Cache cache;
-    private static AppCompatActivity activity;
-    private static SQLTask sqlTask;
-    private static ScopeTextViewHolder viewHolder;
-
-    @BeforeClass
-    public static void beforeClass() {
-        setupMocks();
-    }
+    private  boolean isRecyclerViewSet;
+    private  int viewHolderPosition;
+    private  ScopeTextPresenter objUnderTest;
+    private  List<ScopeText> viewHolderDataSet;
+    @Mock
+    private  DBHelper dbHelper;
+    @Mock
+    private  FragmentAction fragmentAction;
+    @Mock
+    private  Cache cache;
+    @Mock
+    private  AppCompatActivity activity;
+    @Mock
+    private  SQLTask sqlTask;
+    @Mock
+    private  ScopeTextViewHolder viewHolder;
 
     @Before
     public void before() {
         objUnderTest = spy(new ScopeTextPresenter(dbHelper, fragmentAction, cache));
     }
-
-    // TODO Add individual tests here reference: http://fragmentedpodcast.com/episodes/052/
-/*    public static class IndividualTests {
-
-    }*/
 
     @Test
     public void itShouldVerifyNoActivityRefreshForNullActivity() {
@@ -207,6 +201,7 @@ public class ScopeTextPresenterTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void itShouldAssertIllegalArgumentExceptionForNullDataSet() {
+        viewHolderDataSet = null;
         objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet,
                 ScopeTextFragment.SCOPE_TEXT_LIST);
         fail("IllegalArgumentException should have been thrown from null DataSet.");
@@ -233,7 +228,7 @@ public class ScopeTextPresenterTest {
 
         // Setup ScopeText
         String stName = "ScopeText",
-               contactName = "Contact";
+                contactName = "Contact";
         ScopeText scopeText = new ScopeText();
         scopeText.setName(stName);
         Contact contact = new Contact();
@@ -316,68 +311,23 @@ public class ScopeTextPresenterTest {
         fail("IllegalStateException should have been thrown with an empty ScopeText name.");
     }
 
-    /**
-     * Parameterized tests for onBindViewHolder().
-     */
-    @RunWith(Parameterized.class)
-    public static class ParameterizedTests {
-        @Parameters
-        public static Collection<Object[]> data() {
-            return Arrays.asList(new Object[][] {
-                    {null, "ContactName"}, {"", "ContactName"}
-            });
-        }
-
-        private String scopeTextName,
-                       contactName;
-
-        public ParameterizedTests(String scopeTextName, String contactName) {
-            this.scopeTextName = scopeTextName;
-            this.contactName = contactName;
-        }
-
-        @Before
-        public void setup() {
-            setupMocks();
-            objUnderTest = new ScopeTextPresenter(dbHelper, fragmentAction, cache);
-        }
-
-        @Test(expected = IllegalStateException.class)
-        public void itShouldAssertIllegalStateExceptionForEmptyScopeTextName() {
-            // Setup ScopeText
-            ScopeText scopeText = new ScopeText();
-            scopeText.setName(scopeTextName);
-            Contact contact = new Contact();
-            contact.setName(contactName);
-            List<Contact> contacts = new ArrayList<>(1);
-            contacts.add(contact);
-            scopeText.setContacts(contacts);
-
-            // Setup Mocks
-            viewHolderDataSet = new ArrayList<>(1);
-            viewHolderDataSet.add(scopeText);
-            LinearLayout linearLayout = mock(LinearLayout.class);
-            TextView scopeTextView = mock(TextView.class);
-            TextView contactView = mock(TextView.class);
-            when(viewHolder.getViewGroup()).thenReturn(linearLayout);
-            when(linearLayout.getChildAt(0)).thenReturn(scopeTextView);
-            when(linearLayout.getChildAt(1)).thenReturn(contactView);
-
-            // Test
-            objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet,
-                    ScopeTextFragment.SCOPE_TEXT_LIST);
-            fail("IllegalStateException should have been thrown with the following ScopeText " +
-                    "instance: ScopeText name: " + scopeTextName + " ContactName: " + contactName);
-        }
-
+    //TODO Change when new caches are updated
+    @Test
+    public void itShouldVerifyNoCacheUpdateForNullResults() {
+        objUnderTest.retrieveSQLTaskResults(null);
+        verify(cache, times(0)).updateCache(isA(List.class));
     }
 
-    private static void setupMocks() {
-        dbHelper = mock(DBHelper.class);
-        fragmentAction = mock(FragmentAction.class);
-        cache = mock(Cache.class);
-        activity = mock(AppCompatActivity.class);
-        sqlTask = mock(SQLTask.class);
-        viewHolder = mock(ScopeTextViewHolder.class);
+    @Test
+    public void itShouldVerifyNoCacheUpdateForEmptyResults() {
+        objUnderTest.retrieveSQLTaskResults(null);
+        verify(cache, times(0)).updateCache(isA(List.class));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void itShouldAssertIllegalArgumentExceptionForWrongResultsType() {
+        List<Object> list = new ArrayList<>(1);
+        list.add(new Object());
+        objUnderTest.retrieveSQLTaskResults(list);
     }
 }

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.EBean;
@@ -97,7 +98,7 @@ public class ScopeTextPresenter {
 
         // Setup RecyclerViewAdapter based on Fragment name
         if (fragmentName == null) {
-            // TODO put in logger class
+            // TODO Throw IllegalArgumentException
 /*            Log.e(ScopeTextPresenter.class.getName(), "Cannot set RecyclerViewAdapter with null"
             + " Fragment name.");*/
         } else if (fragmentName == ScopeTextFragment.SCOPE_TEXT_LIST) {
@@ -111,7 +112,7 @@ public class ScopeTextPresenter {
             recyclerView.setAdapter((RecyclerView.Adapter) adapter);
             result = true;
         } else {
-            // TODO put in logger class
+            // TODO Throw IllegalArgumentException
 /*            Log.e(ScopeTextPresenter.class.getName(), "Cannot set RecyclerViewAdapter with"
                     + " Fragment: " + fragmentName.getName());*/
         }
@@ -162,15 +163,23 @@ public class ScopeTextPresenter {
     }
 
     /**
-     * Retrieves results from asynchronous SQLTask calls
+     * Retrieves results from asynchronous SQLTask calls, and updates the appropriate cache.
      *
-     * @param results The results from the SQL.
+     * @param results The results from the SQLTask call.
      */
     public void retrieveSQLTaskResults(List<Object> results) {
         if (results != null && !results.isEmpty()) {
             if (results.get(0) instanceof ScopeText) {
-
+                scopeTextCache.updateCache(results);
             }
+            else {
+                throw new IllegalArgumentException(results.getClass() + " is not " +
+                        "supported for " + results.get(0).getClass() + " cache.");
+            }
+        }
+        else {
+            // TODO Make logger class
+            /*Log.d("", "No results were retrieved from the SQLTask execution.");*/
         }
     }
 
@@ -229,4 +238,6 @@ public class ScopeTextPresenter {
                                                  List<? extends Object> dataSet) {
         return viewHolder != null && dataSet != null && !dataSet.isEmpty();
     }
+
+
 }

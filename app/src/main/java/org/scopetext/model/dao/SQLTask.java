@@ -12,12 +12,7 @@ import java.util.List;
  * subclassed. 2. Thread safe. <PRE/> Created by john.qualls on 9/20/2016.
  */
 public class SQLTask extends AsyncTask<Object, Integer, Object> {
-    private static final int ARG_SIZE = 2;
     private ScopeTextPresenter presenter;
-
-    public enum Task {
-        GET_ALL_SCOPE_TEXTS;
-    }
 
     public SQLTask(ScopeTextPresenter presenter) {
         this.presenter = presenter;
@@ -39,8 +34,7 @@ public class SQLTask extends AsyncTask<Object, Integer, Object> {
             List<Object> results = null;
             Object param1 = params[0];
             Object param2 = params[1];
-            if (param1 != null && param2 != null && param1 instanceof DBHelper &&
-                    param2 instanceof SQL) {
+            if (validateParams(param1, param2)) {
                 // Delegate SQL to execute
                 DBHelper dbHelper = (DBHelper) param1;
                 SQL sql = (SQL) param2;
@@ -61,5 +55,10 @@ public class SQLTask extends AsyncTask<Object, Integer, Object> {
     protected void onPostExecute(Object result) {
         List<Object> list = (List<Object>) result;
         presenter.retrieveSQLTaskResults(list);
+    }
+
+    private boolean validateParams(Object param1, Object param2) {
+        return param1 != null && param2 != null && param1 instanceof DBHelper &&
+                param2 instanceof SQL;
     }
 }

@@ -68,7 +68,7 @@ public class ScopeTextDAO {
                 // TODO refactor by using .contains() and adding .equals to ScopeText class
                 // Check if record is an additional contact
                 if (!list.isEmpty()) {
-                    scopeText = (ScopeText) list.get(row - 1);
+                    scopeText = list.get(row - 1);
                     prevName = scopeText.getName();
                 } else {
                     scopeText = null;
