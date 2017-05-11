@@ -330,4 +330,12 @@ public class ScopeTextPresenterTest {
         list.add(new Object());
         objUnderTest.retrieveSQLTaskResults(list);
     }
+
+    @Test
+    public void itShouldAssertCacheUpdateForScopeTextResults() {
+        List<Object> list = new ArrayList<>(1);
+        list.add(new ScopeText());
+        objUnderTest.retrieveSQLTaskResults(list);
+        verify(cache).updateCache(list);
+    }
 }

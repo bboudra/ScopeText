@@ -2,6 +2,7 @@ package org.scopetext.model.cache;
 
 import org.scopetext.model.javabean.ScopeText;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +15,9 @@ public class ScopeTextCache implements Cache<ScopeText> {
     private List<ScopeText> scopeTexts;
 
     // Prevent Instantiation
-    private ScopeTextCache() {}
+    private ScopeTextCache() {
+        scopeTexts = new ArrayList<>();
+    }
 
     public static Cache getInstance() {
         return cache;

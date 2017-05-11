@@ -26,23 +26,58 @@ public class ScopeTextDAO {
      * @return A list of the resulting ScopeTexts, or null if nothing was retrieved.
      */
     public static List<? extends Object> getAllScopeTextsAndContacts(SQLiteDatabase db) {
-        List<ScopeText> list = new ArrayList<>();
-        final String All_SCOPETEXT_SQL =
-                "SELECT ST." + ScopeTextSchema.NAME + ", C." + ContactSchema.NAME + ", ST." +
-                        ScopeTextSchema.IN_USE +
-                        "\nFROM " + ScopeTextSchema.TABLE_NAME + " ST" +
-                        "\nLEFT JOIN " + ContactAssocSchema.TABLE_NAME +
-                        " CA ON ST." + ScopeTextSchema.SCOPETEXT_ID + " = CA." +
-                        ContactAssocSchema.SCOPETEXT_ID +
-                        "\nLEFT JOIN " + ContactSchema.TABLE_NAME +
-                        " C ON C." + ContactSchema.CONTACT_ID + " = CA." +
-                        ContactAssocSchema.CONTACT_ID +
-                        "\nORDER BY ST." + ScopeTextSchema.SCOPETEXT_ID;
-        Cursor cursor = db.rawQuery(All_SCOPETEXT_SQL, null);
-        if (cursor != null) {
-            list = buildScopeTextList(cursor, list);
+        List<ScopeText> list = null;
+        try {
+            list = new ArrayList<>();
+            final String All_SCOPETEXT_SQL =
+                    "SELECT ST." + ScopeTextSchema.NAME + ", C." + ContactSchema.NAME + ", ST." +
+                            ScopeTextSchema.IN_USE +
+                            "\nFROM " + ScopeTextSchema.TABLE_NAME + " ST" +
+                            "\nLEFT JOIN " + ContactAssocSchema.TABLE_NAME +
+                            " CA ON ST." + ScopeTextSchema.SCOPETEXT_ID + " = CA." +
+                            ContactAssocSchema.SCOPETEXT_ID +
+                            "\nLEFT JOIN " + ContactSchema.TABLE_NAME +
+                            " C ON C." + ContactSchema.CONTACT_ID + " = CA." +
+                            ContactAssocSchema.CONTACT_ID +
+                            "\nORDER BY ST." + ScopeTextSchema.SCOPETEXT_ID;
+            Cursor cursor = db.rawQuery(All_SCOPETEXT_SQL, null);
+            if (cursor != null) {
+                list = buildScopeTextList(cursor, list);
+            }
+        } catch (Exception e) {
+            // TODO Log here
+        } finally {
+            db.close();
         }
         return list;
+    }
+
+    // TODO Refactor once insert functionality is required
+    /*
+     * Currently just used for testing.
+     */
+    public static void insertScopeText(SQLiteDatabase db) {
+        final String sql = "INSERT INTO SCOPETEXT (NAME, IN_USE) VALUES ('Name1', 'Y')";
+        try {
+            db.rawQuery(sql, null);
+        } catch (Exception e) {
+        } finally {
+            db.close();
+        }
+    }
+
+    // TODO Refactor once insert functionality is required
+    /*
+     * Currently just used for testing.
+     */
+    public static void delete(SQLiteDatabase db) {
+        final String sql = "DELETE FROM SCOPETEXT";
+        try {
+            db.rawQuery(sql, null);
+        } catch (Exception e) {
+        } finally {
+            db.close();
+        }
     }
 
     private static List<ScopeText> buildScopeTextList(Cursor cursor, List<ScopeText> list) {

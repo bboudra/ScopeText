@@ -132,4 +132,10 @@ public class ScopeTextDAOTest {
         assertEquals(contactName2, contact2.getName());
         assertEquals(false, scopeText2.isInUse());
     }
+
+    @Test
+    public void itShouldAssertCloseForGetAllScopeTexts() {
+        ScopeTextDAO.getAllScopeTextsAndContacts(db);
+        verify(db).close();
+    }
 }

@@ -6,15 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.TextView;
 
-import org.androidannotations.annotations.EBean;
 import org.scopetext.model.cache.Cache;
 import org.scopetext.model.cache.ScopeTextCache;
+import org.scopetext.model.dao.ContactAssocDAO;
+import org.scopetext.model.dao.ContactDAO;
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.dao.SQL;
 import org.scopetext.model.dao.SQLTask;
+import org.scopetext.model.dao.ScopeTextDAO;
 import org.scopetext.model.javabean.ScopeText;
 import org.scopetext.presenter.fragment.FragmentAction;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
@@ -218,6 +219,22 @@ public class ScopeTextPresenter {
             throw new IllegalArgumentException(
                     "Either ScopeTextViewHolder or dataSet have an invalid value.");
         }
+    }
+
+    // TODO Comment out when not testing.
+    /*
+     * Currently just used for testing.
+     */
+    public void createTestDB() {
+        // Delete all data
+        ScopeTextDAO.delete(dbHelper.getWriteableDB());
+        ContactDAO.delete(dbHelper.getWriteableDB());
+        ContactAssocDAO.delete(dbHelper.getWriteableDB());
+
+        // Insert data
+        ScopeTextDAO.insertScopeText(dbHelper.getWriteableDB());
+        ContactDAO.insertContact(dbHelper.getWriteableDB());
+        ContactAssocDAO.insertContactAssoc(dbHelper.getWriteableDB());
     }
 
     void setupActionBar() {
