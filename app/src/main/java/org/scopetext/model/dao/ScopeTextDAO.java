@@ -57,13 +57,9 @@ public class ScopeTextDAO {
      * Currently just used for testing.
      */
     public static void insertScopeText(SQLiteDatabase db) {
-        final String sql = "INSERT INTO SCOPETEXT (NAME, IN_USE) VALUES ('Name1', 'Y')";
-        try {
-            db.rawQuery(sql, null);
-        } catch (Exception e) {
-        } finally {
-            db.close();
-        }
+        final String sql = "INSERT INTO SCOPETEXT (SCOPETEXT_ID, NAME, IN_USE) " +
+                "VALUES (0, 'Name1', 'Y')";
+        db.execSQL(sql);
     }
 
     // TODO Refactor once insert functionality is required
@@ -71,13 +67,7 @@ public class ScopeTextDAO {
      * Currently just used for testing.
      */
     public static void delete(SQLiteDatabase db) {
-        final String sql = "DELETE FROM SCOPETEXT";
-        try {
-            db.rawQuery(sql, null);
-        } catch (Exception e) {
-        } finally {
-            db.close();
-        }
+        db.delete("SCOPETEXT", null, null);
     }
 
     private static List<ScopeText> buildScopeTextList(Cursor cursor, List<ScopeText> list) {
@@ -91,7 +81,7 @@ public class ScopeTextDAO {
             Contact contact = null;
             List<Contact> contacts = null;
             int row = 0;
-            while (cursor.moveToNext()) {
+            do {
                 // Get DB data
                 name = cursor.getString(0);
                 contactName = cursor.getString(1);
@@ -130,7 +120,7 @@ public class ScopeTextDAO {
                     list.add(scopeText);
                 }
                 row++;
-            }
+            } while (cursor.moveToNext());
         }
         return list;
     }

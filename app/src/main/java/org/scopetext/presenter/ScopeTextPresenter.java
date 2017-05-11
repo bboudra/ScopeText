@@ -237,6 +237,15 @@ public class ScopeTextPresenter {
         ContactAssocDAO.insertContactAssoc(dbHelper.getWriteableDB());
     }
 
+    /**
+     * Closes all open resources
+     */
+    public void shutdown() {
+        if(dbHelper != null) {
+            dbHelper.close();
+        }
+    }
+
     void setupActionBar() {
         if (activity != null) {
             Toolbar toolbar = (Toolbar) activity.findViewById(R.id.actionBar);

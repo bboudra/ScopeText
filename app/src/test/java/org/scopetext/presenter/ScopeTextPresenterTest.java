@@ -338,4 +338,10 @@ public class ScopeTextPresenterTest {
         objUnderTest.retrieveSQLTaskResults(list);
         verify(cache).updateCache(list);
     }
+
+    @Test
+    public void itShouldVerifyCloseForValidDBHelper() {
+        objUnderTest.shutdown();
+        verify(dbHelper).close();
+    }
 }

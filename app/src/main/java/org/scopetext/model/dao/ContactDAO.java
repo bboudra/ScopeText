@@ -12,13 +12,8 @@ public class ContactDAO {
      * Currently just used for testing.
      */
     public static void insertContact(SQLiteDatabase db) {
-        final String sql = "INSERT INTO CONTACT (NAME) VALUES ('Contact1')";
-        try {
-            db.rawQuery(sql, null);
-        } catch (Exception e) {
-        } finally {
-            db.close();
-        }
+        final String sql = "INSERT INTO CONTACT (CONTACT_ID, NAME) VALUES (0, 'Contact1')";
+        db.execSQL(sql);
     }
 
     // TODO Refactor once insert functionality is required
@@ -26,12 +21,6 @@ public class ContactDAO {
      * Currently just used for testing.
      */
     public static void delete(SQLiteDatabase db) {
-        final String sql = "DELETE FROM CONTACT";
-        try {
-            db.rawQuery(sql, null);
-        } catch (Exception e) {
-        } finally {
-            db.close();
-        }
+        db.delete("CONTACT", null, null);
     }
 }

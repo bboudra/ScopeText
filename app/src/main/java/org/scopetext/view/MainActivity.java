@@ -47,5 +47,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        presenter.shutdown();
+        super.onDestroy();
+    }
 }
