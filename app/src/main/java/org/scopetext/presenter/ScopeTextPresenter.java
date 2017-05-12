@@ -36,7 +36,7 @@ public class ScopeTextPresenter {
     private DBHelper dbHelper;
     private FragmentAction fragmentAction;
     private Cache scopeTextCache;
-    private RecyclerViewAdapter recyclerViewAdapter;
+    private ScopeTextListAdapter scopeTextListAdapter;
     private AppCompatActivity activity;
 
     /*
@@ -94,7 +94,6 @@ public class ScopeTextPresenter {
      */
     public boolean setRecyclerViewAdapter(ScopeTextFragment fragmentName) {
         boolean result = false;
-        RecyclerViewAdapter adapter = null;
         Fragment fragment = null;
 
         // Setup RecyclerViewAdapter based on Fragment name
@@ -109,8 +108,8 @@ public class ScopeTextPresenter {
             recyclerView.setLayoutManager(adapterItemLayout);
 
             // Setup adapter
-            adapter = new ScopeTextListAdapter(scopeTextCache.getCache(), this);
-            recyclerView.setAdapter((RecyclerView.Adapter) adapter);
+            scopeTextListAdapter = new ScopeTextListAdapter(scopeTextCache.getCache(), this);
+            recyclerView.setAdapter(scopeTextListAdapter);
             result = true;
         } else {
             // TODO Throw IllegalArgumentException
@@ -172,6 +171,7 @@ public class ScopeTextPresenter {
         if (results != null && !results.isEmpty()) {
             if (results.get(0) instanceof ScopeText) {
                 scopeTextCache.updateCache(results);
+                scopeTextListAdapter.notifyItemRangeInserted(0, results.size());
             }
             else {
                 throw new IllegalArgumentException(results.getClass() + " is not " +
@@ -255,15 +255,20 @@ public class ScopeTextPresenter {
             }
         }
     }
-
-    DBHelper getDbHelper() {
-        return this.dbHelper;
-    }
-
     private boolean validBindViewHolderArguments(ScopeTextViewHolder viewHolder,
                                                  List<? extends Object> dataSet) {
         return viewHolder != null && dataSet != null && !dataSet.isEmpty();
     }
 
+    /*
+     * Unit testing getters and setters
+     */
 
+    void setScopeTextListAdapter(ScopeTextListAdapter scopeTextListAdapter) {
+        this.scopeTextListAdapter = scopeTextListAdapter;
+    }
+
+    DBHelper getDbHelper() {
+        return this.dbHelper;
+    }
 }

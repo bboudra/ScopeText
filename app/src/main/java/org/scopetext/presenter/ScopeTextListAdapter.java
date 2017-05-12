@@ -4,10 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import org.scopetext.model.javabean.ScopeText;
-import org.scopetext.presenter.fragment.FragmentAction;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
 
 import java.util.List;
@@ -18,8 +16,7 @@ import java.util.List;
  * Created by john.qualls on 4/9/2017.
  */
 
-public class ScopeTextListAdapter extends RecyclerView.Adapter<ScopeTextListAdapter.ViewHolder>
-        implements RecyclerViewAdapter {
+public class ScopeTextListAdapter extends RecyclerView.Adapter<ScopeTextListAdapter.ViewHolder> {
     private List<ScopeText> scopeTexts;
     private ScopeTextPresenter presenter;
 

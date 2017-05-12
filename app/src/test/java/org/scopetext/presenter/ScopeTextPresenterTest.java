@@ -24,7 +24,6 @@ import org.scopetext.view.ScopeTextListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -333,6 +332,8 @@ public class ScopeTextPresenterTest {
 
     @Test
     public void itShouldAssertCacheUpdateForScopeTextResults() {
+        ScopeTextListAdapter adapter = mock(ScopeTextListAdapter.class);
+        objUnderTest.setScopeTextListAdapter(adapter);
         List<Object> list = new ArrayList<>(1);
         list.add(new ScopeText());
         objUnderTest.retrieveSQLTaskResults(list);
