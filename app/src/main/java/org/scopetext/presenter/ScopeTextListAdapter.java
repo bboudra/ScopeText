@@ -60,4 +60,11 @@ public class ScopeTextListAdapter extends RecyclerView.Adapter<ScopeTextListAdap
     public int getItemCount() {
         return scopeTexts.size();
     }
+
+    /**
+     * @see android.support.v7.widget.RecyclerView.Adapter#notifyItemRangeInserted(int, int)
+     */
+    public void notifyItemRangeInsertedWrapper(int poisitionStart, int itemCount) {
+        super.notifyItemRangeInserted(poisitionStart, itemCount);
+    }
 }

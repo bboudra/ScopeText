@@ -42,7 +42,7 @@
     <style name="AppTheme.ListItem">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/form_height</item>
+        <item name="android:textColor">@color/colorForm</item>
         <item name="android:textSize">@dimen/header_text_size</item>
-        <item name="android:background">@color/colorPrimary</item>
     </style>
 </resources>

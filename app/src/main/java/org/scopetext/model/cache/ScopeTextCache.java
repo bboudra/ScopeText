@@ -25,7 +25,7 @@ public class ScopeTextCache implements Cache<ScopeText> {
 
     @Override
     public void updateCache(List<ScopeText> newValues) {
-        scopeTexts = newValues;
+        scopeTexts.addAll(newValues);
     }
 
     @Override

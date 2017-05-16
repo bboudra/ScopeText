@@ -1,5 +1,6 @@
 package org.scopetext.model.dao;
 
+import android.app.ProgressDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 

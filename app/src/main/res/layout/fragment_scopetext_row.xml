@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
-        android:orientation="horizontal" android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            style="@style/AppTheme.ListItem"
-            android:id="@+id/scopetext_name"
-            android:layout_weight=".5"/>
-        <TextView
-            style="@style/AppTheme.ListItem"
-            android:id="@+id/scopetext_contact"
-            android:layout_weight=".5"/>
-    </LinearLayout>
-</layout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        style="@style/AppTheme.ListItem"
+        android:id="@+id/scopetext_name"
+        android:layout_weight=".5"/>
+    <TextView
+        style="@style/AppTheme.ListItem"
+        android:id="@+id/scopetext_contact"
+        android:layout_weight=".5"/>
+</LinearLayout>

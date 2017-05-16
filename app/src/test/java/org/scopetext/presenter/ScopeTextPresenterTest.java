@@ -62,10 +62,13 @@ public class ScopeTextPresenterTest {
     private  SQLTask sqlTask;
     @Mock
     private  ScopeTextViewHolder viewHolder;
+    @Mock
+    private ScopeTextListAdapter scopeTextListAdapter;
 
     @Before
     public void before() {
         objUnderTest = spy(new ScopeTextPresenter(dbHelper, fragmentAction, cache));
+        objUnderTest.setScopeTextListAdapter(scopeTextListAdapter);
     }
 
     @Test
@@ -319,8 +322,28 @@ public class ScopeTextPresenterTest {
 
     @Test
     public void itShouldVerifyNoCacheUpdateForEmptyResults() {
-        objUnderTest.retrieveSQLTaskResults(null);
+        List<Object> results = new ArrayList<>();
+        objUnderTest.retrieveSQLTaskResults(results);
         verify(cache, times(0)).updateCache(isA(List.class));
+    }
+
+    @Test
+    public void itShouldVerifyCacheUpdateForScopeTextResult() {
+        List<Object> results = new ArrayList<>();
+        ScopeText scopeText = new ScopeText();
+        results.add(scopeText);
+        objUnderTest.retrieveSQLTaskResults(results);
+        verify(cache).updateCache(isA(List.class));
+    }
+
+    @Test
+    public void itShouldVerifyAdapterUpdateForScopeTextResult() {
+        List<Object> results = new ArrayList<>();
+        ScopeText scopeText = new ScopeText();
+        results.add(scopeText);
+        objUnderTest.retrieveSQLTaskResults(results);
+        verify(scopeTextListAdapter).notifyItemRangeInsertedWrapper(0,
+               results.size());
     }
 
     @Test(expected = IllegalArgumentException.class)

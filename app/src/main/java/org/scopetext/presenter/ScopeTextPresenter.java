@@ -167,15 +167,11 @@ public class ScopeTextPresenter {
      *
      * @param results The results from the SQLTask call.
      */
-    public void retrieveSQLTaskResults(List<Object> results) {
+    public <T> void retrieveSQLTaskResults(List<T> results) {
         if (results != null && !results.isEmpty()) {
-            if (results.get(0) instanceof ScopeText) {
+            if(results.get(0) instanceof ScopeText){
                 scopeTextCache.updateCache(results);
-                scopeTextListAdapter.notifyItemRangeInserted(0, results.size());
-            }
-            else {
-                throw new IllegalArgumentException(results.getClass() + " is not " +
-                        "supported for " + results.get(0).getClass() + " cache.");
+                scopeTextListAdapter.notifyItemRangeInsertedWrapper(0, results.size());
             }
         }
         else {
