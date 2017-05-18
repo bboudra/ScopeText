@@ -227,7 +227,6 @@ public class ScopeTextPresenterTest {
 
     @Test
     public void itShouldAssertScopeTextNameAndContactNameForValidScopeTextListArguments() {
-
         // Setup ScopeText
         String stName = "ScopeText",
                 contactName = "Contact";
@@ -254,6 +253,41 @@ public class ScopeTextPresenterTest {
                 ScopeTextFragment.SCOPE_TEXT_LIST);
         verify(scopeTextView).setText(stName);
         verify(contactView).setText(contactName);
+    }
+
+    @Test
+    public void itShouldAssertSecondContactForDuplicateScopeText() {
+        // Setup ScopeText
+        String stName = "ScopeText",
+                contactName = "Contact",
+                contactName2 = "Contact2";
+        ScopeText scopeText = new ScopeText();
+        scopeText.setName(stName);
+        Contact contact = new Contact(),
+                contact2 = new Contact();
+        contact.setName(contactName);
+        contact.setInList(true);
+        contact2.setName(contactName2);
+        List<Contact> contacts = new ArrayList<>(2);
+        contacts.add(contact);
+        contacts.add(contact2);
+        scopeText.setContacts(contacts);
+
+        // Setup Mocks
+        viewHolderDataSet = new ArrayList<>(1);
+        viewHolderDataSet.add(scopeText);
+        LinearLayout linearLayout = mock(LinearLayout.class);
+        TextView scopeTextView = mock(TextView.class);
+        TextView contactView = mock(TextView.class);
+        when(viewHolder.getViewGroup()).thenReturn(linearLayout);
+        when(linearLayout.getChildAt(0)).thenReturn(scopeTextView);
+        when(linearLayout.getChildAt(1)).thenReturn(contactView);
+
+        // Test
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet,
+                ScopeTextFragment.SCOPE_TEXT_LIST);
+        verify(scopeTextView).setText(stName);
+        verify(contactView).setText(contactName2);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -311,6 +345,52 @@ public class ScopeTextPresenterTest {
         objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet,
                 ScopeTextFragment.SCOPE_TEXT_LIST);
         fail("IllegalStateException should have been thrown with an empty ScopeText name.");
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void itShouldAssertIllegalStateExceptionForNullContacts() {
+        // Setup ScopeText
+        String stName = "Name",
+                contactName = "Contact";
+        ScopeText scopeText = new ScopeText();
+        scopeText.setName(stName);
+        List<Contact> contacts = new ArrayList<>();
+        scopeText.setContacts(contacts);
+
+        // Setup Mocks
+        viewHolderDataSet = new ArrayList<>(1);
+        viewHolderDataSet.add(scopeText);
+        LinearLayout linearLayout = mock(LinearLayout.class);
+        TextView scopeTextView = mock(TextView.class);
+        when(viewHolder.getViewGroup()).thenReturn(linearLayout);
+        when(linearLayout.getChildAt(0)).thenReturn(scopeTextView);
+
+        // Test
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet,
+                ScopeTextFragment.SCOPE_TEXT_LIST);
+        fail("IllegalStateException should have been thrown with a null Contact list.");
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void itShouldAssertIllegalStateExceptionForEmptyContacts() {
+        // Setup ScopeText
+        String stName = "Name",
+                contactName = "Contact";
+        ScopeText scopeText = new ScopeText();
+        scopeText.setName(stName);
+
+        // Setup Mocks
+        viewHolderDataSet = new ArrayList<>(1);
+        viewHolderDataSet.add(scopeText);
+        LinearLayout linearLayout = mock(LinearLayout.class);
+        TextView scopeTextView = mock(TextView.class);
+        when(viewHolder.getViewGroup()).thenReturn(linearLayout);
+        when(linearLayout.getChildAt(0)).thenReturn(scopeTextView);
+
+        // Test
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet,
+                ScopeTextFragment.SCOPE_TEXT_LIST);
+        fail("IllegalStateException should have been thrown with a null Contact list.");
     }
 
     //TODO Change when new caches are updated

@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * Java bean that contains all properties of a ScopeText. Created by john.qualls on 9/24/2016.
  */
+// TODO implement equals and hashcode
 public class ScopeText {
     private String name;
     private Message message;

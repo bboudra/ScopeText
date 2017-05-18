@@ -16,6 +16,7 @@ import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.dao.SQL;
 import org.scopetext.model.dao.SQLTask;
 import org.scopetext.model.dao.ScopeTextDAO;
+import org.scopetext.model.javabean.Contact;
 import org.scopetext.model.javabean.ScopeText;
 import org.scopetext.presenter.fragment.FragmentAction;
 import org.scopetext.presenter.fragment.ScopeTextFragment;
@@ -193,28 +194,33 @@ public class ScopeTextPresenter {
      *
      */
     public void onBindViewHolder(ScopeTextViewHolder viewHolder, int position,
-                                 List<? extends Object> dataSet, ScopeTextFragment fragmentName)
+                                 List<?> dataSet, ScopeTextFragment fragmentName)
             throws IllegalArgumentException {
         if(validBindViewHolderArguments(viewHolder, dataSet)) {
             if(ScopeTextFragment.SCOPE_TEXT_LIST == fragmentName) {
                 ScopeText scopeText = (ScopeText) dataSet.get(position);
                 String scopeTextName = scopeText.getName();
-
                 if(scopeTextName != null && !scopeTextName.isEmpty()) {
                     ((TextView) viewHolder.getViewGroup().getChildAt(0)).setText(scopeText.getName());
-                    ((TextView) viewHolder.getViewGroup().getChildAt(1))
-                            .setText(scopeText.getContacts().get(0).getName());
+
+                    // Select contact that is not already in the list
+                    // TODO make private method for contact check
+                    List<Contact> contacts = scopeText.getContacts();
+                    if(contacts != null && !contacts.isEmpty()) {
+                        for(Contact contact : contacts) {
+                            if (!contact.isInList()) {
+                                ((TextView) viewHolder.getViewGroup().getChildAt(1)).setText(contact.getName());
+                                contact.setInList(true);
+                                return;
+                            }
+                        }
+                    }
                 }
-                else {
-                    throw new IllegalStateException("ScopeText from dataSet is in an " +
-                            "invalid state");
-                }
+                throw new IllegalStateException("ScopeText from dataSet is in an invalid state");
             }
         }
-        else {
-            throw new IllegalArgumentException(
-                    "Either ScopeTextViewHolder or dataSet have an invalid value.");
-        }
+        throw new IllegalArgumentException("Either ScopeTextViewHolder or dataSet have" +
+                " an invalid value.");
     }
 
     // TODO Comment out when not testing.
@@ -251,6 +257,7 @@ public class ScopeTextPresenter {
             }
         }
     }
+
     private boolean validBindViewHolderArguments(ScopeTextViewHolder viewHolder,
                                                  List<? extends Object> dataSet) {
         return viewHolder != null && dataSet != null && !dataSet.isEmpty();

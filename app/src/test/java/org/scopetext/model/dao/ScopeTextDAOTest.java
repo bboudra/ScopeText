@@ -69,7 +69,7 @@ public class ScopeTextDAOTest {
         // Test
         resultSet = (List<Object>) ScopeTextDAO.getAllScopeTextsAndContacts(db);
         ScopeText scopeText = (ScopeText) resultSet.get(0);
-        Contact contact = (Contact) scopeText.getContacts().get(0);
+        Contact contact = scopeText.getContacts().get(0);
         assertEquals(1, resultSet.size());
         assertEquals(name, scopeText.getName());
         assertEquals(contactName, contact.getName());
@@ -84,7 +84,7 @@ public class ScopeTextDAOTest {
                 contactName2 = "contactName2",
                 inUse = "Y";
         when(cursor.moveToFirst()).thenReturn(true);
-        when(cursor.moveToNext()).thenReturn(true, true, false);
+        when(cursor.moveToNext()).thenReturn(true, false);
         when(cursor.getString(0)).thenReturn(name);
         when(cursor.getString(1)).thenReturn(contactName, contactName2);
         when(cursor.getString(2)).thenReturn(inUse);
@@ -92,14 +92,17 @@ public class ScopeTextDAOTest {
 
         // Test
         resultSet = (List<Object>) ScopeTextDAO.getAllScopeTextsAndContacts(db);
-        ScopeText scopeText = (ScopeText) resultSet.get(0);
-        Contact contact = (Contact) scopeText.getContacts().get(0),
-                contact2 = (Contact) scopeText.getContacts().get(1);
-        assertEquals(1, resultSet.size());
+        ScopeText scopeText = (ScopeText) resultSet.get(0),
+                  scopeText2 = (ScopeText) resultSet.get(1);
+        Contact contact = scopeText.getContacts().get(0),
+                contact2 = scopeText2.getContacts().get(1);
+        assertEquals(2, resultSet.size());
         assertEquals(name, scopeText.getName());
+        assertEquals(name, scopeText2.getName());
         assertEquals(contactName, contact.getName());
         assertEquals(contactName2, contact2.getName());
         assertEquals(true, scopeText.isInUse());
+        assertEquals(true, scopeText2.isInUse());
     }
 
     @Test
@@ -112,7 +115,7 @@ public class ScopeTextDAOTest {
                 contactName2 = "contactName2",
                 inUse2 = "N";
         when(cursor.moveToFirst()).thenReturn(true);
-        when(cursor.moveToNext()).thenReturn(true, true, false);
+        when(cursor.moveToNext()).thenReturn(true, false);
         when(cursor.getString(0)).thenReturn(name, name2);
         when(cursor.getString(1)).thenReturn(contactName, contactName2);
         when(cursor.getString(2)).thenReturn(inUse, inUse2);
@@ -122,8 +125,8 @@ public class ScopeTextDAOTest {
         resultSet = (List<Object>) ScopeTextDAO.getAllScopeTextsAndContacts(db);
         ScopeText scopeText1 = (ScopeText) resultSet.get(0),
                 scopeText2 = (ScopeText) resultSet.get(1);
-        Contact contact1 = (Contact) scopeText1.getContacts().get(0),
-                contact2 = (Contact) scopeText2.getContacts().get(0);
+        Contact contact1 = scopeText1.getContacts().get(0),
+                contact2 = scopeText2.getContacts().get(0);
         assertEquals(2, resultSet.size());
         assertEquals(name, scopeText1.getName());
         assertEquals(contactName, contact1.getName());

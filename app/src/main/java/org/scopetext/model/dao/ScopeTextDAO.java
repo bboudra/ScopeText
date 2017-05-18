@@ -2,6 +2,7 @@ package org.scopetext.model.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import org.scopetext.model.javabean.Contact;
 import org.scopetext.model.javabean.ScopeText;
@@ -46,6 +47,7 @@ public class ScopeTextDAO {
             }
         } catch (Exception e) {
             // TODO Log here
+            Log.e("EXCEPTION!!", e.getMessage());
         } finally {
             db.close();
         }
@@ -59,7 +61,10 @@ public class ScopeTextDAO {
     public static void insertScopeText(SQLiteDatabase db) {
         final String sql = "INSERT INTO SCOPETEXT (SCOPETEXT_ID, NAME, IN_USE) " +
                 "VALUES (0, 'Name1', 'Y')";
+        final String sql2 = "INSERT INTO SCOPETEXT (SCOPETEXT_ID, NAME, IN_USE) " +
+                "VALUES (1, 'Name2', 'N')";
         db.execSQL(sql);
+        db.execSQL(sql2);
     }
 
     // TODO Refactor once insert functionality is required
@@ -107,6 +112,7 @@ public class ScopeTextDAO {
                     if (contacts != null) {
                         contacts.add(contact);
                     }
+                    list.add(scopeText);
                 } else {
                     // Add ScopeText
                     scopeText = new ScopeText();
@@ -118,8 +124,8 @@ public class ScopeTextDAO {
                     contacts.add(contact);
                     scopeText.setContacts(contacts);
                     list.add(scopeText);
+                    row++;
                 }
-                row++;
             } while (cursor.moveToNext());
         }
         return list;

@@ -12,8 +12,12 @@ public class ContactDAO {
      * Currently just used for testing.
      */
     public static void insertContact(SQLiteDatabase db) {
-        final String sql = "INSERT INTO CONTACT (CONTACT_ID, NAME) VALUES (0, 'Contact1')";
+        final String sql = "INSERT INTO CONTACT (CONTACT_ID, NAME) VALUES (0, 'Contact1')",
+        sql2 = "INSERT INTO CONTACT (CONTACT_ID, NAME) VALUES (1, 'Contact2')",
+        sql3 = "INSERT INTO CONTACT (CONTACT_ID, NAME) VALUES (2, 'Contact3')";
         db.execSQL(sql);
+        db.execSQL(sql2);
+        db.execSQL(sql3);
     }
 
     // TODO Refactor once insert functionality is required
