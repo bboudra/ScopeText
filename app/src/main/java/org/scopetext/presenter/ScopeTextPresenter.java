@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.scopetext.model.cache.Cache;
@@ -182,45 +183,71 @@ public class ScopeTextPresenter {
     }
 
     /**
-     * Call back from the RecyclerViewAdapter.onBindView(), which is used to populate each View in
-     * the ViewHolder. The dataSet is used to populate the view.
+     * Call back from the ScopeTextListAdapter.onBindView(), which is used to populate each View in
+     * the ViewHolder with a ScopeText, retrieved from the dataset.
      *
      * @param viewHolder Used to retrieve the View at the dataSet position.
      * @param position The dataSet position.
-     * @param dataSet The dataSet to populate the view.
-     * @param fragmentName The name of the Fragment that uses the calling RecyclerViewAdapter.
-     * @throws IllegalArgumentException Thrown if any of the arguments are not valid.
-     * @throws IllegalStateException Thrown if the dataset is not in the correct state.
+     * @param dataSet The dataSet that contains the ScopeText.
+     * @throws IllegalArgumentException Thrown for the following conditions<br/>
+     *          <ul style="list-style-type:disc">
+     *              viewHolder
+     *              <li>viewHolder is null.</li>
+     *              <li>viewGroup is null.</li>
+     *              <li>Either viewGroup or TextViews are null.</li>
      *
+     *              dataSet
+     *              <li>dataSet is null or empty.</li>
+     *              <li>ScopeText is null.</li>
+     *              <li>ScopeText has a null or empty name.</li>
+     *              <li>Contact list is null or empty.</li>
+     *              <li>Contact is null.</li>
+     *              <li>Contact name is null or empty.</li>
+     *
+     *              position
+     *              <li>position is outside the range of the dataset.</li>
+     *          </ul>
+     * @see ScopeTextListAdapter#onBindViewHolder(ScopeTextListAdapter.ViewHolder, int)
+     * @see ScopeText
      */
-    public void onBindViewHolder(ScopeTextViewHolder viewHolder, int position,
-                                 List<?> dataSet, ScopeTextFragment fragmentName)
+    public void onBindViewHolderScopeTextList(ScopeTextViewHolder viewHolder, int position,
+                                              List<ScopeText> dataSet)
             throws IllegalArgumentException {
-        if(validBindViewHolderArguments(viewHolder, dataSet)) {
-            if(ScopeTextFragment.SCOPE_TEXT_LIST == fragmentName) {
-                ScopeText scopeText = (ScopeText) dataSet.get(position);
-                String scopeTextName = scopeText.getName();
-                if(scopeTextName != null && !scopeTextName.isEmpty()) {
-                    ((TextView) viewHolder.getViewGroup().getChildAt(0)).setText(scopeText.getName());
+        if(validBindViewHolderArguments(viewHolder, dataSet, position)) {
+            // Set ScopeText name
+            LinearLayout linearLayout = (LinearLayout) viewHolder.getViewGroup();
+            if(linearLayout != null) {
+                TextView scopeTextNameView = (TextView) linearLayout.getChildAt(0);
+                if(scopeTextNameView != null) {
+                    ScopeText scopeText = dataSet.get(position);
+                    if(scopeText != null) {
+                        String scopeTextName = scopeText.getName();
+                        if (scopeTextName != null && !scopeTextName.isEmpty()) {
+                            scopeTextNameView.setText(scopeText.getName());
 
-                    // Select contact that is not already in the list
-                    // TODO make private method for contact check
-                    List<Contact> contacts = scopeText.getContacts();
-                    if(contacts != null && !contacts.isEmpty()) {
-                        for(Contact contact : contacts) {
-                            if (!contact.isInList()) {
-                                ((TextView) viewHolder.getViewGroup().getChildAt(1)).setText(contact.getName());
-                                contact.setInList(true);
-                                return;
+                            // Set contact name
+                            List<Contact> contacts = scopeText.getContacts();
+                            TextView contactView = (TextView) linearLayout.getChildAt(1);
+                            if (contacts != null && !contacts.isEmpty() && contactView != null) {
+                                for (Contact contact : contacts) {
+                                    if(contact != null) {
+                                        if (!contact.isInList()) {
+                                            String contactName = contact.getName();
+                                            if(contactName != null && !contactName.isEmpty()) {
+                                                contactView.setText(contact.getName());
+                                                contact.setInList(true);
+                                                return;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
-                throw new IllegalStateException("ScopeText from dataSet is in an invalid state");
             }
         }
-        throw new IllegalArgumentException("Either ScopeTextViewHolder or dataSet have" +
-                " an invalid value.");
+        throw new IllegalArgumentException();
     }
 
     // TODO Comment out when not testing.
@@ -259,8 +286,13 @@ public class ScopeTextPresenter {
     }
 
     private boolean validBindViewHolderArguments(ScopeTextViewHolder viewHolder,
-                                                 List<? extends Object> dataSet) {
-        return viewHolder != null && dataSet != null && !dataSet.isEmpty();
+                                                 List<?> dataSet, int position) {
+        boolean result = false;
+        if(viewHolder != null && dataSet != null && !dataSet.isEmpty() && position >= 0
+                && position < dataSet.size()) {
+            result = true;
+        }
+        return result;
     }
 
     /*

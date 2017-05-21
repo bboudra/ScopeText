@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import org.scopetext.model.javabean.ScopeText;
-import org.scopetext.presenter.fragment.ScopeTextFragment;
 
 import java.util.List;
 
@@ -53,7 +52,7 @@ public class ScopeTextListAdapter extends RecyclerView.Adapter<ScopeTextListAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        presenter.onBindViewHolder(holder, position, scopeTexts, ScopeTextFragment.SCOPE_TEXT_LIST);
+        presenter.onBindViewHolderScopeTextList(holder, position, scopeTexts);
     }
 
     @Override
