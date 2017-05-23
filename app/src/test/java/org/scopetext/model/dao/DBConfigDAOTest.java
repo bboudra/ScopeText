@@ -1,16 +1,12 @@
 package org.scopetext.model.dao;
 
 import android.database.sqlite.SQLiteDatabase;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.scopetext.model.schema.ContactAssocContract.ContactAssocSchema;
-import org.scopetext.model.schema.ContactContract.ContactSchema;
-import org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
-import org.scopetext.model.schema.MessageContract.MessageSchema;
-import org.scopetext.model.schema.ResponseContract.ResponseSchema;
 
 /**
  * Unit tests for DBConfigDAOTest.java.

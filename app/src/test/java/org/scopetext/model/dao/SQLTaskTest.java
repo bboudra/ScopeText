@@ -12,7 +12,8 @@ import org.scopetext.presenter.ScopeTextPresenter;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.isA;
 import static org.mockito.Mockito.mock;

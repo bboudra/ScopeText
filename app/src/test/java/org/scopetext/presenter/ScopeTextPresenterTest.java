@@ -205,7 +205,7 @@ public class ScopeTextPresenterTest {
         buildValidScopeTextWithValidContact("scopeText", "contact");
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolderScopeTextList(null, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(null, viewHolderPosition, viewHolderDataSet);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -213,7 +213,7 @@ public class ScopeTextPresenterTest {
         buildValidScopeTextWithValidContact("scopeText", "contact");
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -223,7 +223,7 @@ public class ScopeTextPresenterTest {
         when(viewHolder.getViewGroup()).thenReturn(scopeTextListLinearLayout);
         when(scopeTextListLinearLayout.getChildAt(1)).thenReturn(scopeTextView);
 
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -233,7 +233,7 @@ public class ScopeTextPresenterTest {
         when(viewHolder.getViewGroup()).thenReturn(scopeTextListLinearLayout);
         when(scopeTextListLinearLayout.getChildAt(0)).thenReturn(scopeTextView);
 
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition,
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
                 viewHolderDataSet);
     }
 
@@ -241,14 +241,14 @@ public class ScopeTextPresenterTest {
     public void itShouldAssertIllegalArgumentExceptionForNullDataSet() {
         buildValidViewHolder();
 
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition, null);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void itShouldAssertIllegalArgumentExceptionForEmptyDataSet() {
         buildValidViewHolder();
 
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -256,7 +256,7 @@ public class ScopeTextPresenterTest {
         buildValidViewHolder();
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition,
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
                 viewHolderDataSet);
     }
 
@@ -266,7 +266,7 @@ public class ScopeTextPresenterTest {
         scopeText = new ScopeText();
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition,
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
                 viewHolderDataSet);
     }
 
@@ -277,7 +277,7 @@ public class ScopeTextPresenterTest {
         scopeText.setName("");
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition,
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
                 viewHolderDataSet);
     }
 
@@ -288,7 +288,7 @@ public class ScopeTextPresenterTest {
         scopeText.setName("name");
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition,
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
                 viewHolderDataSet);
     }
 
@@ -301,7 +301,7 @@ public class ScopeTextPresenterTest {
         scopeText.setContacts(contacts);
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition,
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
                 viewHolderDataSet);
     }
 
@@ -316,7 +316,7 @@ public class ScopeTextPresenterTest {
         scopeText.setContacts(contacts);
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition,
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
                 viewHolderDataSet);
     }
 
@@ -331,7 +331,7 @@ public class ScopeTextPresenterTest {
         scopeText.setContacts(contacts);
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition,
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
                 viewHolderDataSet);
     }
 
@@ -347,7 +347,7 @@ public class ScopeTextPresenterTest {
         scopeText.setContacts(contacts);
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition,
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
                 viewHolderDataSet);
     }
 
@@ -359,7 +359,7 @@ public class ScopeTextPresenterTest {
         viewHolderDataSet.add(scopeText);
 
         // Test
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, -1, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, -1, viewHolderDataSet);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -370,7 +370,7 @@ public class ScopeTextPresenterTest {
         viewHolderDataSet.add(scopeText);
 
         // Test
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, 1, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, 1, viewHolderDataSet);
     }
 
     @Test
@@ -383,7 +383,7 @@ public class ScopeTextPresenterTest {
         viewHolderDataSet.add(scopeText);
 
         // Test
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
         verify(scopeTextView).setText(expectedScopeTextName);
         verify(contactView).setText(expectedContactName);
     }
@@ -401,7 +401,7 @@ public class ScopeTextPresenterTest {
         viewHolderPosition = 1;
 
         // Test
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
         verify(scopeTextView).setText(expectedScopeTextName);
         verify(contactView).setText(expectedContactName);
     }
@@ -428,7 +428,7 @@ public class ScopeTextPresenterTest {
         buildValidViewHolder();
 
         // Test
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
         verify(scopeTextView).setText(stName);
         verify(contactView).setText(contactName2);
     }
@@ -456,7 +456,7 @@ public class ScopeTextPresenterTest {
         when(linearLayout.getChildAt(1)).thenReturn(contactView);
 
         // Test
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -483,7 +483,7 @@ public class ScopeTextPresenterTest {
         when(linearLayout.getChildAt(1)).thenReturn(contactView);
 
         // Test
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -505,7 +505,7 @@ public class ScopeTextPresenterTest {
         when(linearLayout.getChildAt(0)).thenReturn(scopeTextView);
 
         // Test
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -525,7 +525,7 @@ public class ScopeTextPresenterTest {
         when(linearLayout.getChildAt(0)).thenReturn(scopeTextView);
 
         // Test
-        objUnderTest.onBindViewHolderScopeTextList(viewHolder, viewHolderPosition,
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
                 viewHolderDataSet);
     }
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * // TODO Implement thread safe cache ScopeTextCache contains the most up to date ScopeText objects
+ * // TODO Implement thread safe cache containing the most up to date ScopeText objects
  * from the database. The cache is updated whenever a ScopeText is changed in the database. Created
  * by john.qualls on 11/29/2016.
  */

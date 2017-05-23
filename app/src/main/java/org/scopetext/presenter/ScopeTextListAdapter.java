@@ -52,7 +52,7 @@ public class ScopeTextListAdapter extends RecyclerView.Adapter<ScopeTextListAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        presenter.onBindViewHolderScopeTextList(holder, position, scopeTexts);
+        presenter.onBindViewHolder(holder, position, scopeTexts);
     }
 
     @Override

@@ -47,7 +47,7 @@ public class ScopeTextDAO {
             }
         } catch (Exception e) {
             // TODO Log here
-            Log.e("EXCEPTION!!", e.getMessage());
+           // Log.e("EXCEPTION!!", e.getMessage());
         } finally {
             db.close();
         }

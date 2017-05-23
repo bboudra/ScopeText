@@ -1,9 +1,6 @@
 package org.scopetext.model.dao;
 
 
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
-
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -18,6 +15,12 @@ import org.scopetext.model.schema.ContactContract.ContactSchema;
 import org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
 
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.isA;
+import static org.mockito.Mockito.isNull;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for ScopeTextDAO. Created by john.qualls on 10/3/2016.

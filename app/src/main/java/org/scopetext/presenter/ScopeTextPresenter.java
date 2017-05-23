@@ -183,36 +183,40 @@ public class ScopeTextPresenter {
     }
 
     /**
-     * Call back from the ScopeTextListAdapter.onBindView(), which is used to populate each View in
-     * the ViewHolder with a ScopeText, retrieved from the dataset.
+     * Call back from a RecyclerView.Adapter subclass onBindView() method, which is used to
+     * populate each View in the ViewHolder with a data element, retrieved from the dataset.
      *
      * @param viewHolder Used to retrieve the View at the dataSet position.
      * @param position The dataSet position.
-     * @param dataSet The dataSet that contains the ScopeText.
+     * @param dataSet The dataSet that contains the data element.
      * @throws IllegalArgumentException Thrown for the following conditions<br/>
+     *          viewHolder
      *          <ul style="list-style-type:disc">
-     *              viewHolder
      *              <li>viewHolder is null.</li>
      *              <li>viewGroup is null.</li>
      *              <li>Either viewGroup or TextViews are null.</li>
-     *
-     *              dataSet
+     *          </ul>
+     *          Position
+     *          <ul style="list-style-type:disc">
+     *              <li>position is outside the range of the dataset.</li>
+     *          </ul>
+     *          ScopeText dataSet
+     *          <ul style="list-style-type:disc">
      *              <li>dataSet is null or empty.</li>
      *              <li>ScopeText is null.</li>
      *              <li>ScopeText has a null or empty name.</li>
      *              <li>Contact list is null or empty.</li>
      *              <li>Contact is null.</li>
      *              <li>Contact name is null or empty.</li>
-     *
-     *              position
-     *              <li>position is outside the range of the dataset.</li>
      *          </ul>
-     * @see ScopeTextListAdapter#onBindViewHolder(ScopeTextListAdapter.ViewHolder, int)
+     *
+     * @see RecyclerView
      * @see ScopeText
      */
-    public void onBindViewHolderScopeTextList(ScopeTextViewHolder viewHolder, int position,
-                                              List<ScopeText> dataSet)
-            throws IllegalArgumentException {
+    public void onBindViewHolder(ScopeTextViewHolder viewHolder, int position,
+                                 List<ScopeText> dataSet)
+            throws IllegalArgumentException  {
+        //TODO Add Messages for each error condition
         if(validBindViewHolderArguments(viewHolder, dataSet, position)) {
             // Set ScopeText name
             LinearLayout linearLayout = (LinearLayout) viewHolder.getViewGroup();
