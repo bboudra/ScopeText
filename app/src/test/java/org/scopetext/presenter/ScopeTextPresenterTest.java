@@ -200,30 +200,45 @@ public class ScopeTextPresenterTest {
         assertTrue("SQLTask should be executed with a valid SQL and SQLTask.",objUnderTest.executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS, sqlTask));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void itShouldAssertIllegalArgumentExceptionForNullViewHolder() {
         buildValidScopeTextWithValidContact("scopeText", "contact");
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolder(null, viewHolderPosition, viewHolderDataSet);
+        try {
+            objUnderTest.onBindViewHolder(null, viewHolderPosition, viewHolderDataSet);
+        } catch (NullPointerException e) {
+            assertEquals(ScopeTextPresenter.NULL_VIEWHOLDER, e.getMessage());
+            throw e;
+        }
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void itShouldAssertIllegalArgumentExceptionForNullViewGroup() {
+    @Test(expected = NullPointerException.class)
+    public void itShouldAssertIllegalArgumentExceptionForNullLinearLayout() {
         buildValidScopeTextWithValidContact("scopeText", "contact");
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        try {
+            objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        } catch (NullPointerException e) {
+            assertEquals(ScopeTextPresenter.NULL_LINEAR_LAYOUT, e.getMessage());
+            throw e;
+        }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void itShouldAssertIllegalArgumentExceptionForNullScopeTextTextView() {
         buildValidScopeTextWithValidContact("scopeText", "contact");
         viewHolderDataSet.add(scopeText);
         when(viewHolder.getViewGroup()).thenReturn(scopeTextListLinearLayout);
         when(scopeTextListLinearLayout.getChildAt(1)).thenReturn(scopeTextView);
 
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        try {
+            objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        } catch (NullPointerException e) {
+            assertEquals(ScopeTextPresenter.NULL_TEXTVIEW, e.getMessage());
+            throw e;
+        }
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -237,11 +252,16 @@ public class ScopeTextPresenterTest {
                 viewHolderDataSet);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void itShouldAssertIllegalArgumentExceptionForNullDataSet() {
         buildValidViewHolder();
 
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, null);
+        try {
+            objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, null);
+        } catch (NullPointerException e) {
+            assertEquals(ScopeTextPresenter.NULL_DATASET, e.getMessage());
+            throw e;
+        }
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -251,23 +271,31 @@ public class ScopeTextPresenterTest {
         objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void itShouldAssertIllegalArgumentExceptionForNullScopeText() {
         buildValidViewHolder();
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
-                viewHolderDataSet);
+        try {
+            objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        } catch (NullPointerException e) {
+            assertEquals(ScopeTextPresenter.NULL_SCOPETEXT, e.getMessage());
+            throw e;
+        }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void itShouldAssertIllegalArgumentExceptionForNullScopeTextName() {
         buildValidViewHolder();
         scopeText = new ScopeText();
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
-                viewHolderDataSet);
+        try {
+            objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        } catch (NullPointerException e) {
+            assertEquals(ScopeTextPresenter.NULL_SCOPETEXT_NAME, e.getMessage());
+            throw e;
+        }
     }
 
     @Test(expected = IllegalArgumentException.class)

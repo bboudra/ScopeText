@@ -34,6 +34,13 @@ import java.util.List;
  * display in the View component. Created by john.qualls on 11/28/2016.
  */
 public class ScopeTextPresenter {
+    static final String NULL_VIEWHOLDER = "ViewHolder parameter cannot be null";
+    static final String NULL_LINEAR_LAYOUT = "LinearLayout from ViewHolder parameter cannot be " +
+            "null";
+    static final String NULL_DATASET = "dataSet parameter cannot be null";
+    static final String NULL_TEXTVIEW = "TextView from ViewHolder parameter cannot be null";
+    static final String NULL_SCOPETEXT = "ScopeText from ViewHolder parameter cannot be null";
+    static final String NULL_SCOPETEXT_NAME = "ScopeText parameter cannot be null";
     private final static ScopeTextPresenter presenter = new ScopeTextPresenter();
     private DBHelper dbHelper;
     private FragmentAction fragmentAction;
@@ -189,69 +196,94 @@ public class ScopeTextPresenter {
      * @param viewHolder Used to retrieve the View at the dataSet position.
      * @param position The dataSet position.
      * @param dataSet The dataSet that contains the data element.
-     * @throws IllegalArgumentException Thrown for the following conditions<br/>
+     * @throws NullPointerException Thrown for the following conditions:<br/>
      *          viewHolder
      *          <ul style="list-style-type:disc">
      *              <li>viewHolder is null.</li>
-     *              <li>viewGroup is null.</li>
-     *              <li>Either viewGroup or TextViews are null.</li>
+     *              <li>LinearLayout is null.</li>
+     *              <li>Either TextView is null.</li>
      *          </ul>
+     *          ScopeText dataSet
+     *          <ul style="list-style-type:disc">
+     *          <li>dataset is null.</li>
+     *          <li>ScopeText is null.</li>
+     *          <li>ScopeText has a null name.</li>
+     *          <li>Contact list is null.</li>
+     *          <li>Contact is null.</li>
+     *          <li>Contact name is null.</li>
+     *          </ul>
+     * @throws IndexOutOfBoundsException Thrown for the following conditions:<br/>
      *          Position
      *          <ul style="list-style-type:disc">
      *              <li>position is outside the range of the dataset.</li>
      *          </ul>
+     * @throws IllegalArgumentException Thrown for the following conditions:<br/>
      *          ScopeText dataSet
      *          <ul style="list-style-type:disc">
-     *              <li>dataSet is null or empty.</li>
-     *              <li>ScopeText is null.</li>
-     *              <li>ScopeText has a null or empty name.</li>
-     *              <li>Contact list is null or empty.</li>
-     *              <li>Contact is null.</li>
-     *              <li>Contact name is null or empty.</li>
+     *              <li>dataSet is empty.</li>
+     *              <li>ScopeText has a empty name.</li>
+     *              <li>Contact list is empty.</li>
+     *              <li>Contact name is empty.</li>
      *          </ul>
      *
      * @see RecyclerView
      * @see ScopeText
      */
     public void onBindViewHolder(ScopeTextViewHolder viewHolder, int position,
-                                 List<ScopeText> dataSet)
-            throws IllegalArgumentException  {
-        //TODO Add Messages for each error condition
-        if(validBindViewHolderArguments(viewHolder, dataSet, position)) {
+                                 List<ScopeText> dataSet) {
+         if(viewHolder != null) {
             // Set ScopeText name
             LinearLayout linearLayout = (LinearLayout) viewHolder.getViewGroup();
             if(linearLayout != null) {
                 TextView scopeTextNameView = (TextView) linearLayout.getChildAt(0);
                 if(scopeTextNameView != null) {
-                    ScopeText scopeText = dataSet.get(position);
-                    if(scopeText != null) {
-                        String scopeTextName = scopeText.getName();
-                        if (scopeTextName != null && !scopeTextName.isEmpty()) {
-                            scopeTextNameView.setText(scopeText.getName());
+                    if(dataSet != null) {
+                        ScopeText scopeText = dataSet.get(position);
+                        if (scopeText != null) {
+                            String scopeTextName = scopeText.getName();
+                            if (scopeTextName != null && !scopeTextName.isEmpty()) {
+                                scopeTextNameView.setText(scopeText.getName());
 
-                            // Set contact name
-                            List<Contact> contacts = scopeText.getContacts();
-                            TextView contactView = (TextView) linearLayout.getChildAt(1);
-                            if (contacts != null && !contacts.isEmpty() && contactView != null) {
-                                for (Contact contact : contacts) {
-                                    if(contact != null) {
-                                        if (!contact.isInList()) {
-                                            String contactName = contact.getName();
-                                            if(contactName != null && !contactName.isEmpty()) {
-                                                contactView.setText(contact.getName());
-                                                contact.setInList(true);
-                                                return;
+                                // Set contact name
+                                List<Contact> contacts = scopeText.getContacts();
+                                TextView contactView = (TextView) linearLayout.getChildAt(1);
+                                if (contacts != null && !contacts.isEmpty() &&
+                                        contactView != null) {
+                                    for (Contact contact : contacts) {
+                                        if (contact != null) {
+                                            if (!contact.isInList()) {
+                                                String contactName = contact.getName();
+                                                if (contactName != null && !contactName.isEmpty()) {
+                                                    contactView.setText(contact.getName());
+                                                    contact.setInList(true);
+                                                    return;
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+                        else {
+                            throw new NullPointerException(NULL_SCOPETEXT);
+                        }
+                    }
+                    else {
+                        throw new NullPointerException(NULL_DATASET);
                     }
                 }
+                 else {
+                    throw new NullPointerException(NULL_TEXTVIEW);
+                 }
             }
+             else {
+                throw new NullPointerException(NULL_LINEAR_LAYOUT);
+             }
         }
-        throw new IllegalArgumentException();
+         else {
+             throw new NullPointerException(NULL_VIEWHOLDER);
+         }
+
     }
 
     // TODO Comment out when not testing.
@@ -292,7 +324,7 @@ public class ScopeTextPresenter {
     private boolean validBindViewHolderArguments(ScopeTextViewHolder viewHolder,
                                                  List<?> dataSet, int position) {
         boolean result = false;
-        if(viewHolder != null && dataSet != null && !dataSet.isEmpty() && position >= 0
+        if(dataSet != null && !dataSet.isEmpty() && position >= 0
                 && position < dataSet.size()) {
             result = true;
         }
