@@ -1,5 +1,6 @@
 package org.scopetext.presenter;
 
+import static org.scopetext.presenter.ScopeTextPresenter.Exception.*;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.common.base.Preconditions;
 
 import org.scopetext.model.cache.Cache;
 import org.scopetext.model.cache.ScopeTextCache;
@@ -34,13 +37,6 @@ import java.util.List;
  * display in the View component. Created by john.qualls on 11/28/2016.
  */
 public class ScopeTextPresenter {
-    static final String NULL_VIEWHOLDER = "ViewHolder parameter cannot be null";
-    static final String NULL_LINEAR_LAYOUT = "LinearLayout from ViewHolder parameter cannot be " +
-            "null";
-    static final String NULL_DATASET = "dataSet parameter cannot be null";
-    static final String NULL_TEXTVIEW = "TextView from ViewHolder parameter cannot be null";
-    static final String NULL_SCOPETEXT = "ScopeText from ViewHolder parameter cannot be null";
-    static final String NULL_SCOPETEXT_NAME = "ScopeText parameter cannot be null";
     private final static ScopeTextPresenter presenter = new ScopeTextPresenter();
     private DBHelper dbHelper;
     private FragmentAction fragmentAction;
@@ -231,59 +227,47 @@ public class ScopeTextPresenter {
      */
     public void onBindViewHolder(ScopeTextViewHolder viewHolder, int position,
                                  List<ScopeText> dataSet) {
-         if(viewHolder != null) {
-            // Set ScopeText name
-            LinearLayout linearLayout = (LinearLayout) viewHolder.getViewGroup();
-            if(linearLayout != null) {
-                TextView scopeTextNameView = (TextView) linearLayout.getChildAt(0);
-                if(scopeTextNameView != null) {
-                    if(dataSet != null) {
-                        ScopeText scopeText = dataSet.get(position);
-                        if (scopeText != null) {
-                            String scopeTextName = scopeText.getName();
-                            if (scopeTextName != null && !scopeTextName.isEmpty()) {
-                                scopeTextNameView.setText(scopeText.getName());
+        // Validate arguments
+        Preconditions.checkNotNull(viewHolder, NULL_VIEWHOLDER);
+        LinearLayout linearLayout = (LinearLayout) viewHolder.getViewGroup();
+        Preconditions.checkNotNull(linearLayout, NULL_LINEAR_LAYOUT);
+        TextView scopeTextNameView = (TextView) linearLayout.getChildAt(0);
+        Preconditions.checkNotNull(scopeTextNameView, NULL_TEXTVIEW);
+        Preconditions.checkNotNull(dataSet, NULL_DATASET);
+        if(dataSet.isEmpty()) {
+            throw new IllegalArgumentException(EMPTY_DATASET);
+        }
 
-                                // Set contact name
-                                List<Contact> contacts = scopeText.getContacts();
-                                TextView contactView = (TextView) linearLayout.getChildAt(1);
-                                if (contacts != null && !contacts.isEmpty() &&
-                                        contactView != null) {
-                                    for (Contact contact : contacts) {
-                                        if (contact != null) {
-                                            if (!contact.isInList()) {
-                                                String contactName = contact.getName();
-                                                if (contactName != null && !contactName.isEmpty()) {
-                                                    contactView.setText(contact.getName());
-                                                    contact.setInList(true);
-                                                    return;
+            // Set ScopeText name
+                            ScopeText scopeText = dataSet.get(position);
+                            if (scopeText != null) {
+                                String scopeTextName = scopeText.getName();
+                                if (scopeTextName != null && !scopeTextName.isEmpty()) {
+                                    scopeTextNameView.setText(scopeText.getName());
+
+                                    // Set contact name
+                                    List<Contact> contacts = scopeText.getContacts();
+                                    TextView contactView = (TextView) linearLayout.getChildAt(1);
+                                    if (contacts != null && !contacts.isEmpty() &&
+                                            contactView != null) {
+                                        for (Contact contact : contacts) {
+                                            if (contact != null) {
+                                                if (!contact.isInList()) {
+                                                    String contactName = contact.getName();
+                                                    if (contactName != null && !contactName.isEmpty()) {
+                                                        contactView.setText(contact.getName());
+                                                        contact.setInList(true);
+                                                        return;
+                                                    }
                                                 }
                                             }
                                         }
                                     }
                                 }
                             }
-                        }
-                        else {
-                            throw new NullPointerException(NULL_SCOPETEXT);
-                        }
-                    }
-                    else {
-                        throw new NullPointerException(NULL_DATASET);
-                    }
-                }
-                 else {
-                    throw new NullPointerException(NULL_TEXTVIEW);
-                 }
-            }
-             else {
-                throw new NullPointerException(NULL_LINEAR_LAYOUT);
-             }
-        }
-         else {
-             throw new NullPointerException(NULL_VIEWHOLDER);
-         }
-
+                            else {
+                                throw new NullPointerException(NULL_SCOPETEXT);
+                            }
     }
 
     // TODO Comment out when not testing.
@@ -341,5 +325,19 @@ public class ScopeTextPresenter {
 
     DBHelper getDbHelper() {
         return this.dbHelper;
+    }
+
+    /**
+     * Stores data specific to Exceptions thrown from the ScopeTextPresenter.
+     */
+    static class Exception {
+        static final String NULL_VIEWHOLDER = "ViewHolder parameter cannot be null";
+        static final String NULL_LINEAR_LAYOUT = "LinearLayout from ViewHolder parameter cannot be " +
+                "null";
+        static final String NULL_DATASET = "dataSet parameter cannot be null";
+        static final String EMPTY_DATASET = "dataSet parameter cannot be EMPTY";
+        static final String NULL_TEXTVIEW = "TextView from ViewHolder parameter cannot be null";
+        static final String NULL_SCOPETEXT = "ScopeText from ViewHolder parameter cannot be null";
+        static final String NULL_SCOPETEXT_NAME = "ScopeText parameter cannot be null";
     }
 }
