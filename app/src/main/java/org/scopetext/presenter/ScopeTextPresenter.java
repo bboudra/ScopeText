@@ -168,23 +168,36 @@ public class ScopeTextPresenter {
     }
 
     /**
-     * Retrieves results from asynchronous SQLTask calls, and updates the appropriate cache.
+     * Retrieves generic results from asynchronous SQLTask calls and invokes helper methods to
+     * handle the data.
      *
-     * @param results The results from the SQLTask call.
+     * <p>
+     *     <b>Side Effects:</b> This method has no side effects, but the helper methods might, as
+     *     they update caches and other components.
+     * </p>
+     *
+     * <p>
+     *     <b>Thread Safety:</b> This method is thread safe, but like side effects, the helper
+     *     methods might.
+     * </p>
+     *
+     * @param results The results from the SQLTask call. Must not be empty or null, and the
+     * type parameter must be ScopeText
+     * @throws NullPointerException If results is null
+     * @throws IllegalArgumentException If results is null, or has wrong type parameter
      */
     public <T> void retrieveSQLTaskResults(List<T> results) {
         if (results != null && !results.isEmpty()) {
             if(results.get(0) instanceof ScopeText){
-                scopeTextCache.updateCache(results);
-                scopeTextListAdapter.notifyItemRangeInsertedWrapper(0, results.size());
+                updateScopeTextCacheAndAdapter((List<ScopeText>)results);
             }
         }
         else {
-            // TODO Make logger class
-            /*Log.d("", "No results were retrieved from the SQLTask execution.");*/
+
         }
     }
 
+    // TODO add side effects and thread safety comments
     /**
      * Call back from a RecyclerView.Adapter subclass onBindView() method, which is used to
      * populate each View in the ViewHolder with a data element, retrieved from the dataset.
@@ -227,7 +240,7 @@ public class ScopeTextPresenter {
      */
     public void onBindViewHolder(ScopeTextViewHolder viewHolder, int position,
                                  List<ScopeText> dataSet) {
-        // Validate arguments
+        // Validate arguments for setting ScopeText TextView
         Preconditions.checkNotNull(viewHolder, "ViewHolder parameter cannot be null");
         LinearLayout linearLayout = (LinearLayout) viewHolder.getViewGroup();
         Preconditions.checkNotNull(linearLayout, "LinearLayout from ViewHolder parameter cannot " +
@@ -247,34 +260,10 @@ public class ScopeTextPresenter {
                 " be null");
         if(scopeTextName.isEmpty()) throw new IllegalArgumentException("ScopeText name from dataset " +
                 "parameter cannot be empty");
-        List<Contact> contacts = scopeText.getContacts();
-        Preconditions.checkNotNull(contacts, "Contact list from dataset parameter cannot be null");
-        if(contacts.isEmpty()) throw new IllegalArgumentException("Contact list from dataset " +
-                "parameter cannot be empty");
-        TextView contactView = (TextView) linearLayout.getChildAt(1);
-        Preconditions.checkNotNull(contactView, "Contact TextView from ViewHolder parameter " +
-                "cannot be null");
 
-
-        // Set ScopeText name
+        // Set ScopeText and contact names
         scopeTextNameView.setText(scopeText.getName());
-
-        // Set contact name
-        for (Contact contact : contacts) {
-            if (contact != null) {
-                if (!contact.isInList()) {
-                    String contactName = contact.getName();
-                    if(contactName != null) {
-                        if (!contactName.isEmpty()) {
-                            contactView.setText(contact.getName());
-                            contact.setInList(true);
-                        } else throw new IllegalArgumentException("Contact name from dataset " +
-                                "parameter cannot be empty");
-                    } else throw new NullPointerException("Contact name from dataset parameter " +
-                            "cannot be null");
-                }
-            } else throw new NullPointerException("Contact from dataset parameter cannot be null");
-        }
+        setContactName(scopeText, linearLayout);
     }
 
     // TODO Comment out when not testing.
@@ -322,5 +311,59 @@ public class ScopeTextPresenter {
 
     DBHelper getDbHelper() {
         return this.dbHelper;
+    }
+
+    /**
+     * Adds all the new ScopeText results to the ScopeTextCache, and notifies the
+     * ScopeTextListAdapter that the cache has been updated.
+     *
+     * <p>
+     *     <b>Side Effects:</b> This method method updates the ScopeTextCache, and
+     *     notifies the ScopeTextListAdapter.
+     * </p>
+     *
+     * <p>
+     *     <b>Thread Safety:</b> This method is not thread safe, thus relies on the ScopeTextCache
+     *     and ScopeTextListAdapter fields to handle synchronization.
+     * </p>
+     *
+     * @param results The ScopeText results to add to the cache. Validation is done in
+     * retrieveSQLTaskResults()
+     * @throws NullPointerException
+     * @see ScopeTextCache
+     * @see ScopeTextListAdapter
+     * @see ScopeText
+     */
+    private void updateScopeTextCacheAndAdapter(List<ScopeText> results) {
+        scopeTextCache.updateCache(results);
+        scopeTextListAdapter.notifyItemRangeInsertedWrapper(0, results.size());
+    }
+
+    private void setContactName(ScopeText scopeText, LinearLayout linearLayout) {
+        // Validate arguments for setting Contact TextView
+        List<Contact> contacts = scopeText.getContacts();
+        Preconditions.checkNotNull(contacts, "Contact list from dataset parameter cannot be null");
+        if(contacts.isEmpty()) throw new IllegalArgumentException("Contact list from dataset " +
+                "parameter cannot be empty");
+        TextView contactView = (TextView) linearLayout.getChildAt(1);
+        Preconditions.checkNotNull(contactView, "Contact TextView from ViewHolder parameter " +
+                "cannot be null");
+
+        // Set contact name
+        for (Contact contact : contacts) {
+            if (contact != null) {
+                if (!contact.isInList()) {
+                    String contactName = contact.getName();
+                    if(contactName != null) {
+                        if (!contactName.isEmpty()) {
+                            contactView.setText(contact.getName());
+                            contact.setInList(true);
+                        } else throw new IllegalArgumentException("Contact name from dataset " +
+                                "parameter cannot be empty");
+                    } else throw new NullPointerException("Contact name from dataset parameter " +
+                            "cannot be null");
+                }
+            } else throw new NullPointerException("Contact from dataset parameter cannot be null");
+        }
     }
 }
