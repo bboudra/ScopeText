@@ -1,6 +1,5 @@
 package org.scopetext.presenter;
 
-import static org.scopetext.presenter.ScopeTextPresenter.Exception.*;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -75,6 +74,30 @@ public class ScopeTextPresenterTest {
     private TextView scopeTextView;
     @Mock
     private TextView contactView;
+
+    /*
+     * Expected exception messages
+     */
+    // TODO Remove and put literals in asserts within test cases
+    private static final String NULL_VIEWHOLDER = "ViewHolder parameter cannot be null";
+    private static final String NULL_LINEAR_LAYOUT = "LinearLayout from ViewHolder parameter cannot be " +
+            "null";
+    private static final String NULL_DATASET = "dataSet parameter cannot be null";
+    private static final String EMPTY_DATASET = "dataSet parameter cannot be EMPTY";
+    private static final String NULL_SCOPETEXT_VIEW = "ScopeText TextView from ViewHolder parameter " +
+            "cannot be null";
+    private static final String NULL_CONTACT_VIEW = "Contact TextView from ViewHolder parameter " +
+            "cannot be null";
+    private static final String NULL_SCOPETEXT = "ScopeText from dataset parameter cannot be null";
+    private static final String NULL_CONTACT = "Contact from dataset parameter cannot be null";
+    private static final String NULL_SCOPETEXT_NAME = "ScopeText name from dataset parameter " +
+            "cannot be null";
+    private static final String EMPTY_SCOPETEXT_NAME = "ScopeText name from dataset parameter " +
+            "cannot be empty";
+    private static final String NULL_CONTACT_LIST = "Contact list from dataset parameter cannot be " +
+            "null";
+    private static final String EMPTY_CONTACT_LIST = "Contact list from dataset parameter cannot be " +
+            "empty";
 
     @Before
     public void before() {
@@ -236,19 +259,8 @@ public class ScopeTextPresenterTest {
 
         // Test
         thrown.expect(NullPointerException.class);
-        thrown.expectMessage(NULL_TEXTVIEW);
+        thrown.expectMessage(NULL_SCOPETEXT_VIEW);
         objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void itShouldAssertExceptionForNullContactTextView() {
-        buildValidScopeTextWithValidContact("scopeText", "contact");
-        viewHolderDataSet.add(scopeText);
-        when(viewHolder.getViewGroup()).thenReturn(scopeTextListLinearLayout);
-        when(scopeTextListLinearLayout.getChildAt(0)).thenReturn(scopeTextView);
-
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
-                viewHolderDataSet);
     }
 
     @Test
@@ -283,29 +295,32 @@ public class ScopeTextPresenterTest {
         objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void itShouldAssertExceptionForEmptyScopeTextName() {
         buildValidViewHolder();
-        scopeText = new ScopeText();
-        scopeText.setName("");
+        buildValidScopeTextWithValidContact("", "Contact");
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
-                viewHolderDataSet);
+        // Test
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage(EMPTY_SCOPETEXT_NAME);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void itShouldAssertExceptionForNullContactList() {
         buildValidViewHolder();
         scopeText = new ScopeText();
         scopeText.setName("name");
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
-                viewHolderDataSet);
+        // Test
+        thrown.expect(NullPointerException.class);
+        thrown.expectMessage(NULL_CONTACT_LIST);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void itShouldAssertExceptionForEmptyContactList() {
         buildValidViewHolder();
         scopeText = new ScopeText();
@@ -314,11 +329,13 @@ public class ScopeTextPresenterTest {
         scopeText.setContacts(contacts);
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
-                viewHolderDataSet);
+        // Test
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage(EMPTY_CONTACT_LIST);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void itShouldAssertExceptionForNullContact() {
         buildValidViewHolder();
         scopeText = new ScopeText();
@@ -329,11 +346,13 @@ public class ScopeTextPresenterTest {
         scopeText.setContacts(contacts);
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
-                viewHolderDataSet);
+        // Test
+        thrown.expect(NullPointerException.class);
+        thrown.expectMessage(NULL_CONTACT);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void itShouldAssertExceptionForNullContactName() {
         buildValidViewHolder();
         scopeText = new ScopeText();
@@ -344,11 +363,13 @@ public class ScopeTextPresenterTest {
         scopeText.setContacts(contacts);
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
-                viewHolderDataSet);
+        // Test
+        thrown.expect(NullPointerException.class);
+        thrown.expectMessage("Contact name from dataset parameter cannot be null");
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void itShouldAssertExceptionForEmptyContactName() {
         buildValidViewHolder();
         scopeText = new ScopeText();
@@ -360,29 +381,35 @@ public class ScopeTextPresenterTest {
         scopeText.setContacts(contacts);
         viewHolderDataSet.add(scopeText);
 
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
-                viewHolderDataSet);
+        // Test
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Contact name from dataset parameter cannot be empty");
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void itShouldAssertExceptionForNegPosition() {
-        // Setup ScopeText
-        ScopeText scopeText = new ScopeText();
-        viewHolderDataSet = new ArrayList<>(1);
+        // Setup
+        buildValidViewHolder();
+        buildValidScopeTextWithValidContact("Name", "Contact");
         viewHolderDataSet.add(scopeText);
 
         // Test
+        thrown.expect(IndexOutOfBoundsException.class);
+        thrown.expectMessage("Position parameter is out of the dataset bounds");
         objUnderTest.onBindViewHolder(viewHolder, -1, viewHolderDataSet);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void itShouldAssertExceptionForTooHighPosition() {
-        // Setup ScopeText
-        ScopeText scopeText = new ScopeText();
-        viewHolderDataSet = new ArrayList<>(1);
+        // Setup
+        buildValidViewHolder();
+        buildValidScopeTextWithValidContact("Name", "Contact");
         viewHolderDataSet.add(scopeText);
 
         // Test
+        thrown.expect(IndexOutOfBoundsException.class);
+        thrown.expectMessage("Position parameter is out of the dataset bounds");
         objUnderTest.onBindViewHolder(viewHolder, 1, viewHolderDataSet);
     }
 
@@ -436,6 +463,7 @@ public class ScopeTextPresenterTest {
         contacts.add(contact);
         contacts.add(contact2);
         scopeText.setContacts(contacts);
+        viewHolderDataSet.add(scopeText);
 
         // Setup Mocks
         buildValidViewHolder();
@@ -461,15 +489,16 @@ public class ScopeTextPresenterTest {
     }
 
     @Test
-    public void itShouldAssertExceptionForNullScopeTextView() {
+    public void itShouldAssertExceptionForNullContactView() {
         // Setup
         buildValidScopeTextWithValidContact("Name", "Contact");
+        viewHolderDataSet.add(scopeText);
         when(viewHolder.getViewGroup()).thenReturn(scopeTextListLinearLayout);
-        when(scopeTextListLinearLayout.getChildAt(1)).thenReturn(contactView);
+        when(scopeTextListLinearLayout.getChildAt(0)).thenReturn(scopeTextView);
 
         // Test
         thrown.expect(NullPointerException.class);
-        thrown.expectMessage(NULL_TEXTVIEW);
+        thrown.expectMessage(NULL_CONTACT_VIEW);
         objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
     }
 
@@ -498,49 +527,6 @@ public class ScopeTextPresenterTest {
 
         // Test
         objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
-    }
-
-    @Test
-    public void itShouldAssertExceptionForNullContacts() {
-        // Setup ScopeText
-        String stName = "Name",
-                contactName = "Contact";
-        ScopeText scopeText = new ScopeText();
-        scopeText.setName(stName);
-        List<Contact> contacts = new ArrayList<>();
-        scopeText.setContacts(contacts);
-
-        // Setup Mocks
-        viewHolderDataSet = new ArrayList<>(1);
-        viewHolderDataSet.add(scopeText);
-        LinearLayout linearLayout = mock(LinearLayout.class);
-        TextView scopeTextView = mock(TextView.class);
-        when(viewHolder.getViewGroup()).thenReturn(linearLayout);
-        when(linearLayout.getChildAt(0)).thenReturn(scopeTextView);
-
-        // Test
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void itShouldAssertIllegalStateExceptionForEmptyContacts() {
-        // Setup ScopeText
-        String stName = "Name",
-                contactName = "Contact";
-        ScopeText scopeText = new ScopeText();
-        scopeText.setName(stName);
-
-        // Setup Mocks
-        viewHolderDataSet = new ArrayList<>(1);
-        viewHolderDataSet.add(scopeText);
-        LinearLayout linearLayout = mock(LinearLayout.class);
-        TextView scopeTextView = mock(TextView.class);
-        when(viewHolder.getViewGroup()).thenReturn(linearLayout);
-        when(linearLayout.getChildAt(0)).thenReturn(scopeTextView);
-
-        // Test
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition,
-                viewHolderDataSet);
     }
 
     //TODO Change when new caches are updated

@@ -1,6 +1,5 @@
 package org.scopetext.presenter;
 
-import static org.scopetext.presenter.ScopeTextPresenter.Exception.*;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +26,7 @@ import org.scopetext.presenter.fragment.ScopeTextFragment;
 import org.scopetext.presenter.fragment.ScopeTextFragmentAction;
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -228,46 +228,53 @@ public class ScopeTextPresenter {
     public void onBindViewHolder(ScopeTextViewHolder viewHolder, int position,
                                  List<ScopeText> dataSet) {
         // Validate arguments
-        Preconditions.checkNotNull(viewHolder, NULL_VIEWHOLDER);
+        Preconditions.checkNotNull(viewHolder, "ViewHolder parameter cannot be null");
         LinearLayout linearLayout = (LinearLayout) viewHolder.getViewGroup();
-        Preconditions.checkNotNull(linearLayout, NULL_LINEAR_LAYOUT);
+        Preconditions.checkNotNull(linearLayout, "LinearLayout from ViewHolder parameter cannot " +
+                "be null");
         TextView scopeTextNameView = (TextView) linearLayout.getChildAt(0);
-        Preconditions.checkNotNull(scopeTextNameView, NULL_TEXTVIEW);
-        Preconditions.checkNotNull(dataSet, NULL_DATASET);
-        if(dataSet.isEmpty()) {
-            throw new IllegalArgumentException(EMPTY_DATASET);
+        Preconditions.checkNotNull(scopeTextNameView, "ScopeText TextView from ViewHolder " +
+                "parameter cannot be null");
+        Preconditions.checkNotNull(dataSet, "dataSet parameter cannot be null");
+        if(dataSet.isEmpty()) throw new IllegalArgumentException("dataSet parameter cannot be " +
+                "EMPTY");
+        Preconditions.checkElementIndex(position, dataSet.size(), "Position parameter is out of" +
+                " the dataset bounds");
+        ScopeText scopeText = dataSet.get(position);
+        Preconditions.checkNotNull(scopeText, "ScopeText from dataset parameter cannot be null");
+        String scopeTextName = scopeText.getName();
+        Preconditions.checkNotNull(scopeTextName, "ScopeText name from dataset parameter cannot" +
+                " be null");
+        if(scopeTextName.isEmpty()) throw new IllegalArgumentException("ScopeText name from dataset " +
+                "parameter cannot be empty");
+        List<Contact> contacts = scopeText.getContacts();
+        Preconditions.checkNotNull(contacts, "Contact list from dataset parameter cannot be null");
+        if(contacts.isEmpty()) throw new IllegalArgumentException("Contact list from dataset " +
+                "parameter cannot be empty");
+        TextView contactView = (TextView) linearLayout.getChildAt(1);
+        Preconditions.checkNotNull(contactView, "Contact TextView from ViewHolder parameter " +
+                "cannot be null");
+
+
+        // Set ScopeText name
+        scopeTextNameView.setText(scopeText.getName());
+
+        // Set contact name
+        for (Contact contact : contacts) {
+            if (contact != null) {
+                if (!contact.isInList()) {
+                    String contactName = contact.getName();
+                    if(contactName != null) {
+                        if (!contactName.isEmpty()) {
+                            contactView.setText(contact.getName());
+                            contact.setInList(true);
+                        } else throw new IllegalArgumentException("Contact name from dataset " +
+                                "parameter cannot be empty");
+                    } else throw new NullPointerException("Contact name from dataset parameter " +
+                            "cannot be null");
+                }
+            } else throw new NullPointerException("Contact from dataset parameter cannot be null");
         }
-
-            // Set ScopeText name
-                            ScopeText scopeText = dataSet.get(position);
-                            if (scopeText != null) {
-                                String scopeTextName = scopeText.getName();
-                                if (scopeTextName != null && !scopeTextName.isEmpty()) {
-                                    scopeTextNameView.setText(scopeText.getName());
-
-                                    // Set contact name
-                                    List<Contact> contacts = scopeText.getContacts();
-                                    TextView contactView = (TextView) linearLayout.getChildAt(1);
-                                    if (contacts != null && !contacts.isEmpty() &&
-                                            contactView != null) {
-                                        for (Contact contact : contacts) {
-                                            if (contact != null) {
-                                                if (!contact.isInList()) {
-                                                    String contactName = contact.getName();
-                                                    if (contactName != null && !contactName.isEmpty()) {
-                                                        contactView.setText(contact.getName());
-                                                        contact.setInList(true);
-                                                        return;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            else {
-                                throw new NullPointerException(NULL_SCOPETEXT);
-                            }
     }
 
     // TODO Comment out when not testing.
@@ -305,16 +312,6 @@ public class ScopeTextPresenter {
         }
     }
 
-    private boolean validBindViewHolderArguments(ScopeTextViewHolder viewHolder,
-                                                 List<?> dataSet, int position) {
-        boolean result = false;
-        if(dataSet != null && !dataSet.isEmpty() && position >= 0
-                && position < dataSet.size()) {
-            result = true;
-        }
-        return result;
-    }
-
     /*
      * Unit testing getters and setters
      */
@@ -325,19 +322,5 @@ public class ScopeTextPresenter {
 
     DBHelper getDbHelper() {
         return this.dbHelper;
-    }
-
-    /**
-     * Stores data specific to Exceptions thrown from the ScopeTextPresenter.
-     */
-    static class Exception {
-        static final String NULL_VIEWHOLDER = "ViewHolder parameter cannot be null";
-        static final String NULL_LINEAR_LAYOUT = "LinearLayout from ViewHolder parameter cannot be " +
-                "null";
-        static final String NULL_DATASET = "dataSet parameter cannot be null";
-        static final String EMPTY_DATASET = "dataSet parameter cannot be EMPTY";
-        static final String NULL_TEXTVIEW = "TextView from ViewHolder parameter cannot be null";
-        static final String NULL_SCOPETEXT = "ScopeText from ViewHolder parameter cannot be null";
-        static final String NULL_SCOPETEXT_NAME = "ScopeText parameter cannot be null";
     }
 }
