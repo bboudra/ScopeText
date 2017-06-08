@@ -52,7 +52,7 @@ public class ScopeTextPresenterTest {
     private  boolean isRecyclerViewSet;
     private  int viewHolderPosition;
     private  ScopeTextPresenter objUnderTest;
-    private  List<ScopeText> viewHolderDataSet;
+    private  List<ScopeText> scopeTexts;
     private  ScopeText scopeText;
     @Mock
     private  DBHelper dbHelper;
@@ -103,7 +103,7 @@ public class ScopeTextPresenterTest {
     public void before() {
         objUnderTest = spy(new ScopeTextPresenter(dbHelper, fragmentAction, cache));
         objUnderTest.setScopeTextListAdapter(scopeTextListAdapter);
-        viewHolderDataSet = new ArrayList<>();
+        scopeTexts = new ArrayList<>();
     }
 
     @Test
@@ -231,36 +231,36 @@ public class ScopeTextPresenterTest {
     @Test
     public void itShouldAssertExceptionForNullViewHolder() {
         buildValidScopeTextWithValidContact("scopeText", "contact");
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
 
         // Test
         thrown.expect(NullPointerException.class);
         thrown.expectMessage(NULL_VIEWHOLDER);
-        objUnderTest.onBindViewHolder(null, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(null, viewHolderPosition, scopeTexts);
     }
 
     @Test
     public void itShouldAssertExceptionForNullLinearLayout() {
         buildValidScopeTextWithValidContact("scopeText", "contact");
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
 
         // Test
         thrown.expect(NullPointerException.class);
         thrown.expectMessage(NULL_LINEAR_LAYOUT);
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
     }
 
     @Test
     public void itShouldAssertExceptionForNullScopeTextTextView() {
         buildValidScopeTextWithValidContact("scopeText", "contact");
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
         when(viewHolder.getViewGroup()).thenReturn(scopeTextListLinearLayout);
         when(scopeTextListLinearLayout.getChildAt(1)).thenReturn(scopeTextView);
 
         // Test
         thrown.expect(NullPointerException.class);
         thrown.expectMessage(NULL_SCOPETEXT_VIEW);
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
     }
 
     @Test
@@ -280,31 +280,31 @@ public class ScopeTextPresenterTest {
         // Test
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage(EMPTY_DATASET);
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
     }
 
     @Test
     public void itShouldAssertExceptionForNullScopeTextName() {
         buildValidViewHolder();
         scopeText = new ScopeText();
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
 
         // Test
         thrown.expect(NullPointerException.class);
         thrown.expectMessage(NULL_SCOPETEXT_NAME);
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
     }
 
     @Test
     public void itShouldAssertExceptionForEmptyScopeTextName() {
         buildValidViewHolder();
         buildValidScopeTextWithValidContact("", "Contact");
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
 
         // Test
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage(EMPTY_SCOPETEXT_NAME);
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
     }
 
     @Test
@@ -312,12 +312,12 @@ public class ScopeTextPresenterTest {
         buildValidViewHolder();
         scopeText = new ScopeText();
         scopeText.setName("name");
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
 
         // Test
         thrown.expect(NullPointerException.class);
         thrown.expectMessage(NULL_CONTACT_LIST);
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
     }
 
     @Test
@@ -327,12 +327,12 @@ public class ScopeTextPresenterTest {
         scopeText.setName("name");
         List<Contact> contacts = new ArrayList<>();
         scopeText.setContacts(contacts);
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
 
         // Test
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage(EMPTY_CONTACT_LIST);
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
     }
 
     @Test
@@ -344,12 +344,12 @@ public class ScopeTextPresenterTest {
         Contact contact = null;
         contacts.add(contact);
         scopeText.setContacts(contacts);
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
 
         // Test
         thrown.expect(NullPointerException.class);
         thrown.expectMessage(NULL_CONTACT);
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
     }
 
     @Test
@@ -361,12 +361,12 @@ public class ScopeTextPresenterTest {
         Contact contact = new Contact();
         contacts.add(contact);
         scopeText.setContacts(contacts);
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
 
         // Test
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Contact name from dataset parameter cannot be null");
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
     }
 
     @Test
@@ -379,12 +379,12 @@ public class ScopeTextPresenterTest {
         contact.setName("");
         contacts.add(contact);
         scopeText.setContacts(contacts);
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
 
         // Test
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Contact name from dataset parameter cannot be empty");
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
     }
 
     @Test
@@ -392,12 +392,12 @@ public class ScopeTextPresenterTest {
         // Setup
         buildValidViewHolder();
         buildValidScopeTextWithValidContact("Name", "Contact");
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
 
         // Test
         thrown.expect(IndexOutOfBoundsException.class);
         thrown.expectMessage("Position parameter is out of the dataset bounds");
-        objUnderTest.onBindViewHolder(viewHolder, -1, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, -1, scopeTexts);
     }
 
     @Test
@@ -405,12 +405,12 @@ public class ScopeTextPresenterTest {
         // Setup
         buildValidViewHolder();
         buildValidScopeTextWithValidContact("Name", "Contact");
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
 
         // Test
         thrown.expect(IndexOutOfBoundsException.class);
         thrown.expectMessage("Position parameter is out of the dataset bounds");
-        objUnderTest.onBindViewHolder(viewHolder, 1, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, 1, scopeTexts);
     }
 
     @Test
@@ -420,10 +420,10 @@ public class ScopeTextPresenterTest {
                expectedContactName = "contact";
         buildValidScopeTextWithValidContact(expectedScopeTextName, expectedContactName);
         buildValidViewHolder();
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
 
         // Test
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
         verify(scopeTextView).setText(expectedScopeTextName);
         verify(contactView).setText(expectedContactName);
     }
@@ -434,14 +434,14 @@ public class ScopeTextPresenterTest {
         String expectedScopeTextName = "scopeText",
                 expectedContactName = "contact";
         buildValidScopeTextWithValidContact("wrongScopeText", "wrongContact");
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
         buildValidScopeTextWithValidContact(expectedScopeTextName, expectedContactName);
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
         buildValidViewHolder();
         viewHolderPosition = 1;
 
         // Test
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
         verify(scopeTextView).setText(expectedScopeTextName);
         verify(contactView).setText(expectedContactName);
     }
@@ -463,13 +463,13 @@ public class ScopeTextPresenterTest {
         contacts.add(contact);
         contacts.add(contact2);
         scopeText.setContacts(contacts);
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
 
         // Setup Mocks
         buildValidViewHolder();
 
         // Test
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
         verify(scopeTextView).setText(stName);
         verify(contactView).setText(contactName2);
     }
@@ -478,28 +478,28 @@ public class ScopeTextPresenterTest {
     public void itShouldAssertExceptionForNullScopeText() {
         // Setup
         ScopeText scopeText = null;
-        viewHolderDataSet = new ArrayList<>(1);
-        viewHolderDataSet.add(scopeText);
+        scopeTexts = new ArrayList<>(1);
+        scopeTexts.add(scopeText);
         buildValidViewHolder();
 
         // Test
         thrown.expect(NullPointerException.class);
         thrown.expectMessage(NULL_SCOPETEXT);
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
     }
 
     @Test
     public void itShouldAssertExceptionForNullContactView() {
         // Setup
         buildValidScopeTextWithValidContact("Name", "Contact");
-        viewHolderDataSet.add(scopeText);
+        scopeTexts.add(scopeText);
         when(viewHolder.getViewGroup()).thenReturn(scopeTextListLinearLayout);
         when(scopeTextListLinearLayout.getChildAt(0)).thenReturn(scopeTextView);
 
         // Test
         thrown.expect(NullPointerException.class);
         thrown.expectMessage(NULL_CONTACT_VIEW);
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -516,8 +516,8 @@ public class ScopeTextPresenterTest {
         scopeText.setContacts(contacts);
 
         // Setup Mocks
-        viewHolderDataSet = new ArrayList<>(1);
-        viewHolderDataSet.add(scopeText);
+        scopeTexts = new ArrayList<>(1);
+        scopeTexts.add(scopeText);
         LinearLayout linearLayout = mock(LinearLayout.class);
         TextView scopeTextView = mock(TextView.class);
         TextView contactView = mock(TextView.class);
@@ -526,57 +526,48 @@ public class ScopeTextPresenterTest {
         when(linearLayout.getChildAt(1)).thenReturn(contactView);
 
         // Test
-        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, viewHolderDataSet);
+        objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
     }
 
-    //TODO Change when new caches are updated
     @Test
     public void itShouldVerifyNoCacheUpdateForNullResults() {
+        thrown.expect(NullPointerException.class);
+        thrown.expectMessage("results List cannot be null");
         objUnderTest.retrieveSQLTaskResults(null);
-        verify(cache, times(0)).updateCache(isA(List.class));
     }
 
     @Test
     public void itShouldVerifyNoCacheUpdateForEmptyResults() {
-        List<Object> results = new ArrayList<>();
-        objUnderTest.retrieveSQLTaskResults(results);
-        verify(cache, times(0)).updateCache(isA(List.class));
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("results List cannot be empty");
+        objUnderTest.retrieveSQLTaskResults(scopeTexts);
     }
 
     @Test
-    public void itShouldVerifyCacheUpdateForScopeTextResult() {
-        List<Object> results = new ArrayList<>();
-        ScopeText scopeText = new ScopeText();
-        results.add(scopeText);
-        objUnderTest.retrieveSQLTaskResults(results);
-        verify(cache).updateCache(isA(List.class));
-    }
-
-    @Test
-    public void itShouldVerifyAdapterUpdateForScopeTextResult() {
-        List<Object> results = new ArrayList<>();
-        ScopeText scopeText = new ScopeText();
-        results.add(scopeText);
-        objUnderTest.retrieveSQLTaskResults(results);
-        verify(scopeTextListAdapter).notifyItemRangeInsertedWrapper(0,
-               results.size());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
     public void itShouldAssertExceptionForWrongResultsType() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("type parameter for results list is not supported");
         List<Object> list = new ArrayList<>(1);
         list.add(new Object());
         objUnderTest.retrieveSQLTaskResults(list);
     }
 
     @Test
-    public void itShouldAssertCacheUpdateForScopeTextResults() {
+    public void itShouldVerifyCacheUpdateForScopeTextResults() {
         ScopeTextListAdapter adapter = mock(ScopeTextListAdapter.class);
         objUnderTest.setScopeTextListAdapter(adapter);
-        List<Object> list = new ArrayList<>(1);
-        list.add(new ScopeText());
-        objUnderTest.retrieveSQLTaskResults(list);
-        verify(cache).updateCache(list);
+        scopeTexts.add(new ScopeText());
+        objUnderTest.retrieveSQLTaskResults(scopeTexts);
+        verify(cache).updateCache(scopeTexts);
+    }
+
+    @Test
+    public void itShouldVerifyAdapterRefreshForScopeTextResult() {
+        ScopeTextListAdapter adapter = mock(ScopeTextListAdapter.class);
+        objUnderTest.setScopeTextListAdapter(adapter);
+        scopeTexts.add(new ScopeText());
+        objUnderTest.retrieveSQLTaskResults(scopeTexts);
+        verify(adapter).notifyItemRangeInsertedWrapper(0, scopeTexts.size());
     }
 
     @Test

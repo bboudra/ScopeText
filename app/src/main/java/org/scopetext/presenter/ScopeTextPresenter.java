@@ -26,7 +26,6 @@ import org.scopetext.presenter.fragment.ScopeTextFragment;
 import org.scopetext.presenter.fragment.ScopeTextFragmentAction;
 import org.scopetext.view.NewContactFragment;
 import org.scopetext.view.ScopeTextListFragment;
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -168,32 +167,30 @@ public class ScopeTextPresenter {
     }
 
     /**
-     * Retrieves generic results from asynchronous SQLTask calls and invokes helper methods to
-     * handle the data.
+     * Retrieves generic results from asynchronous SQLTask calls and performs specific operations
+     * depending on the type of T.
      *
      * <p>
-     *     <b>Side Effects:</b> This method has no side effects, but the helper methods might, as
-     *     they update caches and other components.
+     *     If T is of type ScopeText, then the ScopeTextCache will be updated with
+     *     the results and the ScopeTextListAdapter will be refreshed. Also, the ScopeTextCache
+     *     will not be synchronized when updating. Therefore the cache itself must be thread safe.
      * </p>
      *
-     * <p>
-     *     <b>Thread Safety:</b> This method is thread safe, but like side effects, the helper
-     *     methods might.
-     * </p>
-     *
-     * @param results The results from the SQLTask call. Must not be empty or null, and the
-     * type parameter must be ScopeText
-     * @throws NullPointerException If results is null
-     * @throws IllegalArgumentException If results is null, or has wrong type parameter
+     * @param results the results from the SQLTask call. Must not be empty or null
+     * @param <T> the type of the results elements. Must be a ScopeText, ... //TODO update when more type are supported
+     * @throws NullPointerException if results are null
+     * @throws IllegalArgumentException if results are null, or T is not a supported type
      */
     public <T> void retrieveSQLTaskResults(List<T> results) {
-        if (results != null && !results.isEmpty()) {
-            if(results.get(0) instanceof ScopeText){
-                updateScopeTextCacheAndAdapter((List<ScopeText>)results);
-            }
-        }
-        else {
+        // Validate parameters
+        Preconditions.checkNotNull(results, "results List cannot be null");
+        if (results.isEmpty()) throw new IllegalArgumentException("results List cannot be empty");
 
+        // Perform operation depending on T
+        if(results.get(0) instanceof ScopeText){
+            updateScopeTextCacheAndAdapter((List<ScopeText>)results);
+        } else {
+            throw new IllegalArgumentException("type parameter for results list is not supported");
         }
     }
 
@@ -313,27 +310,6 @@ public class ScopeTextPresenter {
         return this.dbHelper;
     }
 
-    /**
-     * Adds all the new ScopeText results to the ScopeTextCache, and notifies the
-     * ScopeTextListAdapter that the cache has been updated.
-     *
-     * <p>
-     *     <b>Side Effects:</b> This method method updates the ScopeTextCache, and
-     *     notifies the ScopeTextListAdapter.
-     * </p>
-     *
-     * <p>
-     *     <b>Thread Safety:</b> This method is not thread safe, thus relies on the ScopeTextCache
-     *     and ScopeTextListAdapter fields to handle synchronization.
-     * </p>
-     *
-     * @param results The ScopeText results to add to the cache. Validation is done in
-     * retrieveSQLTaskResults()
-     * @throws NullPointerException
-     * @see ScopeTextCache
-     * @see ScopeTextListAdapter
-     * @see ScopeText
-     */
     private void updateScopeTextCacheAndAdapter(List<ScopeText> results) {
         scopeTextCache.updateCache(results);
         scopeTextListAdapter.notifyItemRangeInsertedWrapper(0, results.size());
