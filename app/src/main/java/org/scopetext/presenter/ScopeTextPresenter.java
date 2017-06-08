@@ -334,6 +334,7 @@ public class ScopeTextPresenter {
                         if (!contactName.isEmpty()) {
                             contactView.setText(contact.getName());
                             contact.setInList(true);
+                            break;
                         } else throw new IllegalArgumentException("Contact name from dataset " +
                                 "parameter cannot be empty");
                     } else throw new NullPointerException("Contact name from dataset parameter " +

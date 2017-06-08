@@ -451,17 +451,21 @@ public class ScopeTextPresenterTest {
         // Setup ScopeText
         String stName = "ScopeText",
                 contactName = "Contact",
-                contactName2 = "Contact2";
+                contactName2 = "Contact2",
+                contactName3 = "Contact3";
         ScopeText scopeText = new ScopeText();
         scopeText.setName(stName);
         Contact contact = new Contact(),
-                contact2 = new Contact();
+                contact2 = new Contact(),
+                contact3 = new Contact();
         contact.setName(contactName);
         contact.setInList(true);
         contact2.setName(contactName2);
+        contact3.setName(contactName3);
         List<Contact> contacts = new ArrayList<>(2);
         contacts.add(contact);
         contacts.add(contact2);
+        contacts.add(contact3);
         scopeText.setContacts(contacts);
         scopeTexts.add(scopeText);
 
@@ -472,6 +476,7 @@ public class ScopeTextPresenterTest {
         objUnderTest.onBindViewHolder(viewHolder, viewHolderPosition, scopeTexts);
         verify(scopeTextView).setText(stName);
         verify(contactView).setText(contactName2);
+        verify(contactView, times(0)).setText(contactName3);
     }
 
     @Test
