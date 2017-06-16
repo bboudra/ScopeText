@@ -41,7 +41,6 @@ public class ScopeTextListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        presenter.createTestDB();
         presenter.setRecyclerViewAdapter(ScopeTextFragment.SCOPE_TEXT_LIST);
         presenter.executeSQL(SQL.SELECT_ALL_SCOPETEXTS_CONTACTS, new SQLTask(presenter));
     }

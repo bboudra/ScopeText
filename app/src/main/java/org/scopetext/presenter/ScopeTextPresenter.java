@@ -263,22 +263,6 @@ public class ScopeTextPresenter {
         setContactName(scopeText, linearLayout);
     }
 
-    // TODO Comment out when not testing.
-    /*
-     * Currently just used for testing.
-     */
-    public void createTestDB() {
-        // Delete all data
-        ScopeTextDAO.delete(dbHelper.getWriteableDB());
-        ContactDAO.delete(dbHelper.getWriteableDB());
-        ContactAssocDAO.delete(dbHelper.getWriteableDB());
-
-        // Insert data
-        ScopeTextDAO.insertScopeText(dbHelper.getWriteableDB());
-        ContactDAO.insertContact(dbHelper.getWriteableDB());
-        ContactAssocDAO.insertContactAssoc(dbHelper.getWriteableDB());
-    }
-
     /**
      * Closes all open resources
      */

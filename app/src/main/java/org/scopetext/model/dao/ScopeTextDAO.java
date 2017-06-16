@@ -54,27 +54,6 @@ public class ScopeTextDAO {
         return list;
     }
 
-    // TODO Refactor once insert functionality is required
-    /*
-     * Currently just used for testing.
-     */
-    public static void insertScopeText(SQLiteDatabase db) {
-        final String sql = "INSERT INTO SCOPETEXT (SCOPETEXT_ID, NAME, IN_USE) " +
-                "VALUES (0, 'Name1', 'Y')";
-        final String sql2 = "INSERT INTO SCOPETEXT (SCOPETEXT_ID, NAME, IN_USE) " +
-                "VALUES (1, 'Name2', 'N')";
-        db.execSQL(sql);
-        db.execSQL(sql2);
-    }
-
-    // TODO Refactor once insert functionality is required
-    /*
-     * Currently just used for testing.
-     */
-    public static void delete(SQLiteDatabase db) {
-        db.delete("SCOPETEXT", null, null);
-    }
-
     private static List<ScopeText> buildScopeTextList(Cursor cursor, List<ScopeText> list) {
         if (cursor.moveToFirst()) {
             String name = null,
