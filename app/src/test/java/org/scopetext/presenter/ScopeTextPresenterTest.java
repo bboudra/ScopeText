@@ -543,9 +543,9 @@ public class ScopeTextPresenterTest {
 
     @Test
     public void itShouldVerifyNoCacheUpdateForEmptyResults() {
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("results List cannot be empty");
         objUnderTest.retrieveSQLTaskResults(scopeTexts);
+        verify(cache, times(0)).updateCache(scopeTexts);
+        verify(scopeTextListAdapter, times(0)).notifyItemRangeInsertedWrapper(0, scopeTexts.size());
     }
 
     @Test

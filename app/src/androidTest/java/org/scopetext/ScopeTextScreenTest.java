@@ -1,31 +1,27 @@
 package org.scopetext;
 
-import static android.support.test.espresso.Espresso.onData;
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.matcher.ViewMatchers.hasSibling;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static org.hamcrest.Matchers.allOf;
-import static org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
-import static org.scopetext.model.schema.ContactAssocContract.ContactAssocSchema;
-import static org.scopetext.model.schema.ContactContract.ContactSchema;
-
 import android.database.sqlite.SQLiteDatabase;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.hamcrest.Matchers;
+import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.scopetext.model.dao.DBHelper;
 import org.scopetext.model.schema.ScopeTextContract;
-import org.scopetext.presenter.R;
 import org.scopetext.view.MainActivity;
+
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.matcher.ViewMatchers.hasSibling;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
+import static org.scopetext.model.schema.ContactAssocContract.ContactAssocSchema;
+import static org.scopetext.model.schema.ContactContract.ContactSchema;
+import static org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
 
 /**
  * Encapsulates all of the functional tests for the ScopeText screen. These tests meet the
@@ -41,6 +37,16 @@ public class ScopeTextScreenTest {
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class, false, false);
 
+    @BeforeClass
+    public static void beforeClass() {
+        clearDB();
+    }
+
+    @After
+    public void after() {
+        clearDB();
+    }
+
     /**
      * This test ensures that on app startup, all persisted ScopeTexts in the DB are retrieved in a
      * list. See the requirement <a href=https://github.com/Alton09/ScopeText/wiki/Requirements:-ScopeText-1.0#ScopeTextListRetrieval">here.</a>
@@ -53,71 +59,85 @@ public class ScopeTextScreenTest {
      */
     @Test
     public void itShouldAssertAllPersistedScopeTextsAreRetrievedOnStartup() {
-        // Clean and inject test data
-        DBHelper dbHelper;
-        SQLiteDatabase db = null;
-        try {
-            dbHelper = new DBHelper(InstrumentationRegistry.getTargetContext());
-            db = dbHelper.getWriteableDB();
-            clearDB(db);
-            insertScopeTexts(db);
-        } finally {
-            if(db != null) {
-                db.close();
-            }
-        }
+        // Inject test data
+        insertScopeTexts();
 
         // Test
         mActivityRule.launchActivity(null);
-        onView(allOf(withText("Name1"), hasSibling(withText("Contact1"))));
+        onView(allOf(withText("Name1"), hasSibling(withText("Contactz"))));
         //onData(withId(R.id.scopetext_name)).atPosition(0).check(matches(withText("Name1")));
     }
 
     // TODO Implement ViewAssertion interface, see https://developer.android.com/reference/android/support/test/espresso/ViewAssertion.html
 
-    private void insertScopeTexts(SQLiteDatabase db) {
-        // Insert ScopeTexts
-        StringBuilder sql = new StringBuilder();
-        sql.append("INSERT INTO ").append(ScopeTextContract.ScopeTextSchema.TABLE_NAME).append(" (")
+    private void insertScopeTexts() {
+        // Retrieve SQLiteDatabase
+        DBHelper dbHelper;
+        SQLiteDatabase db = null;
+        try {
+            dbHelper = new DBHelper(InstrumentationRegistry.getTargetContext());
+            db = dbHelper.getWriteableDB();
+
+            // Insert ScopeTexts
+            StringBuilder sql = new StringBuilder();
+            sql.append("INSERT INTO ").append(ScopeTextContract.ScopeTextSchema.TABLE_NAME).append(" (")
                     .append(ScopeTextSchema.SCOPETEXT_ID).append(", ").append(ScopeTextSchema.NAME)
                     .append(", ").append(ScopeTextSchema.IN_USE)
                     .append(") VALUES (0, 'Name1', 'Y')");
-        StringBuilder sql2 = new StringBuilder();
-        sql2.append("INSERT INTO ").append(ScopeTextContract.ScopeTextSchema.TABLE_NAME).append(" (")
-                .append(ScopeTextSchema.SCOPETEXT_ID).append(", ").append(ScopeTextSchema.NAME)
-                .append(", ").append(ScopeTextSchema.IN_USE)
-                .append(") VALUES (1, 'Name2', 'N')");
-        db.execSQL(sql.toString());
-        db.execSQL(sql2.toString());
+            StringBuilder sql2 = new StringBuilder();
+            sql2.append("INSERT INTO ").append(ScopeTextContract.ScopeTextSchema.TABLE_NAME).append(" (")
+                    .append(ScopeTextSchema.SCOPETEXT_ID).append(", ").append(ScopeTextSchema.NAME)
+                    .append(", ").append(ScopeTextSchema.IN_USE)
+                    .append(") VALUES (1, 'Name2', 'N')");
+            db.execSQL(sql.toString());
+            db.execSQL(sql2.toString());
 
-        // Insert Contacts
-        sql = new StringBuilder();
-        sql.append("INSERT INTO ").append(ContactSchema.TABLE_NAME).append(" (")
-                .append(ContactSchema.CONTACT_ID).append(", ").append(ContactSchema.NAME)
-                .append(") VALUES (0, 'Contact1')");
-        sql2 = new StringBuilder();
-        sql2.append("INSERT INTO ").append(ContactSchema.TABLE_NAME).append(" (")
-                .append(ContactSchema.CONTACT_ID).append(", ").append(ContactSchema.NAME)
-                .append(") VALUES (1, 'Contact2')");
-        db.execSQL(sql.toString());
-        db.execSQL(sql2.toString());
+            // Insert Contacts
+            sql = new StringBuilder();
+            sql.append("INSERT INTO ").append(ContactSchema.TABLE_NAME).append(" (")
+                    .append(ContactSchema.CONTACT_ID).append(", ").append(ContactSchema.NAME)
+                    .append(") VALUES (0, 'Contact1')");
+            sql2 = new StringBuilder();
+            sql2.append("INSERT INTO ").append(ContactSchema.TABLE_NAME).append(" (")
+                    .append(ContactSchema.CONTACT_ID).append(", ").append(ContactSchema.NAME)
+                    .append(") VALUES (1, 'Contact2')");
+            db.execSQL(sql.toString());
+            db.execSQL(sql2.toString());
 
-        // Insert ContactAssoc records
-        sql = new StringBuilder();
-        sql.append("INSERT INTO ").append(ContactAssocSchema.TABLE_NAME).append(" (")
-                .append(ContactAssocSchema.SCOPETEXT_ID).append(", ")
-                .append(ContactAssocSchema.CONTACT_ID).append(") VALUES (0, 0)");
-        sql2 = new StringBuilder();
-        sql2.append("INSERT INTO ").append(ContactAssocSchema.TABLE_NAME).append(" (")
-                .append(ContactAssocSchema.SCOPETEXT_ID).append(", ")
-                .append(ContactAssocSchema.CONTACT_ID).append(") VALUES (0, 1)");
-        db.execSQL(sql.toString());
-        db.execSQL(sql2.toString());
+            // Insert ContactAssoc records
+            sql = new StringBuilder();
+            sql.append("INSERT INTO ").append(ContactAssocSchema.TABLE_NAME).append(" (")
+                    .append(ContactAssocSchema.SCOPETEXT_ID).append(", ")
+                    .append(ContactAssocSchema.CONTACT_ID).append(") VALUES (0, 0)");
+            sql2 = new StringBuilder();
+            sql2.append("INSERT INTO ").append(ContactAssocSchema.TABLE_NAME).append(" (")
+                    .append(ContactAssocSchema.SCOPETEXT_ID).append(", ")
+                    .append(ContactAssocSchema.CONTACT_ID).append(") VALUES (0, 1)");
+            db.execSQL(sql.toString());
+            db.execSQL(sql2.toString());
+        } finally {
+            if(db != null) {
+                db.close();
+            }
+        }
     }
 
-    private void clearDB(SQLiteDatabase db) {
-        db.delete(ContactAssocSchema.TABLE_NAME, null, null);
-        db.delete(ScopeTextSchema.TABLE_NAME, null, null);
-        db.delete(ContactSchema.TABLE_NAME, null, null);
+    private static void clearDB() {
+        // Retrieve SQLiteDatabase
+        DBHelper dbHelper;
+        SQLiteDatabase db = null;
+        try {
+            dbHelper = new DBHelper(InstrumentationRegistry.getTargetContext());
+            db = dbHelper.getWriteableDB();
+
+            // Clear all data from DB
+            db.delete(ContactAssocSchema.TABLE_NAME, null, null);
+            db.delete(ContactSchema.TABLE_NAME, null, null);
+            db.delete(ScopeTextSchema.TABLE_NAME, null, null);
+        } finally {
+            if(db != null) {
+                db.close();
+            }
+        }
     }
 }

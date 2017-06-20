@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -176,7 +177,8 @@ public class ScopeTextPresenter {
      *     will not be synchronized when updating. Therefore the cache itself must be thread safe.
      * </p>
      *
-     * @param results the results from the SQLTask call. Must not be empty or null
+     * @param results the results from the SQLTask call. Must not be null. No operations are
+     * performed if empty
      * @param <T> the type of the results elements. Must be a ScopeText, ... //TODO update when more type are supported
      * @throws NullPointerException if results are null
      * @throws IllegalArgumentException if results are null, or T is not a supported type
@@ -184,7 +186,7 @@ public class ScopeTextPresenter {
     public <T> void retrieveSQLTaskResults(List<T> results) {
         // Validate parameters
         Preconditions.checkNotNull(results, "results List cannot be null");
-        if (results.isEmpty()) throw new IllegalArgumentException("results List cannot be empty");
+        if (results.isEmpty()) return;
 
         // Perform operation depending on T
         if(results.get(0) instanceof ScopeText){
@@ -257,6 +259,10 @@ public class ScopeTextPresenter {
                 " be null");
         if(scopeTextName.isEmpty()) throw new IllegalArgumentException("ScopeText name from dataset " +
                 "parameter cannot be empty");
+        StringBuilder sb = new StringBuilder();
+        sb.append("DataSetSize: " + dataSet.size());
+        sb.append("ScopeTextName: " + scopeTextName);
+        Log.d("ScopeTextScreenTest", sb.toString());
 
         // Set ScopeText and contact names
         scopeTextNameView.setText(scopeText.getName());

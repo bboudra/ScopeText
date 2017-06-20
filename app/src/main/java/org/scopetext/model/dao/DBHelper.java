@@ -17,12 +17,9 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by john.qualls on 8/7/2016.
  */
 public class DBHelper extends SQLiteOpenHelper implements DatabaseProvider {
-    private static final String DATABASE_NAME = "ScopeText.db";
-    private static int DATABASE_VERSION = 1;
-    public final String LOG_TAG = "DBHelper.java";
 
     public DBHelper(Context context) throws SQLiteException {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, "ScopeText.db", null, 1);
     }
 
     public void onCreate(SQLiteDatabase db) {
