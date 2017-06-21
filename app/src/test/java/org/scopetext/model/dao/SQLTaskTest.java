@@ -88,7 +88,8 @@ public class SQLTaskTest {
         when(db.rawQuery(isA(String.class), (String[]) isNull())).thenReturn(cursor);
 
         // Test
-        List<Object> result = objUnderTest.doInBackground(dbHelper, SQL.SELECT_ALL_SCOPETEXTS_CONTACTS);
+        List<Object> result =
+                (List<Object>) objUnderTest.doInBackground(dbHelper, SQL.SELECT_ALL_SCOPETEXTS_CONTACTS);
         assertTrue(result.isEmpty());
     }
 

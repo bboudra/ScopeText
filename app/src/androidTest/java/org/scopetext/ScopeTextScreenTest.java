@@ -112,7 +112,7 @@ public class ScopeTextScreenTest {
             sql2 = new StringBuilder();
             sql2.append("INSERT INTO ").append(ContactAssocSchema.TABLE_NAME).append(" (")
                     .append(ContactAssocSchema.SCOPETEXT_ID).append(", ")
-                    .append(ContactAssocSchema.CONTACT_ID).append(") VALUES (0, 1)");
+                    .append(ContactAssocSchema.CONTACT_ID).append(") VALUES (1, 1)");
             db.execSQL(sql.toString());
             db.execSQL(sql2.toString());
         } finally {

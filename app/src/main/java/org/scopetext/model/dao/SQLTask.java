@@ -29,10 +29,10 @@ public class SQLTask extends AsyncTask<Object, Integer, Object> {
      * @throws IllegalArgumentException Thrown if the parameter constraints above are violated.
      */
     @Override
-    protected List<Object> doInBackground(Object... params) throws IllegalArgumentException {
+    protected List<?> doInBackground(Object... params) throws IllegalArgumentException {
         // Validate arguments
         if (params.length == 2) {
-            List<Object> results = null;
+            List<?> results = null;
             Object param1 = params[0];
             Object param2 = params[1];
             if (validateParams(param1, param2)) {
@@ -43,7 +43,7 @@ public class SQLTask extends AsyncTask<Object, Integer, Object> {
                 switch (sql) {
                     case SELECT_ALL_SCOPETEXTS_CONTACTS:
                         db = dbHelper.getReadableDatabase();
-                        results = (List<Object>) ScopeTextDAO.getAllScopeTextsAndContacts(db);
+                        results = ScopeTextDAO.getAllScopeTextsAndContacts(db);
                         break;
                 }
                 return results;

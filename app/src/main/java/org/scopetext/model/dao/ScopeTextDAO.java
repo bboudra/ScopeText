@@ -11,6 +11,7 @@ import org.scopetext.model.schema.ContactContract.ContactSchema;
 import org.scopetext.model.schema.ScopeTextContract.ScopeTextSchema;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
@@ -18,7 +19,6 @@ import java.util.Vector;
  * Created by john.qualls on 8/9/2016.
  */
 public class ScopeTextDAO {
-    private static final String IS_IN_USE = "Y";
 
     /**
      * Reads all existing ScopeText objects from the database.
@@ -26,10 +26,9 @@ public class ScopeTextDAO {
      * @param db Used to retrieve data from the database.
      * @return A list of the resulting ScopeTexts, or null if nothing was retrieved.
      */
-    public static List<? extends Object> getAllScopeTextsAndContacts(SQLiteDatabase db) {
-        List<ScopeText> list = null;
-        try {
-            list = new ArrayList<>();
+    public static List<ScopeText> getAllScopeTextsAndContacts(SQLiteDatabase db) {
+        List<ScopeText> list = Collections.emptyList();
+        try{
             final String All_SCOPETEXT_SQL =
                     "SELECT ST." + ScopeTextSchema.NAME + ", C." + ContactSchema.NAME + ", ST." +
                             ScopeTextSchema.IN_USE +
@@ -43,19 +42,18 @@ public class ScopeTextDAO {
                             "\nORDER BY ST." + ScopeTextSchema.SCOPETEXT_ID;
             Cursor cursor = db.rawQuery(All_SCOPETEXT_SQL, null);
             if (cursor != null) {
-                list = buildScopeTextList(cursor, list);
+                list = buildScopeTextList(cursor);
             }
-        } catch (Exception e) {
-            // TODO Log here
-           // Log.e("EXCEPTION!!", e.getMessage());
         } finally {
             db.close();
         }
         return list;
     }
 
-    private static List<ScopeText> buildScopeTextList(Cursor cursor, List<ScopeText> list) {
+    private static List<ScopeText> buildScopeTextList(Cursor cursor) {
+        List<ScopeText> list = Collections.emptyList();
         if (cursor.moveToFirst()) {
+            list = new ArrayList<>();
             String name = null,
                     contactName = null,
                     inUseStr = null,
@@ -71,10 +69,10 @@ public class ScopeTextDAO {
                 contactName = cursor.getString(1);
                 inUseStr = cursor.getString(2);
                 if (inUseStr != null) {
-                    inUse = inUseStr.equals(IS_IN_USE) ? true : false;
+                    inUse = inUseStr.equals("Y");
                 }
 
-                // TODO refactor by using .contains() and adding .equals to ScopeText class
+                // TODO refactor by using .contains() and adding .equals to ScopeText and Contact javabeans
                 // Check if record is an additional contact
                 if (!list.isEmpty()) {
                     scopeText = list.get(row - 1);
@@ -91,7 +89,6 @@ public class ScopeTextDAO {
                     if (contacts != null) {
                         contacts.add(contact);
                     }
-                    list.add(scopeText);
                 } else {
                     // Add ScopeText
                     scopeText = new ScopeText();
@@ -99,7 +96,7 @@ public class ScopeTextDAO {
                     scopeText.setInUse(inUse);
                     contact = new Contact();
                     contact.setName(contactName);
-                    contacts = new Vector();
+                    contacts = new ArrayList<>();
                     contacts.add(contact);
                     scopeText.setContacts(contacts);
                     list.add(scopeText);

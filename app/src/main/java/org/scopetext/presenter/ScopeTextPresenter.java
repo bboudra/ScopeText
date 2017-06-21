@@ -129,8 +129,6 @@ public class ScopeTextPresenter {
      * to add and to what View container based on the ScopeTextFragment fragmentName.
      *
      * @param fragmentName The ScopeTextFragment fragmentName.
-     * @see FragmentAction
-     * @see ScopeTextFragment
      */
     public void addFragment(ScopeTextFragment fragmentName) {
         if (fragmentName != null) {
