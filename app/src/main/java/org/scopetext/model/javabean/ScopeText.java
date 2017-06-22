@@ -6,6 +6,7 @@ import java.util.List;
  * Java bean that contains all properties of a ScopeText. Created by john.qualls on 9/24/2016.
  */
 // TODO implement equals and hashcode
+// TODO Add Constructor validation for non null name
 public class ScopeText {
     private String name;
     private Message message;

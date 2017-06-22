@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Java bean that contains all properties of a Contact.
  */
+// TODO Add Constructor validation for non null name
 public class Contact {
     private String name;
     private boolean inList;

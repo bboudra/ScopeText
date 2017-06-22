@@ -237,6 +237,7 @@ public class ScopeTextPresenter {
      */
     public void onBindViewHolder(ScopeTextViewHolder viewHolder, int position,
                                  List<ScopeText> dataSet) {
+        // TODO remove scopetext and contact name null/empty checks once constructorvalidation is added to those javabeans
         // Validate arguments for setting ScopeText TextView
         Preconditions.checkNotNull(viewHolder, "ViewHolder parameter cannot be null");
         LinearLayout linearLayout = (LinearLayout) viewHolder.getViewGroup();
